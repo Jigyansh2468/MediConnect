@@ -1,0 +1,16 @@
+#navbar {
+  height: 50px;
+  display: flex;
+  font-weight: 600;
+  font-size: large;
+  padding: 40px;
+  align-items: center;
+  background-color: lightcyan;
+  justify-content: space-between;
+  width: 100%;
+}
+.btn {
+  border-radius: 7px;
+  border: 1px solid black;
+  padding: 5px;
+}
