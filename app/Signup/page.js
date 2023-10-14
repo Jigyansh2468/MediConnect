@@ -1,10 +1,8 @@
 "use client";
 import React, { useState } from "react";
+const passcond = () => {};
+const confirmpass = () => {};
 const Signup = () => {
-  const [pass, setpass] = useState("");
-  const validinput = (e) => {
-    console.log(e);
-  };
   return (
     <>
       <h1 className="text-center text-xl font-bold my-5 ">Signup FORM</h1>
@@ -50,15 +48,14 @@ const Signup = () => {
                 type="password"
                 placeholder="Password"
                 value={pass}
-                onChange={(e) => {
-                  setpass(e.target.value);
-                }}
+                onChange={passcond}
                 className="my-5 p-2 rounded-md border-2 border-black"
               />
               <br />
               <input
                 type="password"
                 placeholder="Confirm Password"
+                onChange={confirmpass}
                 className="my-5 p-2 rounded-md border-2 border-black mb-8"
               />
               <button className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-pink-300 hover:text-white hover:cursor-pointer">
