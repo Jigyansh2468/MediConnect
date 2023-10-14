@@ -1,14 +1,15 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
 
 const Signup = () => {
   const [input, setinput] = useState({
-    username: "",
+    name: "",
     email: "",
-    PhNum: "",
+    PhoneNo: "",
     city: "",
     DOB: "",
-    pass: "",
+    password: "",
     cnfrmpass: "",
   });
 
@@ -18,14 +19,26 @@ const Signup = () => {
   };
 
   const checkcpass = () => {
-    if (input.pass !== input.cnfrmpass) {
+    if (input.password !== input.cnfrmpass) {
       alert("Confirm Password does not match Password.");
     }
   };
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    if (input.pass === input.cnfrmpass) {
+
+    // axios post
+    axios.post("http://localhost:8080/patient/register",input,{
+      headers:{"Content-Type":"application/json"}
+    })
+    .then(response=>{
+        console.log(response);
+    })
+    .catch(error=>{
+
+    });
+    
+    if (input.password === input.cnfrmpass) {
       console.log("Form submitted with matching passwords:", input);
     } else {
       alert("Password and Confirm Password do not match.");
@@ -39,13 +52,14 @@ const Signup = () => {
         <center>
           <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
             <form
+              action=""
               onSubmit={handlesubmit}
               className="text-center flex-column items-center gap-5 mt-5"
             >
               <input
                 type="text"
                 placeholder="UserName"
-                name="username"
+                name="name"
                 value={input.username}
                 onChange={oninputchange}
                 className="my-5 p-2 rounded-md border-2 border-black"
@@ -64,7 +78,7 @@ const Signup = () => {
               <input
                 type="number"
                 placeholder="Phone Number"
-                name="PhNum"
+                name="phoneNo"
                 value={input.PhNum}
                 onChange={oninputchange}
                 className="my-5 p-2 rounded-md border-2 border-black"
@@ -84,8 +98,8 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="Password"
-                name="pass"
-                value={input.pass}
+                name="password"
+                value={input.password}
                 onChange={oninputchange}
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
