@@ -1,13 +1,18 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
+<<<<<<< HEAD
+=======
+
+>>>>>>> bbf48a8787978826da84ce9f0415be690f63252d
 const Signup = () => {
   const [input, setinput] = useState({
-    username: "",
+    name: "",
     email: "",
-    PhNum: "",
+    PhoneNo: "",
     city: "",
     DOB: "",
-    pass: "",
+    password: "",
     cnfrmpass: "",
   });
 
@@ -17,7 +22,7 @@ const Signup = () => {
   };
 
   const checkcpass = () => {
-    if (input.pass !== input.cnfrmpass) {
+    if (input.password !== input.cnfrmpass) {
       alert("Confirm Password does not match Password.");
     }
   };
@@ -25,6 +30,7 @@ const Signup = () => {
   const handlesubmit = (e) => {
     e.preventDefault();
 
+<<<<<<< HEAD
     if (input.pass !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
     } else {
@@ -40,6 +46,23 @@ const Signup = () => {
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
+=======
+    // axios post
+    axios.post("http://localhost:8080/patient/register",input,{
+      headers:{"Content-Type":"application/json"}
+    })
+    .then(response=>{
+        console.log(response);
+    })
+    .catch(error=>{
+
+    });
+    
+    if (input.password === input.cnfrmpass) {
+      console.log("Form submitted with matching passwords:", input);
+    } else {
+      alert("Password and Confirm Password do not match.");
+>>>>>>> bbf48a8787978826da84ce9f0415be690f63252d
     }
   };
 
@@ -50,13 +73,14 @@ const Signup = () => {
         <center>
           <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
             <form
+              action=""
               onSubmit={handlesubmit}
               className="text-center flex-column items-center gap-5 mt-5"
             >
               <input
                 type="text"
                 placeholder="UserName"
-                name="username"
+                name="name"
                 value={input.username}
                 onChange={oninputchange}
                 className="my-5 p-2 rounded-md border-2 border-black"
@@ -75,7 +99,7 @@ const Signup = () => {
               <input
                 type="number"
                 placeholder="Phone Number"
-                name="PhNum"
+                name="phoneNo"
                 value={input.PhNum}
                 onChange={oninputchange}
                 className="my-5 p-2 rounded-md border-2 border-black"
@@ -95,8 +119,8 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="Password"
-                name="pass"
-                value={input.pass}
+                name="password"
+                value={input.password}
                 onChange={oninputchange}
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
@@ -112,12 +136,17 @@ const Signup = () => {
                 className="my-5 p-2 rounded-md border-2 border-black mb-8"
                 required
               />
+<<<<<<< HEAD
 
               <button
                 className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-pink-300 hover:text-white hover:cursor-pointer"
                 type="submit"
               >
                 Sign Up
+=======
+              <button className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-pink-300 hover:text-white hover:cursor-pointer">
+                SignUp
+>>>>>>> bbf48a8787978826da84ce9f0415be690f63252d
               </button>
             </form>
           </div>
