@@ -49,7 +49,7 @@ const Signup = () => {
         input.password &&
         input.cnfrmpass
       ) {
-        sendEmailToBackend();
+        // sendEmailToBackend();
         window.location.href = "/OTP";
       } else {
         alert("Please fill in all the required fields before proceeding.");
@@ -125,6 +125,7 @@ const Signup = () => {
             <button
               className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-pink-300 hover:text-white hover:cursor-pointer"
               type="submit"
+              onClick={sendEmailToBackend}
             >
               Sign Up
             </button>

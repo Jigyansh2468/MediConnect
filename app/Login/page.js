@@ -16,6 +16,9 @@ const Login = () => {
   //   // check pass with database
   //   // if correct then verify otp
   // };
+  const submitbtn = () => {
+    window.location.href = "/Signup";
+  };
   return (
     <>
       <h1 className="text-center font-bold text-xl py-12">
@@ -51,10 +54,11 @@ const Login = () => {
               </button>
             </form>
           </div>
-          <button className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer">
-            <Link href="/Signup" className="mx-8">
-              Signup
-            </Link>
+          <button
+            className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
+            onClick={submitbtn}
+          >
+            SignUp
           </button>
         </center>
       </div>
