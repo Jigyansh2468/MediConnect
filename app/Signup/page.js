@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -51,6 +52,7 @@ const Signup = () => {
         input.password &&
         input.cnfrmpass
       ) {
+        sendEmailToBackend();
         window.location.href = "/OTP";
       } else {
         alert("Please fill in all the required fields before proceeding.");
