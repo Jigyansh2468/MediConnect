@@ -1,9 +1,10 @@
-"use client";
 import React, { useState } from "react";
+import axios from "axios";
 
 const OTP = () => {
   const [otp, setOTP] = useState("");
   const [verificationSuccess, setVerificationSuccess] = useState(false);
+  const [verificationError, setVerificationError] = useState("");
 
   const handleOTPChange = (e) => {
     const inputOTP = e.target.value.replace(/\D/g, "").slice(0, 4);
@@ -12,15 +13,21 @@ const OTP = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call your API here to verify the OTP
-    // If OTP matches, set verificationSuccess to true
-    // Else, it remains false
-    // You would typically send the OTP to the server and validate it there.
 
-    // For example:
-    // api.verifyOTP(otp)
-    //   .then(() => setVerificationSuccess(true))
-    //   .catch(() => setVerificationSuccess(false));
+    axios
+      .post("http://localhost:8080/patient/verify-otp", otp)
+      .then((response) => {
+        if (response.data === "OTP verified") {
+          setVerificationSuccess(true);
+          setVerificationError("");
+        } else {
+          setVerificationSuccess(false);
+          setVerificationError("Wrong OTP. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -31,7 +38,7 @@ const OTP = () => {
           <form onSubmit={handleSubmit}>
             <input
               type="tel"
-              placeholder=""
+              placeholder="Enter OTP"
               name="otp"
               value={otp}
               onChange={handleOTPChange}
@@ -47,10 +54,11 @@ const OTP = () => {
             </button>
           </form>
         </div>
-        {verificationSuccess ? <h4>OTP verified. You can proceed.</h4> : null}
-        {!verificationSuccess && otp.length === 4 ? (
-          <h4>Wrong OTP. Please try again.</h4>
-        ) : null}
+        {verificationSuccess ? (
+          <h4>OTP verified. You can proceed.</h4>
+        ) : (
+          <h4>{verificationError}</h4>
+        )}
       </center>
     </>
   );
