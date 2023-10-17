@@ -7,15 +7,15 @@ const Login = () => {
     email: "",
     pass: "",
   });
-  const oninputchange = (e) => {
-    const { name, value } = e.target;
-    setinput({ ...input, [name]: value });
-  };
-  const handlesubmit = (e) => {
-    e.preventDefault();
-    // check pass with database
-    // if correct then verify otp
-  };
+  // const oninputchange = (e) => {
+  //   const { name, value } = e.target;
+  //   setinput({ ...input, [name]: value });
+  // };
+  // const handlesubmit = (e) => {
+  //   e.preventDefault();
+  //   // check pass with database
+  //   // if correct then verify otp
+  // };
   return (
     <>
       <h1 className="text-center font-bold text-xl py-12">
@@ -53,7 +53,7 @@ const Login = () => {
           </div>
           <button className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer">
             <Link href="/Signup" className="mx-8">
-              SignUp
+              Signup
             </Link>
           </button>
         </center>
