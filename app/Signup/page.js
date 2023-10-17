@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
-
 const Signup = () => {
   const [input, setInput] = useState({
     name: "",
@@ -25,13 +24,20 @@ const Signup = () => {
   };
 
   const sendEmailToBackend = () => {
+    // Send only the email to your backend API
     axios
-      .post("http://localhost:8080/patient/email", { email: input.email })
+      .post(
+        "http://localhost:8080/patient/reqOTP",
+        { email: input.email },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   };
 
@@ -49,7 +55,7 @@ const Signup = () => {
         input.password &&
         input.cnfrmpass
       ) {
-        // sendEmailToBackend();
+        sendEmailToBackend();
         window.location.href = "/OTP";
       } else {
         alert("Please fill in all the required fields before proceeding.");
@@ -63,6 +69,7 @@ const Signup = () => {
       <center>
         <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
           <form
+            action=""
             onSubmit={handleSubmit}
             className="text-center flex-column items-center gap-5 mt-5"
           >
@@ -76,7 +83,7 @@ const Signup = () => {
               required
             />
             <input
-              type="email"
+              type="text"
               placeholder="Email"
               name="email"
               value={input.email}
@@ -124,7 +131,7 @@ const Signup = () => {
             <button
               className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-pink-300 hover:text-white hover:cursor-pointer"
               type="submit"
-              onClick={sendEmailToBackend}
+              onClick={handleSubmit}
             >
               Sign Up
             </button>
