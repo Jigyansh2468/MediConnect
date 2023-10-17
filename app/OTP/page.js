@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 const OTP = () => {
@@ -46,9 +47,7 @@ const OTP = () => {
             </button>
           </form>
         </div>
-        {verificationSuccess ? (
-          <h4>OTP verified. You can proceed.</h4>
-        ) : null}
+        {verificationSuccess ? <h4>OTP verified. You can proceed.</h4> : null}
         {!verificationSuccess && otp.length === 4 ? (
           <h4>Wrong OTP. Please try again.</h4>
         ) : null}

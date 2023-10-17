@@ -23,6 +23,20 @@ const Signup = () => {
     }
   };
 
+  const sendEmailToBackend = () => {
+    // Send only the email to your backend API
+    axios
+      .post("http://your-backend-api-url/email", { email: input.email })
+      .then((response) => {
+        console.log(response.data);
+        // Now, you can proceed to OTP verification
+        // You may want to store the email in a state variable for later use.
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
