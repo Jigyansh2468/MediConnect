@@ -63,7 +63,6 @@ const Signup = () => {
       <center>
         <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
           <form
-            action=""
             onSubmit={handleSubmit}
             className="text-center flex-column items-center gap-5 mt-5"
           >
