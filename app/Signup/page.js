@@ -24,14 +24,11 @@ const Signup = () => {
   };
 
   const sendEmailToBackend = () => {
-    // Send only the email to your backend API
     axios
       .post(
         "http://localhost:8080/patient/reqOTP",
         { email: input.email },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+        { headers: { "Content-Type": "application/json" } }
       )
       .then((response) => {
         console.log(response.data);
@@ -56,7 +53,7 @@ const Signup = () => {
         input.cnfrmpass
       ) {
         sendEmailToBackend();
-        window.location.href = "/OTP";
+        // window.location.href = "/OTP";
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
