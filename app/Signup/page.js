@@ -112,7 +112,7 @@ const Signup = () => {
               <button
                 type="submit"
                 className="border-2 border-white rounded-xl px-4 py-2 bg-blue-400 text-white font-mono font-bold text-lg hover-bg-blue-600"
-                onClick={veifyotp}
+                onClick={verifyotp}
               >
                 Verify OTP
               </button>
