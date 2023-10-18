@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -48,6 +48,7 @@ const Signup = () => {
     const inputOTP = e.target.value.replace(/\D/g, "").slice(0, 4);
     setOTP(inputOTP);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -75,7 +76,7 @@ const Signup = () => {
       <h1 className="text-center text-xl font-bold my-5">Signup FORM</h1>
       <center>
         {completedSignup ? (
-          <div className="flex items-center justify-center h-auto w-1/4 px-20 ">
+          <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
             <form action="" onSubmit={handleSubmit}>
               <input
                 type="tel"
@@ -97,9 +98,7 @@ const Signup = () => {
             {verificationError ? (
               <h4 className="text-red-500 ">{verificationError}</h4>
             ) : verificationStatus === true ? (
-              <h4 className="text-green-500 ">
-                OTP verified. You can proceed.
-              </h4>
+              <h4 className="text-green-500 ">OTP verified. You can proceed.</h4>
             ) : null}
           </div>
         ) : (
