@@ -16,7 +16,6 @@ const Signup = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-
   const checkPasswordMatch = () => {
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
@@ -53,7 +52,16 @@ const Signup = () => {
         input.cnfrmpass
       ) {
         sendEmailToBackend();
-        // window.location.href = "/OTP";
+        window.location.href = "/OTP";
+        // send full data to backend
+        // axios
+        //   .post("", input)
+        //   .then((response) => {
+        //     console.log(response.data);
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
@@ -89,7 +97,7 @@ const Signup = () => {
               required
             />
             <input
-              type="number"
+              type="tel"
               placeholder="Phone Number"
               name="phoneNo"
               value={input.phoneNo}
