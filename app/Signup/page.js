@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -70,6 +70,27 @@ const Signup = () => {
       }
     }
   };
+  const verifyotp = () => {
+    axios
+      .post(
+        "http://localhost:8080/patient/verifyOTP",
+        { otp: otp },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        if (response.data.status === "verified") {
+          setVerificationStatus(true);
+        } else {
+          setVerificationError("OTP verification failed. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setVerificationError("An error occurred while verifying OTP.");
+      });
+  };
 
   return (
     <div>
@@ -91,6 +112,7 @@ const Signup = () => {
               <button
                 type="submit"
                 className="border-2 border-white rounded-xl px-4 py-2 bg-blue-400 text-white font-mono font-bold text-lg hover-bg-blue-600"
+                onClick={veifyotp}
               >
                 Verify OTP
               </button>
@@ -98,7 +120,9 @@ const Signup = () => {
             {verificationError ? (
               <h4 className="text-red-500 ">{verificationError}</h4>
             ) : verificationStatus === true ? (
-              <h4 className="text-green-500 ">OTP verified. You can proceed.</h4>
+              <h4 className="text-green-500 ">
+                OTP verified. You can proceed.
+              </h4>
             ) : null}
           </div>
         ) : (
