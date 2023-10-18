@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
+import { headers } from "@/next.config";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -24,17 +26,15 @@ const Signup = () => {
   };
 
   const sendEmailToBackend = () => {
+
     // Send only the email to your backend API
-    axios
-      .post("http://your-backend-api-url/email", { email: input.email })
-      .then((response) => {
-        console.log(response.data);
-        // Now, you can proceed to OTP verification
-        // You may want to store the email in a state variable for later use.
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    axios.get("http://localhost:8080/patient/reqOTP",{params:{to:input.email}},{
+      headers:{"Content-Type":"application/json"}
+    }).then(response=>{
+      console.log(response);
+    }).catch(error=>{
+      console.log(error)
+    })
   };
 
   const handleSubmit = (e) => {
@@ -51,7 +51,8 @@ const Signup = () => {
         input.password &&
         input.cnfrmpass
       ) {
-        window.location.href = "/OTP";
+        sendEmailToBackend();
+        // window.location.href = "/OTP";
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
@@ -78,7 +79,7 @@ const Signup = () => {
               required
             />
             <input
-              type="email"
+              type="text"
               placeholder="Email"
               name="email"
               value={input.email}
@@ -126,6 +127,7 @@ const Signup = () => {
             <button
               className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-pink-300 hover:text-white hover:cursor-pointer"
               type="submit"
+              onClick={handleSubmit}
             >
               Sign Up
             </button>
