@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
-import { headers } from "@/next.config";
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -18,7 +17,6 @@ const Signup = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-
   const checkPasswordMatch = () => {
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
@@ -26,15 +24,17 @@ const Signup = () => {
   };
 
   const sendEmailToBackend = () => {
-
     // Send only the email to your backend API
-    axios.get("http://localhost:8080/patient/reqOTP",{params:{to:input.email}},{
-      headers:{"Content-Type":"application/json"}
-    }).then(response=>{
-      console.log(response);
-    }).catch(error=>{
-      console.log(error)
-    })
+    axios
+      .get("http://localhost:8080/patient/reqOTP",{params:{to:input.email}})
+      .then((response) => {
+        console.log(response.data);
+        // Now, you can proceed to OTP verification
+        // You may want to store the email in a state variable for later use.
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +52,7 @@ const Signup = () => {
         input.cnfrmpass
       ) {
         sendEmailToBackend();
-        // window.location.href = "/OTP";
+        window.location.href = "/OTP";
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
@@ -88,7 +88,7 @@ const Signup = () => {
               required
             />
             <input
-              type="number"
+              type="tel"
               placeholder="Phone Number"
               name="phoneNo"
               value={input.phoneNo}
