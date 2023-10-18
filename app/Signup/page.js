@@ -7,6 +7,7 @@ const Signup = () => {
     name: "",
     email: "",
     phoneNo: "",
+    DOB:"",
     city: "",
     password: "",
     cnfrmpass: "",
@@ -150,6 +151,14 @@ const Signup = () => {
                 placeholder="Phone Number"
                 name="phoneNo"
                 value={input.phoneNo}
+                onChange={onInputChange}
+                className="my-5 p-2 rounded-md border-2 border-black"
+                required
+              />
+              <input
+                type="date"
+                placeholder="Date od Birth
+                value={input.DOB}
                 onChange={onInputChange}
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
