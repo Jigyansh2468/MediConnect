@@ -71,18 +71,19 @@ const Signup = () => {
     }
   };
   const verifyotp = () => {
-    if (otp == apiotp) {
+    if (otp === apiotp) {
       setVerificationStatus(true);
       axios
-        .post("Http://localhost:8080/patient/register", input)
+        .post("http://localhost:8080/patient/register", input)
         .then((response) => {
-          console.log("Data send to Server");
+          console.log("Data sent to Server");
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
       setVerificationStatus(false);
+      setVerificationError("Invalid OTP. Please enter a valid OTP.");
     }
   };
 
@@ -92,7 +93,7 @@ const Signup = () => {
       <center>
         {completedSignup ? (
           <div className="flex items-center justify-center h-auto w-1/4 lg:w-1/4 sm:w-1/4">
-            <form action="" onSubmit={handleSubmit}>
+            <form>
               <input
                 type="tel"
                 placeholder="Enter OTP"
