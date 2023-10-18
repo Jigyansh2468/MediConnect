@@ -13,6 +13,7 @@ const Signup = () => {
   });
   const [completedSignup, setCompletedSignup] = useState(false);
   const [otp, setOTP] = useState("");
+  const [apiotp, setapiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
 
@@ -27,7 +28,7 @@ const Signup = () => {
     }
   };
 
-  const sendEmailToBackend = () => {
+  const requestotp = () => {
     axios
       .post(
         "http://localhost:8080/patient/reqOTP",
@@ -37,7 +38,7 @@ const Signup = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        setapiOTP(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +52,6 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
     } else {
@@ -63,7 +63,7 @@ const Signup = () => {
         input.password &&
         input.cnfrmpass
       ) {
-        sendEmailToBackend();
+        requestotp();
         setCompletedSignup(true); // Mark the signup as completed
       } else {
         alert("Please fill in all the required fields before proceeding.");
@@ -71,25 +71,19 @@ const Signup = () => {
     }
   };
   const verifyotp = () => {
-    axios
-      .post(
-        "http://localhost:8080/patient/verifyOTP",
-        { otp: otp },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-      .then((response) => {
-        if (response.data.status === "verified") {
-          setVerificationStatus(true);
-        } else {
-          setVerificationError("OTP verification failed. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setVerificationError("An error occurred while verifying OTP.");
-      });
+    if (otp == apiotp) {
+      setVerificationStatus(true);
+      axios
+        .post("Http://localhost:8080/patient/register", input)
+        .then((response) => {
+          console.log("Data send to Server");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setVerificationStatus(false);
+    }
   };
 
   return (
