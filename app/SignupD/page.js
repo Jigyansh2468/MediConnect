@@ -35,7 +35,7 @@ const Signup = () => {
   const requestotp = () => {
     axios
       .get(
-        "http://localhost:8080/patient/reqOTP",
+        "http://localhost:8080/doctor/reqOTP",
         { params: { to: input.email } },
         {
           headers: { "Content-Type": "application/json" },
