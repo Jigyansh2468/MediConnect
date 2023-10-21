@@ -15,8 +15,11 @@ const Login = () => {
     // check pass with database
     // if correct then verify otp
   };
-  const submitbtn = () => {
-    window.location.href = "/Signup";
+  const submitbtnp = () => {
+    window.location.href = "/SignupP";
+  };
+  const submitbtnd = () => {
+    window.location.href = "/SignupD";
   };
   return (
     <>
@@ -55,13 +58,22 @@ const Login = () => {
               </button>
             </form>
           </div>
-          <button
-            className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
-            type="submit"
-            onClick={submitbtn}
-          >
-            SignUp
-          </button>
+          <div className="flex gap-5 items-center justify-center ">
+            <button
+              className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
+              type="submit"
+              onClick={submitbtnp}
+            >
+              SignUp as Patient
+            </button>
+            <button
+              className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
+              type="submit"
+              onClick={submitbtnd}
+            >
+              SignUp as Doctor
+            </button>
+          </div>
         </center>
       </div>
     </>

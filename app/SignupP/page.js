@@ -31,7 +31,9 @@ const Signup = () => {
   const requestotp = () => {
     axios
       .get(
-        "http://localhost:8080/patient/reqOTP",{params:{ to: input.email }},{
+        "http://localhost:8080/patient/reqOTP",
+        { params: { to: input.email } },
+        {
           headers: { "Content-Type": "application/json" },
         }
       )
@@ -86,7 +88,7 @@ const Signup = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl font-bold my-5">Signup FORM</h1>
+      <h1 className="text-center text-xl font-bold my-5">User Signup FORM</h1>
       <center>
         {completedSignup ? (
           <div className="flex items-center justify-center h-auto w-1/4 lg:w-1/4 sm:w-1/4">
@@ -180,7 +182,7 @@ const Signup = () => {
                 required
               />
               <button
-                className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover-bg-pink-300 hover-text-white hover-cursor-pointer"
+                className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white"
                 type="submit"
                 onClick={handleSubmit}
               >
