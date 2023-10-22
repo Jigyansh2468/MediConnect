@@ -11,7 +11,7 @@ const Signup = () => {
     city: "",
     specialization: "",
     certificateNum: "",
-    mode: "ONLINE",
+    mode: "",
     password: "",
     cnfrmpass: "",
   });
@@ -208,8 +208,8 @@ const Signup = () => {
                   <input
                     type="radio"
                     name="mode"
-                    value="online"
-                    checked={input.mode === "online"}
+                    value="ONLINE"
+                    checked={input.mode === "ONLINE"}
                     onChange={handleModeChange}
                   />{" "}
                   Online
@@ -218,8 +218,8 @@ const Signup = () => {
                   <input
                     type="radio"
                     name="mode"
-                    value="offline"
-                    checked={input.mode === "offline"}
+                    value="OFFLINE"
+                    checked={input.mode === "OFFLINE"}
                     onChange={handleModeChange}
                   />{" "}
                   Offline
@@ -228,8 +228,8 @@ const Signup = () => {
                   <input
                     type="radio"
                     name="mode"
-                    value="both"
-                    checked={input.mode === "both"}
+                    value="BOTH"
+                    checked={input.mode === "BOTH"}
                     onChange={handleModeChange}
                   />{" "}
                   Both

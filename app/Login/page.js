@@ -1,19 +1,52 @@
 "use client";
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 const Login = () => {
   const [input, setinput] = useState({
     email: "",
-    pass: "",
+    password: "",
   });
+  const [mode, setmode] = useState("");
+  const handleModeChange = (e) => {
+    setmode(e.target.value);
+  };
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setinput({ ...input, [name]: value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // check pass with database
-    // if correct then verify otp
+    const URL = mode === "Patient" ? "/patient/login" : "/doctor/login";
+    axios
+      .post(`http://localhost:8080/${URL}`, input, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.body === "login successful") {
+          // if(patient) patient profile page
+          // else doctor profile page
+          if (mode == "PATIENT") {
+            alert("got to patient profile page");
+          } else {
+            alert("got to doctor profile page");
+          }
+        } else {
+          if (response.data == "Incorrect password") {
+            alert("password incorrect");
+          } else if (response.data == "Patient not found with email") {
+            alert("Email is not exist in database");
+          }
+          setEmail("");
+          setPassword("");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const submitbtnp = () => {
     window.location.href = "/SignupP";
@@ -46,12 +79,36 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Password"
-                name="pass"
-                value={input.pass}
+                name="password"
+                value={input.password}
                 onChange={onInputChange}
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
               />
+              <div className="flex gap-1 font-bold">
+                Login as
+                <br />
+                <label>
+                  <input
+                    type="radio"
+                    name="mode"
+                    value="PATIENT"
+                    checked={mode === "PATIENT"}
+                    onChange={handleModeChange}
+                  />{" "}
+                  Patient
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="mode"
+                    value="DOCTOR"
+                    checked={mode === "DOCTOR"}
+                    onChange={handleModeChange}
+                  />{" "}
+                  Doctor
+                </label>
+              </div>
               <br />
               <button className="font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-blue-300 hover:text-white hover:cursor-pointer">
                 Login
