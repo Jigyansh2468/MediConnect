@@ -1,21 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
+const SignupP = () => {
   const [input, setInput] = useState({
     name: "",
     email: "",
     phoneNo: "",
+    dob: "",
     city: "",
     password: "",
     cnfrmpass: "",
   });
   const [completedSignup, setCompletedSignup] = useState(false);
   const [otp, setOTP] = useState("");
-  const [apiotp, setapiOTP] = useState("");
+  const [apiotp, setApiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
+  const [showResendButton, setShowResendButton] = useState(false);
+  const [verificationAttempts, setVerificationAttempts] = useState(0);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,15 +33,15 @@ const Signup = () => {
 
   const requestotp = () => {
     axios
-      .get(
+      .post(
         "http://localhost:8080/patient/reqOTP",
-        { params: { to: input.email } },
+        { email: input.email },
         {
           headers: { "Content-Type": "application/json" },
         }
       )
       .then((response) => {
-        setapiOTP(response.data);
+        setApiOTP(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -48,6 +51,49 @@ const Signup = () => {
   const handleOTPChange = (e) => {
     const inputOTP = e.target.value.replace(/\D/g, "").slice(0, 4);
     setOTP(inputOTP);
+  };
+
+  const verifyotp = () => {
+    if (otp === "") {
+      alert("Please enter the OTP.");
+      return;
+    }
+    if (otp == apiotp) {
+      setVerificationStatus(true);
+      axios
+        .post("http://localhost:8080/patient/register", input)
+        .then((response) => {
+          console.log("Data sent to Server");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // changes need to be checked
+      window.location.href = "/login";
+    } else {
+      setVerificationAttempts(verificationAttempts + 1);
+      if (verificationAttempts < 3) {
+        setVerificationStatus(false);
+        setVerificationAttempts(verificationAttempts + 1);
+        setVerificationError(
+          `Incorrect OTP. Please try again.Attempt Left :  ${
+            3 - verificationAttempts
+          }`
+        );
+        setOTP("");
+      } else if (verificationAttempts == 2) {
+        setVerificationError(`Please Enter the OTP`);
+      } else {
+        setShowResendButton(true);
+      }
+    }
+  };
+
+  const handleResendOTP = () => {
+    requestotp();
+    setVerificationAttempts(0);
+    setVerificationError("");
+    setShowResendButton(false);
   };
 
   const handleSubmit = (e) => {
@@ -70,38 +116,10 @@ const Signup = () => {
       }
     }
   };
-  const verifyotp = () => {
-    if (otp == apiotp) {
-      setVerificationStatus(true);
-      axios
-        .post("http://localhost:8080/patient/register", input)
-        .then((response) => {
-          console.log("Data send to Server");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      setCounter(3);
-    } else {
-      setVerificationStatus(false);
-      setCounter(counter - 1);
-    }
-  };
-  const [counter, setCounter] = useState(3);
-  const [showResendButton, setShowResendButton] = useState(false);
 
-  useEffect(() => {
-    if (counter === 0) {
-      setShowResendButton(true);
-    }
-  }, [counter]);
-  const resendOTP = () => {
-    requestotp();
-    setShowResendButton(false);
-  };
   return (
     <div>
-      <h1 className="text-center text-xl font-bold my-5">User Signup FORM</h1>
+      <h1 className="text-center text-xl font-bold my-5">Signup Page</h1>
       <center>
         {completedSignup ? (
           <div className="flex items-center justify-center h-auto w-1/4 lg:w-1/4 sm:w-1/4">
@@ -123,14 +141,6 @@ const Signup = () => {
               >
                 Verify OTP
               </button>
-              {showResendButton ? (
-                <button
-                  className="border-2 border-white rounded-xl px-4 py-2 bg-red-400 text-white font-mono font-bold text-lg hover-bg-red-600 ml-4"
-                  onClick={resendOTP}
-                >
-                  Resend OTP
-                </button>
-              ) : null}
             </form>
             {verificationError ? (
               <h4 className="text-red-500 ">{verificationError}</h4>
@@ -138,6 +148,16 @@ const Signup = () => {
               <h4 className="text-green-500 ">
                 OTP verified. You can proceed.
               </h4>
+            ) : showResendButton === true ? (
+              <div>
+                <h4 className="text-red-500">Incorrect OTP</h4>
+                <button
+                  className="border-2 border-white rounded-xl px-4 py-2 bg-blue-400 text-white font-mono font-bold text-lg hover-bg-blue-600"
+                  onClick={handleResendOTP}
+                >
+                  Resend OTP
+                </button>
+              </div>
             ) : null}
           </div>
         ) : (
@@ -175,6 +195,14 @@ const Signup = () => {
                 required
               />
               <input
+                type="date"
+                placeholder="Date of Birth"
+                value={input.dob}
+                onChange={onInputChange}
+                className="my-5 p-2 rounded-md border-2 border-black"
+                required
+              />
+              <input
                 type="text"
                 placeholder="City"
                 name="city"
@@ -203,7 +231,7 @@ const Signup = () => {
                 required
               />
               <button
-                className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white"
+                className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover-bg-pink-300 hover-text-white hover-cursor-pointer"
                 type="submit"
                 onClick={handleSubmit}
               >
@@ -217,4 +245,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupP;

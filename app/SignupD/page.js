@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
+const SignupD = () => {
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -20,6 +20,8 @@ const Signup = () => {
   const [apiotp, setapiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
+  const [showResendButton, setShowResendButton] = useState(false);
+  const [verificationAttempts, setVerificationAttempts] = useState(0);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,6 +60,48 @@ const Signup = () => {
     const selectedMode = e.target.value;
     setInput({ ...input, mode: selectedMode });
   };
+
+  const verifyotp = () => {
+    if (otp === "") {
+      alert("Please enter the OTP.");
+      return;
+    }
+    if (otp == apiotp) {
+      setVerificationStatus(true);
+      axios
+        .post("http://localhost:8080/patient/register", input)
+        .then((response) => {
+          console.log("Data sent to Server");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // changes need to be checked
+      window.location.href = "/login";
+    } else {
+      setVerificationAttempts(verificationAttempts + 1);
+      if (verificationAttempts < 3) {
+        setVerificationStatus(false);
+        setVerificationAttempts(verificationAttempts + 1);
+        setVerificationError(
+          `Incorrect OTP. Please try again.Attempt Left :  ${
+            3 - verificationAttempts
+          }`
+        );
+        setOTP("");
+      } else if (verificationAttempts == 2) {
+        setVerificationError(`Please Enter the OTP`);
+      } else {
+        setShowResendButton(true);
+      }
+    }
+  };
+  const handleResendOTP = () => {
+    requestotp();
+    setVerificationAttempts(0);
+    setVerificationError("");
+    setShowResendButton(false);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(input);
@@ -82,35 +126,6 @@ const Signup = () => {
         alert("Please fill in all the required fields before proceeding.");
       }
     }
-  };
-  const verifyotp = () => {
-    if (otp == apiotp) {
-      setVerificationStatus(true);
-      axios
-        .post("http://localhost:8080/docotor/register", input)
-        .then((response) => {
-          console.log("Data send to Server");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      setCounter(3);
-    } else {
-      setVerificationStatus(false);
-      setCounter(counter - 1);
-    }
-  };
-  const [counter, setCounter] = useState(3);
-  const [showResendButton, setShowResendButton] = useState(false);
-
-  useEffect(() => {
-    if (counter === 0) {
-      setShowResendButton(true);
-    }
-  }, [counter]);
-  const resendOTP = () => {
-    requestotp();
-    setShowResendButton(false);
   };
   return (
     <div>
@@ -151,6 +166,16 @@ const Signup = () => {
               <h4 className="text-green-500 ">
                 OTP verified. You can proceed.
               </h4>
+            ) : showResendButton === true ? (
+              <div>
+                <h4 className="text-red-500">Incorrect OTP</h4>
+                <button
+                  className="border-2 border-white rounded-xl px-4 py-2 bg-blue-400 text-white font-mono font-bold text-lg hover-bg-blue-600"
+                  onClick={handleResendOTP}
+                >
+                  Resend OTP
+                </button>
+              </div>
             ) : null}
           </div>
         ) : (
@@ -291,4 +316,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupD;
