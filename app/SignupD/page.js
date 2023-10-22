@@ -54,21 +54,6 @@ const Signup = () => {
     setOTP(inputOTP);
   };
 
-  const verifyotp = () => {
-    if (otp == apiotp) {
-      setVerificationStatus(true);
-      axios
-        .post("http://localhost:8080/docotor/register", input)
-        .then((response) => {
-          console.log("Data send to Server");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setVerificationStatus(false);
-    }
-  };
   const handleModeChange = (e) => {
     const selectedMode = e.target.value;
     setInput({ ...input, mode: selectedMode });
@@ -98,6 +83,35 @@ const Signup = () => {
       }
     }
   };
+  const verifyotp = () => {
+    if (otp == apiotp) {
+      setVerificationStatus(true);
+      axios
+        .post("http://localhost:8080/docotor/register", input)
+        .then((response) => {
+          console.log("Data send to Server");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setCounter(3);
+    } else {
+      setVerificationStatus(false);
+      setCounter(counter - 1);
+    }
+  };
+  const [counter, setCounter] = useState(3);
+  const [showResendButton, setShowResendButton] = useState(false);
+
+  useEffect(() => {
+    if (counter === 0) {
+      setShowResendButton(true);
+    }
+  }, [counter]);
+  const resendOTP = () => {
+    requestotp();
+    setShowResendButton(false);
+  };
   return (
     <div>
       <h1 className="text-center text-xl font-bold my-5">Dcotor Signup FORM</h1>
@@ -122,6 +136,14 @@ const Signup = () => {
               >
                 Verify OTP
               </button>
+              {showResendButton ? (
+                <button
+                  className="border-2 border-white rounded-xl px-4 py-2 bg-red-400 text-white font-mono font-bold text-lg hover-bg-red-600 ml-4"
+                  onClick={resendOTP}
+                >
+                  Resend OTP
+                </button>
+              ) : null}
             </form>
             {verificationError ? (
               <h4 className="text-red-500 ">{verificationError}</h4>
