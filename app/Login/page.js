@@ -27,8 +27,6 @@ const Login = () => {
       })
       .then((response) => {
         if (response.body === "login successful") {
-          // if(patient) patient profile page
-          // else doctor profile page
           if (mode == "PATIENT") {
             alert("got to patient profile page");
           } else {
