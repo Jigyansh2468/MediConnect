@@ -7,6 +7,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [mode, setmode] = useState("");
   const handleModeChange = (e) => {
     setmode(e.target.value);
@@ -17,7 +19,7 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const URL = mode === "Patient" ? "/patient/login" : "/doctor/login";
+    const URL = mode === "Patient" ? "patient/login" : "doctor/login";
     axios
       .post(`http://localhost:8080/${URL}`, input, {
         headers: {
@@ -26,7 +28,7 @@ const Login = () => {
         withCredentials: true,
       })
       .then((response) => {
-        if (response.body === "login successful") {
+        if (response.data === "login successful") {
           if (mode == "PATIENT") {
             alert("got to patient profile page");
           } else {
