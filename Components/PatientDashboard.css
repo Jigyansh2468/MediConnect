@@ -1,0 +1,8 @@
+.list {
+  list-style-type: none;
+  padding: 8px;
+  margin: 10px;
+}
+.list:hover {
+  background-color: #efefef;
+}

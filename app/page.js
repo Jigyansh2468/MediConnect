@@ -1,9 +1,11 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
+import PatientDashboard from "@/Components/PatientDashboard";
+import DoctorDashboard from "@/Components/DoctorDashboard";
 const page = () => {
   return (
     <>
-      <div>Welcome to Home Page</div>
+      <PatientDashboard />
+      <DoctorDashboard />
     </>
   );
 };
