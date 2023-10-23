@@ -11,43 +11,45 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setmode] = useState("");
-  const handleModeChange = (e) => {
-    setmode(e.target.value);
-  };
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setinput({ ...input, [name]: value });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const URL = mode === "Patient" ? "patient/login" : "doctor/login";
-    axios
-      .post(`http://localhost:8080/${URL}`, input, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        if (response.data === "login successful") {
-          if (mode == "PATIENT") {
-            alert("got to patient profile page");
+  const Handlelogin = (e) => {
+    if (input.email && input.password) {
+      e.preventDefault();
+      console.log(input, mode);
+      const URL = mode === "Patient" ? "patient/login" : "doctor/login";
+      axios
+        .post(`http://localhost:8080/${URL}`, input, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.data === "login successful") {
+            if (mode == "PATIENT") {
+              window.location.href = "/PatientDashboard";
+            } else {
+              window.location.href = "/DoctorDashboard";
+            }
           } else {
-            alert("got to doctor profile page");
+            if (response.data == "Incorrect password") {
+              alert("password incorrect");
+            } else if (response.data == "Patient not found with email") {
+              alert("Email is not exist in database");
+            }
+            setEmail("");
+            setPassword("");
           }
-        } else {
-          if (response.data == "Incorrect password") {
-            alert("password incorrect");
-          } else if (response.data == "Patient not found with email") {
-            alert("Email is not exist in database");
-          }
-          setEmail("");
-          setPassword("");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("Please fill in all the required fields before proceeding.");
+    }
   };
   return (
     <>
@@ -57,10 +59,7 @@ const Login = () => {
       <div>
         <center>
           <div className="flex items-center justify-center h-72 w-1/4 border-2 border-black px-20  rounded-xl lg:w-1/4 sm:w-1/4 ">
-            <form
-              onSubmit={handleSubmit}
-              className="text-center flex-column items-center gap-10"
-            >
+            <form className="text-center flex-column items-center gap-10">
               <input
                 type="email"
                 placeholder="Email"
@@ -89,7 +88,9 @@ const Login = () => {
                     name="mode"
                     value="PATIENT"
                     checked={mode === "PATIENT"}
-                    onChange={handleModeChange}
+                    onChange={(e) => {
+                      setmode(e.target.value);
+                    }}
                   />{" "}
                   Patient
                 </label>
@@ -99,13 +100,18 @@ const Login = () => {
                     name="mode"
                     value="DOCTOR"
                     checked={mode === "DOCTOR"}
-                    onChange={handleModeChange}
+                    onChange={(e) => {
+                      setmode(e.target.value);
+                    }}
                   />{" "}
                   Doctor
                 </label>
               </div>
               <br />
-              <button className="font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-blue-300 hover:text-white hover:cursor-pointer">
+              <button
+                className="font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-blue-300 hover:text-white hover:cursor-pointer mb-3"
+                onClick={Handlelogin}
+              >
                 Login
               </button>
             </form>
@@ -115,7 +121,6 @@ const Login = () => {
               href="/Signup/Patient"
               className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
               type="submit"
-              // onClick={submitbtnp}
             >
               SignUp as Patient
             </Link>
@@ -123,7 +128,6 @@ const Login = () => {
               href="/Signup/Doctor"
               className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
               type="submit"
-              // onClick={submitbtnd}
             >
               SignUp as Doctor
             </Link>
