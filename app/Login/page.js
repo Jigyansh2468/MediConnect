@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 const Login = () => {
@@ -47,12 +48,6 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
-  const submitbtnp = () => {
-    window.location.href = "/SignupP";
-  };
-  const submitbtnd = () => {
-    window.location.href = "/SignupD";
   };
   return (
     <>
@@ -116,20 +111,22 @@ const Login = () => {
             </form>
           </div>
           <div className="flex gap-5 items-center justify-center ">
-            <button
+            <Link
+              href="/Signup/Patient"
               className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
               type="submit"
-              onClick={submitbtnp}
+              // onClick={submitbtnp}
             >
               SignUp as Patient
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/Signup/Doctor"
               className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
               type="submit"
-              onClick={submitbtnd}
+              // onClick={submitbtnd}
             >
               SignUp as Doctor
-            </button>
+            </Link>
           </div>
         </center>
       </div>

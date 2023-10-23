@@ -36,22 +36,22 @@ const DoctorDashboard = (props) => {
               className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg"
               style={{ zIndex: 1 }}
             >
-              <li href="" className="list">
-                <button>View Profile</button>
+              <li className="list">
+                <Link href="/Profile/Doctor">View Profile</Link>
               </li>
-              <li href="" className="list">
+              <li className="list">
                 <button>Medical Records</button>
               </li>
-              <li href="" className="list">
+              <li className="list">
                 <button>My Cart</button>
               </li>
-              <li href="" className="list">
+              <li className="list">
                 <button>Order History</button>
               </li>
-              <li href="" className="list">
+              <li className="list">
                 <button>Settings</button>
               </li>
-              <li href="" className="list">
+              <li className="list">
                 <button onClick={logout}>Logout</button>
               </li>
             </div>
