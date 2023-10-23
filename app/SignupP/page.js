@@ -17,7 +17,7 @@ const SignupP = () => {
   const [apiotp, setApiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
-  const [showResendButton, setShowResendButton] = useState(false);
+  const [passwordMatchError, setPasswordMatchError] = useState("");
   const [verificationAttempts, setVerificationAttempts] = useState(0);
 
   const onInputChange = (e) => {
@@ -27,7 +27,9 @@ const SignupP = () => {
 
   const checkPasswordMatch = () => {
     if (input.password !== input.cnfrmpass) {
-      alert("Password and Confirm Password do not match.");
+      setPasswordMatchError("Password and Confirm Password do not match.");
+    } else {
+      setPasswordMatchError("");
     }
   };
 
@@ -89,13 +91,6 @@ const SignupP = () => {
     }
   };
 
-  const handleResendOTP = () => {
-    requestotp();
-    setVerificationAttempts(0);
-    setVerificationError("");
-    setShowResendButton(false);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.password !== input.cnfrmpass) {
@@ -151,12 +146,6 @@ const SignupP = () => {
             ) : showResendButton === true ? (
               <div>
                 <h4 className="text-red-500">Incorrect OTP</h4>
-                <button
-                  className="border-2 border-white rounded-xl px-4 py-2 bg-blue-400 text-white font-mono font-bold text-lg hover-bg-blue-600"
-                  onClick={handleResendOTP}
-                >
-                  Resend OTP
-                </button>
               </div>
             ) : null}
           </div>
@@ -230,6 +219,9 @@ const SignupP = () => {
                 className="my-5 p-2 rounded-md border-2 border-black mb-8"
                 required
               />
+              {passwordMatchError && (
+                <div className="text-red-500">{passwordMatchError}</div>
+              )}
               <button
                 className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover-bg-pink-300 hover-text-white hover-cursor-pointer"
                 type="submit"

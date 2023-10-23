@@ -10,7 +10,7 @@ const SignupD = () => {
     address: "",
     city: "",
     specialization: "",
-    certificateNum: "",
+    certificateNo: "",
     mode: "",
     password: "",
     cnfrmpass: "",
@@ -20,7 +20,7 @@ const SignupD = () => {
   const [apiotp, setapiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
-  const [showResendButton, setShowResendButton] = useState(false);
+  const [passwordMatchError, setPasswordMatchError] = useState("");
   const [verificationAttempts, setVerificationAttempts] = useState(0);
 
   const onInputChange = (e) => {
@@ -30,15 +30,17 @@ const SignupD = () => {
 
   const checkPasswordMatch = () => {
     if (input.password !== input.cnfrmpass) {
-      alert("Password and Confirm Password do not match.");
+      setPasswordMatchError("Password and Confirm Password do not match.");
+    } else {
+      setPasswordMatchError("");
     }
   };
 
   const requestotp = () => {
     axios
-      .get(
+      .post(
         "http://localhost:8080/doctor/reqOTP",
-        { params: { to: input.email } },
+        { email: input.email },
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -77,6 +79,7 @@ const SignupD = () => {
           console.log(error);
         });
       // changes need to be checked
+      alert("User registered successfully");
       window.location.href = "/login";
     } else {
       setVerificationAttempts(verificationAttempts + 1);
@@ -96,12 +99,6 @@ const SignupD = () => {
       }
     }
   };
-  const handleResendOTP = () => {
-    requestotp();
-    setVerificationAttempts(0);
-    setVerificationError("");
-    setShowResendButton(false);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(input);
@@ -115,7 +112,7 @@ const SignupD = () => {
         input.address &&
         input.city &&
         input.specialization &&
-        input.certificateNum &&
+        input.certificateNo &&
         input.password &&
         input.mode &&
         input.cnfrmpass
@@ -129,7 +126,7 @@ const SignupD = () => {
   };
   return (
     <div>
-      <h1 className="text-center text-xl font-bold my-5">Dcotor Signup FORM</h1>
+      <h1 className="text-center text-xl font-bold my-5">Doctor Signup</h1>
       <center>
         {completedSignup ? (
           <div className="flex items-center justify-center h-auto w-1/4 lg:w-1/4 sm:w-1/4">
@@ -151,14 +148,6 @@ const SignupD = () => {
               >
                 Verify OTP
               </button>
-              {showResendButton ? (
-                <button
-                  className="border-2 border-white rounded-xl px-4 py-2 bg-red-400 text-white font-mono font-bold text-lg hover-bg-red-600 ml-4"
-                  onClick={resendOTP}
-                >
-                  Resend OTP
-                </button>
-              ) : null}
             </form>
             {verificationError ? (
               <h4 className="text-red-500 ">{verificationError}</h4>
@@ -169,12 +158,6 @@ const SignupD = () => {
             ) : showResendButton === true ? (
               <div>
                 <h4 className="text-red-500">Incorrect OTP</h4>
-                <button
-                  className="border-2 border-white rounded-xl px-4 py-2 bg-blue-400 text-white font-mono font-bold text-lg hover-bg-blue-600"
-                  onClick={handleResendOTP}
-                >
-                  Resend OTP
-                </button>
               </div>
             ) : null}
           </div>
@@ -241,9 +224,9 @@ const SignupD = () => {
               />
               <input
                 type="number"
-                placeholder="CertificateNum"
-                name="certificateNum"
-                value={input.certificateNum}
+                placeholder="certificateNo"
+                name="certificateNo"
+                value={input.certificateNo}
                 onChange={onInputChange}
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
@@ -301,6 +284,9 @@ const SignupD = () => {
                 className="my-5 p-2 rounded-md border-2 border-black mb-8"
                 required
               />
+              {passwordMatchError && (
+                <div className="text-red-500">{passwordMatchError}</div>
+              )}
               <button
                 className="mb-8 font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white"
                 type="submit"
