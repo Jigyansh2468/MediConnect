@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 const SignupD = () => {
@@ -22,6 +23,7 @@ const SignupD = () => {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [verificationAttempts, setVerificationAttempts] = useState(0);
+  const [redirectToSignup, setRedirectToSignup] = useState(false);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +65,7 @@ const SignupD = () => {
     setInput({ ...input, mode: selectedMode });
   };
 
-  const verifyotp = () => {
+  const verifyotp = (e) => {
     if (otp === "") {
       alert("Please enter the OTP.");
       return;
@@ -71,14 +73,14 @@ const SignupD = () => {
     if (otp == apiotp) {
       setVerificationStatus(true);
       axios
-        .post("http://localhost:8080/patient/register", input)
+        .post("http://localhost:8080/doctor/register", input)
         .then((response) => {
           console.log("Data sent to Server");
         })
         .catch((error) => {
           console.log(error);
         });
-      alert("User registered successfully");
+      alert("Doctor registered successfully");
       window.location.href = "/Login";
     } else {
       setVerificationAttempts(verificationAttempts + 1);
@@ -91,10 +93,13 @@ const SignupD = () => {
           }`
         );
         setOTP("");
-      } else if (verificationAttempts == 2) {
-        setVerificationError(`Please Enter the OTP`);
       } else {
-        setShowResendButton(true);
+        e.preventDefault();
+        setTimeout(() => {
+          setRedirectToSignup(true);
+          window.location.href = "/SignupD";
+        }, 3000);
+        setVerificationError("No Attemp Left Going back to Signup Page...");
       }
     }
   };
@@ -128,7 +133,7 @@ const SignupD = () => {
       <h1 className="text-center text-xl font-bold my-5">Doctor Signup</h1>
       <center>
         {completedSignup ? (
-          <div className="flex items-center justify-center h-auto w-1/4 lg:w-1/4 sm:w-1/4">
+          <div className="flex items-center justify-center h-auto gap-6 w-1/4 lg:w-1/4 sm:w-1/4">
             <form action="">
               <input
                 type="tel"
@@ -154,11 +159,8 @@ const SignupD = () => {
               <h4 className="text-green-500 ">
                 OTP verified. You can proceed.
               </h4>
-            ) : showResendButton === true ? (
-              <div>
-                <h4 className="text-red-500">Incorrect OTP</h4>
-              </div>
             ) : null}
+            {redirectToSignup && <Redirect to="/signup" />}
           </div>
         ) : (
           <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
