@@ -70,8 +70,8 @@ const SignupP = () => {
         .catch((error) => {
           console.log(error);
         });
-      // changes need to be checked
-      window.location.href = "/login";
+      alert("User registered successfully");
+      window.location.href = "/Login";
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {

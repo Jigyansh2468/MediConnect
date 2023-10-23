@@ -78,9 +78,8 @@ const SignupD = () => {
         .catch((error) => {
           console.log(error);
         });
-      // changes need to be checked
       alert("User registered successfully");
-      window.location.href = "/login";
+      window.location.href = "/Login";
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {
@@ -113,12 +112,12 @@ const SignupD = () => {
         input.city &&
         input.specialization &&
         input.certificateNo &&
-        input.password &&
         input.mode &&
+        input.password &&
         input.cnfrmpass
       ) {
         requestotp();
-        setCompletedSignup(true); // Mark the signup as completed
+        setCompletedSignup(true);
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
