@@ -30,9 +30,9 @@ const Login = () => {
         .then((response) => {
           if (response.data === "login successful") {
             if (mode == "PATIENT") {
-              window.location.href = "/PatientDashboard";
+              history.push("/PatientDashboard");
             } else {
-              window.location.href = "/DoctorDashboard";
+              history.push("/DoctorDashboard");
             }
           } else {
             if (response.data == "Incorrect password") {

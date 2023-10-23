@@ -13,7 +13,7 @@
     "next": "^13.5.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.17.0"
   },
   "devDependencies": {
     "autoprefixer": "^10",
