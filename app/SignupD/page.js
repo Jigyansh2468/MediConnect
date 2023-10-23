@@ -105,7 +105,7 @@ const SignupD = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+    // console.log(input);
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
     } else {
@@ -214,15 +214,39 @@ const SignupD = () => {
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
               />
-              <input
-                type="text"
-                placeholder="Specialization"
+              <select
                 name="specialization"
                 value={input.specialization}
                 onChange={onInputChange}
                 className="my-5 p-2 rounded-md border-2 border-black"
                 required
-              />
+              >
+                <option value="">Select Specialization</option>
+                <option value="Internal medicine">Internal medicine</option>
+                <option value="General surgery">General surgery</option>
+                <option value="Family medicine">Family medicine</option>
+                <option value="Otorhinolaryngology">Otorhinolaryngology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Surgeon">Surgeon</option>
+                <option value="Emergency medicine">Emergency medicine</option>
+                <option value="Ophthalmology">Ophthalmology</option>
+                <option value="Radiology">Radiology</option>
+                <option value="Psychiatrist">Psychiatrist</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Geriatrics">Geriatrics</option>
+                <option value="Radiologist">Radiologist</option>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Oncologist">Oncologist</option>
+                <option value="Ophthalmologist">Ophthalmologist</option>
+                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="Podiatrists">Podiatrists</option>
+                <option value="Endocrinologist">Endocrinologist</option>
+                <option value="Pulmonologist">Pulmonologist</option>
+                <option value="Dentist">Dentist</option>
+              </select>
               <input
                 type="number"
                 placeholder="certificateNo"

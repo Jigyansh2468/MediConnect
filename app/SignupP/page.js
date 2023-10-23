@@ -98,6 +98,7 @@ const SignupP = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log(input);
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
     } else {
