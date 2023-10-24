@@ -2,14 +2,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import "./PatientDashboard.css";
-const PatientDashboard = (props) => {
+const PatientDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
-  };
-  const logout = () => {
-    axios.post("");
   };
   return (
     <>
@@ -18,23 +15,18 @@ const PatientDashboard = (props) => {
           <Link href="/">LOGO</Link>
         </h2>
         <div className="gap-10 flex items-center px-40 text-center">
-          <Link href="/FindDoctor">Find Doctor</Link>
-          <Link href="/VideoConsultation">Video Consultation</Link>
-          <Link href="/Medicines">Medicines</Link>
+          <Link href="/pages/FindDoctor">Find Doctor</Link>
+          <Link href="/pages/VideoConsultation">Video Consultation</Link>
+          <Link href="/pages/Medicines">Medicines</Link>
         </div>
-        <div
-          className="relative inline-block"
-          onMouseLeave={() => {
-            setDropdownOpen(false);
-          }}
-        >
-          <button className="btn" onMouseEnter={toggleDropdown}>
-            {props.user}
+        <div className="relative inline-block">
+          <button className="btn" onClick={toggleDropdown}>
+            Patient_name
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
               <li className="list">
-                <Link href="pages/Profile/Patient">View Profile</Link>
+                <Link href="/pages/ViewProfile/Patient">View Profile</Link>
               </li>
               <li className="list">
                 <button>Medical Records</button>
@@ -49,7 +41,7 @@ const PatientDashboard = (props) => {
                 <button>Settings</button>
               </li>
               <li className="list">
-                <button onClick={logout}>Logout</button>
+                <button>Logout</button>
               </li>
             </div>
           )}
@@ -60,6 +52,3 @@ const PatientDashboard = (props) => {
 };
 
 export default PatientDashboard;
-
-// Medical History
-// remove med rec

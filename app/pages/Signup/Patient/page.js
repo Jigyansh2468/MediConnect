@@ -77,7 +77,7 @@ const SignupP = () => {
       // pending work
       setTimeout(() => {
         setRedirectToSignup(true);
-        Router.push(`/pages/Login`);
+        Router.replace(`/pages/Login`);
       }, 3000);
     } else {
       setVerificationAttempts(verificationAttempts + 1);

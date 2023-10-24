@@ -82,6 +82,7 @@ const SignupD = () => {
         });
       alert("Doctor registered successfully");
       window.location.href = "/Login";
+      // pending
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {
