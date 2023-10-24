@@ -21,7 +21,7 @@ const Login = () => {
     if (input.email && input.password) {
       e.preventDefault();
       console.log(input, mode);
-      const URL = mode === "Patient" ? "patient/login" : "doctor/login";
+      const URL = mode === "PATIENT" ? "patient/login" : "doctor/login";
       axios
         .post(`http://localhost:8080/${URL}`, input, {
           headers: {

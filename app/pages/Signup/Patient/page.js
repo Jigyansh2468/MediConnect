@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
+import { Redirect } from "react-router-dom";
 const SignupP = () => {
+  const Router = useRouter();
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -73,7 +75,11 @@ const SignupP = () => {
           console.log(error);
         });
       alert("Patient registered successfully");
-      window.location.href = "/Login";
+      useEffect(() => {
+        e.preventDefault();
+        // Router.push(`/pages/Login`);
+        // pending route to login page
+      }, []);
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {

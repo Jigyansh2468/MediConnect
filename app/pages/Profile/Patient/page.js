@@ -1,11 +1,11 @@
 import React from "react";
-import DoctorDashboard from "@/Components/DoctorDashboard";
-const DoctorProfile = () => {
+import PatientDashboard from "@/Components/PatientDashboard";
+const PatientProfile = () => {
   return (
     <>
-      <DoctorDashboard />
+      <PatientDashboard />
     </>
   );
 };
 
-export default DoctorProfile;
+export default PatientProfile;
