@@ -11,12 +11,12 @@ const Navbar = (props) => {
           <Link href="/">LOGO</Link>
         </h2>
         <div className="gap-10 flex items-center px-40 text-center">
-          <Link href="/FindDoctor">Find Doctor</Link>
-          <Link href="/VideoConsultation">Video Consultation</Link>
-          <Link href="/Medicines">Medicines</Link>
+          <Link href="/pages/FindDoctor">Find Doctor</Link>
+          <Link href="/pages/VideoConsultation">Video Consultation</Link>
+          <Link href="/pages/Medicines">Medicines</Link>
         </div>
         <button className="btn">
-          <Link href="/Login">Login/Signup</Link>
+          <Link href="/pages/Login">Login/Signup</Link>
         </button>
       </div>
     </>

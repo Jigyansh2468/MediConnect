@@ -118,14 +118,14 @@ const Login = () => {
           </div>
           <div className="flex gap-5 items-center justify-center ">
             <Link
-              href="/Signup/Patient"
+              href="/pages/Signup/Patient"
               className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
               type="submit"
             >
               SignUp as Patient
             </Link>
             <Link
-              href="/Signup/Doctor"
+              href="/pages/Signup/Doctor"
               className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
               type="submit"
             >
