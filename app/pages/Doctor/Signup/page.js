@@ -81,7 +81,8 @@ const SignupD = () => {
           console.log(error);
         });
       alert("Doctor registered successfully");
-      window.location.href = "/Login";
+      // window.location.href = "/Login";
+      // pending
       // pending
     } else {
       setVerificationAttempts(verificationAttempts + 1);
@@ -98,7 +99,8 @@ const SignupD = () => {
         e.preventDefault();
         setTimeout(() => {
           setRedirectToSignup(true);
-          window.location.href = "/SignupD";
+          // window.location.href = "/SignupD";
+          // pending
         }, 3000);
         setVerificationError("No Attemp Left Going back to Signup Page...");
       }

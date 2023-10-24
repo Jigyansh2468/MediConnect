@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import "./PatientDashboard.css";
+import p from "../images/profile.png";
 const PatientDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -21,7 +22,7 @@ const PatientDashboard = () => {
         </div>
         <div className="relative inline-block">
           <button className="btn" onClick={toggleDropdown}>
-            Patient_name
+            <img src={p} alt="Patient" />
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
