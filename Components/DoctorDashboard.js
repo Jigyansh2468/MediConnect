@@ -29,7 +29,7 @@ const DoctorDashboard = (props) => {
           }}
         >
           <button className="btn" onMouseEnter={toggleDropdown}>
-            Doctor_name
+            {props.user}
           </button>
           {isDropdownOpen && (
             <div
@@ -37,7 +37,7 @@ const DoctorDashboard = (props) => {
               style={{ zIndex: 1 }}
             >
               <li className="list">
-                <Link href="/Profile/Doctor">View Profile</Link>
+                <Link href="pages/Profile/Doctor">View Profile</Link>
               </li>
               <li className="list">
                 <button>Medical Records</button>

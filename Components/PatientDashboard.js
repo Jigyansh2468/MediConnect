@@ -29,12 +29,12 @@ const PatientDashboard = (props) => {
           }}
         >
           <button className="btn" onMouseEnter={toggleDropdown}>
-            User_name
+            {props.user}
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
               <li className="list">
-                <Link href="/Profile/Patient">View Profile</Link>
+                <Link href="pages/Profile/Patient">View Profile</Link>
               </li>
               <li className="list">
                 <button>Medical Records</button>

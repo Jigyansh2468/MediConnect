@@ -76,10 +76,10 @@ const SignupP = () => {
         });
       alert("Patient registered successfully");
       useEffect(() => {
-        e.preventDefault();
-        // Router.push(`/pages/Login`);
-        // pending route to login page
-      }, []);
+        Router.push(`/pages/Login`);
+      }, [setVerificationStatus]);
+      // Router.push(`/pages/Login`);
+      // pending route to login pagex
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {
