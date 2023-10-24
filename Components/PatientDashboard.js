@@ -27,7 +27,7 @@ const PatientDashboard = () => {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
               <li className="list">
-                <Link href="/pages/ViewProfile/Patient">View Profile</Link>
+                <Link href="/pages/Patient/ViewProfile">View Profile</Link>
               </li>
               <li className="list">
                 <button>Medical Records</button>

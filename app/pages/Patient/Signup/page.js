@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-// import { Redirect } from "react-router-dom";
+
 const SignupP = () => {
   const [input, setInput] = useState({
     name: "",
@@ -14,15 +13,15 @@ const SignupP = () => {
     password: "",
     cnfrmpass: "",
   });
-  const Router = useRouter();
-  const [completedSignup, setCompletedSignup] = useState(false);
+  // const Router = useRouter();
+  const history = useRouter();
+  const [completedSignup, setCompletedSignup] = useState("signup");
   const [otp, setOTP] = useState("");
   const [apiotp, setApiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [verificationAttempts, setVerificationAttempts] = useState(0);
-  const [redirectToSignup, setRedirectToSignup] = useState(false);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +34,6 @@ const SignupP = () => {
       setPasswordMatchError("");
     }
   };
-
   const requestotp = () => {
     axios
       .post(
@@ -52,12 +50,10 @@ const SignupP = () => {
         console.log(error);
       });
   };
-
   const handleOTPChange = (e) => {
     const inputOTP = e.target.value.replace(/\D/g, "").slice(0, 4);
     setOTP(inputOTP);
   };
-
   const verifyotp = (e) => {
     if (otp === "") {
       alert("Please enter the OTP.");
@@ -74,11 +70,7 @@ const SignupP = () => {
           console.log(error);
         });
       alert("Patient registered successfully");
-      // pending work
-      setTimeout(() => {
-        setRedirectToSignup(true);
-        Router.replace(`/pages/Login`);
-      }, 3000);
+      setCompletedSignup("login");
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {
@@ -91,19 +83,18 @@ const SignupP = () => {
         );
         setOTP("");
       } else {
-        e.preventDefault();
-        setTimeout(() => {
-          setRedirectToSignup(true);
-          Router.push(`/pages/Signup/Patient`);
-        }, 3000);
+        setCompletedSignup("signup");
         setVerificationError("No Attemp Left Going back to Signup Page...");
       }
     }
   };
-
+  useEffect(() => {
+    if (completedSignup === "login") {
+      history.replace(`/pages/Login`);
+    }
+  }, [completedSignup]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(input);
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
     } else {
@@ -116,7 +107,7 @@ const SignupP = () => {
         input.cnfrmpass
       ) {
         requestotp();
-        setCompletedSignup(true);
+        setCompletedSignup("otp");
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
@@ -127,7 +118,7 @@ const SignupP = () => {
     <div>
       <h1 className="text-center text-xl font-bold my-5">Signup Page</h1>
       <center>
-        {completedSignup ? (
+        {completedSignup === "otp" ? (
           <div className="flex items-center justify-center h-auto gap-6 w-1/4 lg:w-1/4 sm:w-1/4">
             <form action="">
               <input
@@ -155,9 +146,8 @@ const SignupP = () => {
                 OTP verified. You can proceed.
               </h4>
             ) : null}
-            {redirectToSignup && <Redirect to="/SignuP" />}
           </div>
-        ) : (
+        ) : completedSignup === "signup" ? (
           <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
             <form
               action=""
@@ -239,7 +229,7 @@ const SignupP = () => {
               </button>
             </form>
           </div>
-        )}
+        ) : null}
       </center>
     </div>
   );

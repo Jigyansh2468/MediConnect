@@ -5,7 +5,7 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 const Login = () => {
-  const Router = useRouter();
+  const history = useRouter();
   const [input, setinput] = useState({
     email: "",
     password: "",
@@ -32,9 +32,9 @@ const Login = () => {
         .then((response) => {
           if (response.data === "login successful") {
             if (mode == "PATIENT") {
-              Router.replace(`/pages/Patient/Hom/`);
+              history.replace(`/pages/Patient/Hom/`);
             } else {
-              Router.replace(`/pages/Doctor/Hom`);
+              history.replace(`/pages/Doctor/Hom`);
             }
           } else {
             if (response.data == "Incorrect password") {

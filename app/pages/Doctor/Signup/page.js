@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 const SignupD = () => {
   const [input, setInput] = useState({
     name: "",
@@ -16,20 +15,19 @@ const SignupD = () => {
     password: "",
     cnfrmpass: "",
   });
-  const [completedSignup, setCompletedSignup] = useState(false);
+  const history = useRouter();
+  const [completedSignup, setCompletedSignup] = useState("signup");
   const [otp, setOTP] = useState("");
   const [apiotp, setapiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [verificationAttempts, setVerificationAttempts] = useState(0);
-  const [redirectToSignup, setRedirectToSignup] = useState(false);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-
   const checkPasswordMatch = () => {
     if (input.password !== input.cnfrmpass) {
       setPasswordMatchError("Password and Confirm Password do not match.");
@@ -37,7 +35,6 @@ const SignupD = () => {
       setPasswordMatchError("");
     }
   };
-
   const requestotp = () => {
     axios
       .post(
@@ -54,17 +51,14 @@ const SignupD = () => {
         console.log(error);
       });
   };
-
   const handleOTPChange = (e) => {
     const inputOTP = e.target.value.replace(/\D/g, "").slice(0, 4);
     setOTP(inputOTP);
   };
-
   const handleModeChange = (e) => {
     const selectedMode = e.target.value;
     setInput({ ...input, mode: selectedMode });
   };
-
   const verifyotp = (e) => {
     if (otp === "") {
       alert("Please enter the OTP.");
@@ -81,9 +75,7 @@ const SignupD = () => {
           console.log(error);
         });
       alert("Doctor registered successfully");
-      // window.location.href = "/Login";
-      // pending
-      // pending
+      setCompletedSignup("login");
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {
@@ -96,19 +88,18 @@ const SignupD = () => {
         );
         setOTP("");
       } else {
-        e.preventDefault();
-        setTimeout(() => {
-          setRedirectToSignup(true);
-          // window.location.href = "/SignupD";
-          // pending
-        }, 3000);
+        setCompletedSignup("signup");
         setVerificationError("No Attemp Left Going back to Signup Page...");
       }
     }
   };
+  useEffect(() => {
+    if (completedSignup === "login") {
+      history.replace(`/pages/Login`);
+    }
+  }, [completedSignup]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(input);
     if (input.password !== input.cnfrmpass) {
       alert("Password and Confirm Password do not match.");
     } else {
@@ -125,7 +116,7 @@ const SignupD = () => {
         input.cnfrmpass
       ) {
         requestotp();
-        setCompletedSignup(true);
+        setCompletedSignup("otp");
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
@@ -135,7 +126,7 @@ const SignupD = () => {
     <div>
       <h1 className="text-center text-xl font-bold my-5">Doctor Signup</h1>
       <center>
-        {completedSignup ? (
+        {completedSignup === "otp" ? (
           <div className="flex items-center justify-center h-auto gap-6 w-1/4 lg:w-1/4 sm:w-1/4">
             <form action="">
               <input
@@ -163,9 +154,8 @@ const SignupD = () => {
                 OTP verified. You can proceed.
               </h4>
             ) : null}
-            {redirectToSignup && <Redirect to="/signup" />}
           </div>
-        ) : (
+        ) : completedSignup === "signup" ? (
           <div className="flex items-center justify-center h-auto w-1/4 border-2 border-black px-20 rounded-xl lg:w-1/4 sm:w-1/4">
             <form
               action=""
@@ -324,7 +314,7 @@ const SignupD = () => {
               </button>
             </form>
           </div>
-        )}
+        ) : null}
       </center>
     </div>
   );
