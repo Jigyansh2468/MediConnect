@@ -3,7 +3,9 @@ import axios from "axios";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 const Login = () => {
+  const Router = useRouter();
   const [input, setinput] = useState({
     email: "",
     password: "",
@@ -30,9 +32,9 @@ const Login = () => {
         .then((response) => {
           if (response.data === "login successful") {
             if (mode == "PATIENT") {
-              history.push("/PatientDashboard");
+              Router.push(`/pages/Profile/Patient`);
             } else {
-              history.push("/DoctorDashboard");
+              Router.push(`/pages/Profile/Doctor`);
             }
           } else {
             if (response.data == "Incorrect password") {

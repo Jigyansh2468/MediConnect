@@ -1,8 +1,9 @@
 import React from "react";
+import PatientDashboard from "@/Components/PatientDashboard";
 const DoctorProfile = () => {
   return (
     <>
-      <h1>Hello this is patient profile</h1>
+      <PatientDashboard />
     </>
   );
 };
