@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 const SignupP = () => {
-  const Router = useRouter();
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -15,6 +14,7 @@ const SignupP = () => {
     password: "",
     cnfrmpass: "",
   });
+  const Router = useRouter();
   const [completedSignup, setCompletedSignup] = useState(false);
   const [otp, setOTP] = useState("");
   const [apiotp, setApiOTP] = useState("");
@@ -28,7 +28,6 @@ const SignupP = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-
   const checkPasswordMatch = () => {
     if (input.password !== input.cnfrmpass) {
       setPasswordMatchError("Password and Confirm Password do not match.");
@@ -69,17 +68,17 @@ const SignupP = () => {
       axios
         .post("http://localhost:8080/patient/register", input)
         .then((response) => {
-          console.log("Data sent to Server");
+          console.log("Data Sent to Server");
         })
         .catch((error) => {
           console.log(error);
         });
       alert("Patient registered successfully");
-      useEffect(() => {
+      // pending work
+      setTimeout(() => {
+        setRedirectToSignup(true);
         Router.push(`/pages/Login`);
-      }, [setVerificationStatus]);
-      // Router.push(`/pages/Login`);
-      // pending route to login pagex
+      }, 3000);
     } else {
       setVerificationAttempts(verificationAttempts + 1);
       if (verificationAttempts < 3) {
@@ -95,7 +94,7 @@ const SignupP = () => {
         e.preventDefault();
         setTimeout(() => {
           setRedirectToSignup(true);
-          window.location.href = "/SignupP";
+          Router.push(`/pages/Signup/Patient`);
         }, 3000);
         setVerificationError("No Attemp Left Going back to Signup Page...");
       }

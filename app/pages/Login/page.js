@@ -32,9 +32,9 @@ const Login = () => {
         .then((response) => {
           if (response.data === "login successful") {
             if (mode == "PATIENT") {
-              Router.push(`/pages/Profile/Patient`);
+              Router.replace(`/pages/Profile/Patient`);
             } else {
-              Router.push(`/pages/Profile/Doctor`);
+              Router.replace(`/pages/Profile/Doctor`);
             }
           } else {
             if (response.data == "Incorrect password") {
