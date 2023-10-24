@@ -3,7 +3,7 @@ import PatientDashboard from "@/Components/PatientDashboard";
 const DoctorProfile = () => {
   return (
     <>
-      <PatientDashboard />
+      <DoctorDashboard />
     </>
   );
 };

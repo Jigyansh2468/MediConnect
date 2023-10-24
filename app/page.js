@@ -5,8 +5,8 @@ import Navbar from "@/Components/Navbar";
 const page = () => {
   return (
     <>
-      <Navbar />
-      {/* <PatientDashboard /> */}
+      {/* <Navbar /> */}
+      <PatientDashboard />
       {/* <DoctorDashboard /> */}
     </>
   );
