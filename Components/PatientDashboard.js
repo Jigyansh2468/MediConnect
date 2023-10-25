@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axios from "axios";
 import Link from "next/link";
 import "./PatientDashboard.css";
 import p from "../images/profile.png";
@@ -8,6 +9,18 @@ const PatientDashboard = () => {
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
+  };
+  const logout = () => {
+    axios
+      .get("http://localhost:8080/patient/logout", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data === "logout successfull") alert("Patient logout");
+      });
   };
   return (
     <>
@@ -42,7 +55,7 @@ const PatientDashboard = () => {
                 <button>Settings</button>
               </li>
               <li className="list">
-                <button>Logout</button>
+                <button onClick={logout}>Logout</button>
               </li>
             </div>
           )}

@@ -13,7 +13,6 @@ const SignupP = () => {
     password: "",
     cnfrmpass: "",
   });
-  // const Router = useRouter();
   const history = useRouter();
   const [completedSignup, setCompletedSignup] = useState("signup");
   const [otp, setOTP] = useState("");
@@ -33,6 +32,24 @@ const SignupP = () => {
     } else {
       setPasswordMatchError("");
     }
+  };
+  const checkUserExist = () => {
+    axios
+      .post(
+        "http://localhost:8080/doctor/emailexist",
+        { email: input.email },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        if (response.data === "email exist") {
+          alert(`Doctor with email ${input.email}\n Already exist`);
+        } else {
+          requestotp();
+          setCompletedSignup("otp");
+        }
+      });
   };
   const requestotp = () => {
     axios
@@ -106,8 +123,7 @@ const SignupP = () => {
         input.password &&
         input.cnfrmpass
       ) {
-        requestotp();
-        setCompletedSignup("otp");
+        checkUserExist();
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }

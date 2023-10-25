@@ -37,10 +37,10 @@ const Login = () => {
               history.replace(`/pages/Doctor/Hom`);
             }
           } else {
-            if (response.data == "Incorrect password") {
-              alert("password incorrect");
-            } else if (response.data == "Patient not found with email") {
-              alert("Email is not exist in database");
+            if (response.data == "User Not Found") {
+              alert(`User with email :${input.email}\nNot found`);
+            } else {
+              alert("Password Incorrect");
             }
             setEmail("");
             setPassword("");

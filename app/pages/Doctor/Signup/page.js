@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+
 const SignupD = () => {
   const [input, setInput] = useState({
     name: "",
@@ -18,7 +19,7 @@ const SignupD = () => {
   const history = useRouter();
   const [completedSignup, setCompletedSignup] = useState("signup");
   const [otp, setOTP] = useState("");
-  const [apiotp, setapiOTP] = useState("");
+  const [apiotp, setApiOTP] = useState("");
   const [verificationError, setVerificationError] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
@@ -35,6 +36,24 @@ const SignupD = () => {
       setPasswordMatchError("");
     }
   };
+  const checkUserExist = () => {
+    axios
+      .post(
+        "http://localhost:8080/doctor/emailexist",
+        { email: input.email },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        if (response.data === "email exist") {
+          alert(`Doctor with email ${input.email}\n Already exist`);
+        } else {
+          requestotp();
+          setCompletedSignup("otp");
+        }
+      });
+  };
   const requestotp = () => {
     axios
       .post(
@@ -45,7 +64,7 @@ const SignupD = () => {
         }
       )
       .then((response) => {
-        setapiOTP(response.data);
+        setApiOTP(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -115,8 +134,7 @@ const SignupD = () => {
         input.password &&
         input.cnfrmpass
       ) {
-        requestotp();
-        setCompletedSignup("otp");
+        checkUserExist();
       } else {
         alert("Please fill in all the required fields before proceeding.");
       }
