@@ -11,7 +11,7 @@ const SignupD = () => {
     city: "",
     specialization: "",
     certificateNo: "",
-    modeOfConsulataion: "",
+    modeOfConsultation: "",
     password: "",
     cnfrmpass: "",
   });
@@ -57,7 +57,7 @@ const SignupD = () => {
   };
   const handleModeChange = (e) => {
     const selectedMode = e.target.value;
-    setInput({ ...input, modeOfConsulataion: selectedMode });
+    setInput({ ...input, modeOfConsultation: selectedMode });
   };
   const checkUserExist = () => {
     axios
@@ -69,8 +69,8 @@ const SignupD = () => {
         }
       )
       .then((response) => {
-        if (response.data === "email exist") {
-          alert(`Doctor with email ${input.email}\n Already exist`);
+        if (response.data === "user already exist") {
+          alert(Doctor with email ${input.email}\n Already exist);
         } else {
           requestotp();
           setCompletedSignup("otp");
@@ -107,13 +107,13 @@ const SignupD = () => {
         setOTP("");
       } else {
         setCompletedSignup("signup");
-        setVerificationError("No Attemp Left Going back to Signup Page...");
+        setVerificationError("No Attempt Left Going back to Signup Page...");
       }
     }
   };
   useEffect(() => {
     if (completedSignup === "login") {
-      history.replace(`/pages/Login`);
+      history.replace(/pages/Login);
     }
   }, [completedSignup]);
   const handleSubmit = (e) => {
@@ -129,7 +129,7 @@ const SignupD = () => {
         input.city &&
         input.specialization &&
         input.certificateNo &&
-        input.modeOfConsulataion &&
+        input.modeOfConsultation &&
         input.password &&
         input.cnfrmpass
       ) {
@@ -252,8 +252,6 @@ const SignupD = () => {
                 <option value="Oncologist">Oncologist</option>
                 <option value="Ophthalmologist">Ophthalmologist</option>
                 <option value="Gastroenterologist">Gastroenterologist</option>
-                <option value="Podiatrists">Podiatrists</option>
-                <option value="Endocrinologist">Endocrinologist</option>
                 <option value="Pulmonologist">Pulmonologist</option>
                 <option value="Dentist">Dentist</option>
               </select>
@@ -267,14 +265,14 @@ const SignupD = () => {
                 required
               />
               <div className="flex gap-1 font-bold">
-                Mode of Appoitment
+                Mode of Appointment
                 <br />
                 <label>
                   <input
                     type="radio"
-                    name="mode"
+                    name="modeOfConsultation"
                     value="ONLINE"
-                    checked={input.modeOfConsulataion === "ONLINE"}
+                    checked={input.modeOfConsultation === "ONLINE"}
                     onChange={handleModeChange}
                   />{" "}
                   Online
@@ -282,9 +280,9 @@ const SignupD = () => {
                 <label>
                   <input
                     type="radio"
-                    name="mode"
+                    name="modeOfConsultation"
                     value="OFFLINE"
-                    checked={input.modeOfConsulataion === "OFFLINE"}
+                    checked={input.modeOfConsultation === "OFFLINE"}
                     onChange={handleModeChange}
                   />{" "}
                   Offline
@@ -292,9 +290,9 @@ const SignupD = () => {
                 <label>
                   <input
                     type="radio"
-                    name="mode"
+                    name="modeOfConsultation"
                     value="BOTH"
-                    checked={input.modeOfConsulataion === "BOTH"}
+                    checked={input.modeOfConsultation === "BOTH"}
                     onChange={handleModeChange}
                   />{" "}
                   Both
