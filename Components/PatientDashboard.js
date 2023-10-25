@@ -4,24 +4,41 @@ import axios from "axios";
 import Link from "next/link";
 import "./PatientDashboard.css";
 import p from "../images/profile.png";
+import axios from "axios";
+
 const PatientDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+<<<<<<< HEAD
   const logout = () => {
     axios
       .get("http://localhost:8080/patient/logout", {
+=======
+
+  const logout = () =>{
+    axios.get("http://localhost:8080/patient/logout",{
+>>>>>>> a6f3184ec48f292d0694c0b40ca707738995a47f
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: true,
+<<<<<<< HEAD
       })
       .then((response) => {
         if (response.data === "logout successfull") alert("Patient logout");
       });
   };
+=======
+    }).then((response)=>{
+      if(response.data==="logout successfull")
+        alert("Patient logout");
+    })
+  }
+
+>>>>>>> a6f3184ec48f292d0694c0b40ca707738995a47f
   return (
     <>
       <div id="navbar">

@@ -16,12 +16,7 @@ const DoctorProfile = () => {
   });
   useEffect(() => {
     axios
-      .get("http://localhost:8080/doctor/view-profile", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      })
+      .get("http://localhost:8080/doctor/view-profile")
       .then((response) => {
         setInput({
           name: response.data.name,
