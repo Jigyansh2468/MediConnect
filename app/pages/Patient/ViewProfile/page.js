@@ -13,11 +13,7 @@ const PatientProfile = () => {
   });
   useEffect(() => {
     axios
-<<<<<<< HEAD
-      .get("http://localhost:8080/patient/view-profile", {
-=======
-      .get("http://localhost:8080/patient/view-profile",{
->>>>>>> a6f3184ec48f292d0694c0b40ca707738995a47f
+      .get("http://localhost:8080/doctor/view-profile", {
         headers: {
           "Content-Type": "application/json",
         },
