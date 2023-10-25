@@ -23,7 +23,7 @@ const Login = () => {
       console.log(input, mode);
       const URL = mode === "PATIENT" ? "patient/login" : "doctor/login";
       axios
-        .post(http://localhost:8080/${URL}, input, {
+        .post(`http://localhost:8080/${URL}`, input, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -32,9 +32,9 @@ const Login = () => {
         .then((response) => {
           if (response.data === "login successful") {
             if (mode == "PATIENT") {
-              history.replace(/pages/Patient/Hom/);
+              history.replace("/pages/Patient/Hom");
             } else {
-              history.replace(/pages/Doctor/Hom);
+              history.replace("/pages/Doctor/Hom");
             }
           } else {
             if (response.data == "Incorrect password") {

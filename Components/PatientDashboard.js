@@ -4,7 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import "./PatientDashboard.css";
 import p from "../images/profile.png";
-import axios from "axios";
 
 const PatientDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);

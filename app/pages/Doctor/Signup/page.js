@@ -70,7 +70,7 @@ const SignupD = () => {
       )
       .then((response) => {
         if (response.data === "user already exist") {
-          alert(Doctor with email ${input.email}\n Already exist);
+          alert("Doctor with email ${input.email}\n Already exist");
         } else {
           requestotp();
           setCompletedSignup("otp");
