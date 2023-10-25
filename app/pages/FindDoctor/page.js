@@ -1,8 +1,12 @@
 import React from "react";
+import Searcbar from "@/Components/SearchBar";
+import PatientDashboard from "@/Components/PatientDashboard";
 const FindDoctor = () => {
+  
   return (
     <>
-      <h1>Find Doctor</h1>
+      <PatientDashboard />
+      <Searcbar />
     </>
   );
 };

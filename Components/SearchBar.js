@@ -11,11 +11,11 @@ function Searcbar({ setresults }) {
     }
     return (
       <div className="result-list">
-        {results.map((result, id) => {
+        {
           {
-            /* return list  */
+            /* data here */
           }
-        })}
+        }
       </div>
     );
   };
