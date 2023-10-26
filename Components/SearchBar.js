@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Searchbar.css";
 import { FaSearch } from "react-icons/fa";
+import gsap from "gsap";
 
 const Searchbar = () => {
   const [results, setResults] = useState([]);
@@ -11,11 +12,24 @@ const Searchbar = () => {
     value: "",
   });
 
+  useEffect(() => {
+    animateResults();
+  }, [results]);
+  const animateResults = () => {
+    const tl = gsap.timeline();
+    tl.set(".results-container", { autoAlpha: 0 });
+    tl.to(".results-container", {
+      duration: 0.5,
+      autoAlpha: 1,
+      y: 0,
+      ease: "power1.inOut",
+    });
+    tl.play();
+  };
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-
   const search = () => {
     if (input.searchBy && input.value) {
       axios
@@ -39,15 +53,15 @@ const Searchbar = () => {
     }
 
     return results.map((result, i) => (
-      <div className="result-list" key={i}>
-        <div className="h-40 bg-gray flex justify-around">
-          <div className="flex flex-col gap-4">
-            <div>{result.name}</div>
-            <div>{result.city}</div>
-            <div>{result.specialization}</div>
+      <div key={i} className="w-100 bg-white border-2 border-white rounded-lg font-semibold">
+        <div className="flex justify-evenly items-center p-5 gap-40">
+          <img src="" alt="Profile" height={100} width={100} />
+          <div className="flex flex-col gap-10">
+            <div className="text-2xl">{result.name}</div>
+            <div className="text-xl">{result.city}</div>
           </div>
-          <div>{result.name}</div>
-          <button onClick={() => bookAppointment(result)}>
+          <div className="text-2xl">{result.specialization}</div>
+          <button onClick={() => bookAppointment(result)} className="border-green-500 border-2 rounded-lg py-2 px-3">
             Book Appointment
           </button>
         </div>
@@ -67,7 +81,7 @@ const Searchbar = () => {
           name="searchBy"
           value={input.searchBy}
           onChange={onInputChange}
-          className="my-5 p-2 rounded-md border-2 font-bold border-blue-600"
+          className="my-5 p-2 rounded-md border-x-4 border-y-2  font-semibold border-purple-400 "
           required
         >
           <option value="">Search By</option>
@@ -83,12 +97,12 @@ const Searchbar = () => {
             value={input.value}
             onChange={onInputChange}
           />
-          <button onClick={search}>Search</button>
+          <button onClick={search} className="font-semibold">Search</button>
         </div>
       </div>
-      <div className="p-8 bg-slate-200 flex justify-center items-center">
-        <div className="bg-blue-200 flex justify-center items-center">
-          <ul>{renderResults()}</ul>
+      <div className="p-10 bg-blue-100 flex justify-center items-center">
+        <div className="results-container">
+          <ul className="font-bold text-xl bg-gray w-screen px-20">{renderResults()}</ul>
         </div>
       </div>
     </>

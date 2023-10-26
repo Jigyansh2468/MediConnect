@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import "./PatientDashboard.css";
-import p from "../images/profile.png";
 
 const PatientDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -36,7 +35,7 @@ const PatientDashboard = () => {
         </div>
         <div className="relative inline-block">
           <button className="btn" onClick={toggleDropdown}>
-            <img src={p} alt="Patient" />
+            <img src="" alt="Patient" />
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
