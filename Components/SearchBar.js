@@ -17,18 +17,20 @@ const Searchbar = () => {
   };
 
   const search = () => {
-    axios
-      .get("http://localhost:8080/doctor/getdoctorby", {
-        params: { searchBy: input.searchBy, value: input.value },
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        setResults(response.data); // Assuming the API returns an array of results
-      })
-      .catch((error) => console.log(error));
+    if (input.searchBy && input.value) {
+      axios
+        .get("http://localhost:8080/doctor/getdoctorby", {
+          params: { searchBy: input.searchBy, value: input.value },
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          setResults(response.data); // Assuming the API returns an array of results
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const renderResults = () => {

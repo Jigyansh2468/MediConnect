@@ -64,7 +64,7 @@ const SignupP = () => {
       )
       .then((response) => {
         if (response.data === "user already exist") {
-          alert(Patient with email ${input.email}\n Already exist);
+          alert("Patient with email ${input.email}\n Already exist");
         } else {
           requestotp();
           setCompletedSignup("otp");
@@ -94,8 +94,7 @@ const SignupP = () => {
         setVerificationStatus(false);
         setVerificationAttempts(verificationAttempts + 1);
         setVerificationError(
-          `Incorrect OTP. Please try again.Attempt Left :  ${
-            3 - verificationAttempts
+          `Incorrect OTP. Please try again.Attempt Left :  ${3 - verificationAttempts
           }`
         );
         setOTP("");
@@ -107,7 +106,7 @@ const SignupP = () => {
   };
   useEffect(() => {
     if (completedSignup === "login") {
-      history.replace(/pages/Login);
+      history.replace("/pages/Login");
     }
   }, [completedSignup]);
   const handleSubmit = (e) => {
