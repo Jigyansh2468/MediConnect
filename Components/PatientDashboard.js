@@ -26,7 +26,7 @@ const PatientDashboard = () => {
     <>
       <div id="navbar">
         <h2 className="">
-          <Link href="/">LOGO</Link>
+          <Link href="/page">LOGO</Link>
         </h2>
         <div className="gap-10 flex items-center px-40 text-center">
           <Link href="/pages/FindDoctor">Find Doctor</Link>

@@ -4,8 +4,11 @@ import axios from "axios";
 import "./Searchbar.css";
 import { FaSearch } from "react-icons/fa";
 import gsap from "gsap";
+import { useRouter } from "next/navigation";
 
 const Searchbar = () => {
+  const route = useRouter();
+  const [doctorId, setdoctorId] = useState("");//PENDING send this data to BookAppointment page  
   const [results, setResults] = useState([]);
   const [input, setInput] = useState({
     searchBy: "",
@@ -41,37 +44,36 @@ const Searchbar = () => {
           withCredentials: true,
         })
         .then((response) => {
-          setResults(response.data); // Assuming the API returns an array of results
+          setResults(response.data);
         })
         .catch((error) => console.log(error));
     }
   };
-
   const renderResults = () => {
     if (results.length === 0) {
       return <div>No Doctors Found</div>;
     }
-
     return results.map((result, i) => (
-      <div key={i} className="w-100 bg-white border-2 border-white rounded-lg font-semibold">
-        <div className="flex justify-evenly items-center p-5 gap-40">
+      <div key={i} className="w-100 bg-white border-2 border-black rounded-lg font-semibold my-10">
+        <div className="flex justify-between  items-center p-5 gap-40">
           <img src="" alt="Profile" height={100} width={100} />
-          <div className="flex flex-col gap-10">
+          <div>
             <div className="text-2xl">{result.name}</div>
             <div className="text-xl">{result.city}</div>
           </div>
           <div className="text-2xl">{result.specialization}</div>
-          <button onClick={() => bookAppointment(result)} className="border-green-500 border-2 rounded-lg py-2 px-3">
+          <button onClick={() => {
+            setdoctorId(result.id);
+            route.push({
+              pathname: "/pages/Patient/Bookappointment",
+              query: { doctorId: result.id }, // Pass the doctorId as a query parameter
+            });
+          }} className="border-green-500 border-2 rounded-lg py-2 px-3 hover:bg-green-500 hover:text-white">
             Book Appointment
           </button>
         </div>
-      </div>
+      </div >
     ));
-  };
-
-  const bookAppointment = (doctor) => {
-    // booking appointment logic here
-    console.log(`Booking an appointment with ${doctor.name}`);
   };
 
   return (
@@ -102,7 +104,7 @@ const Searchbar = () => {
       </div>
       <div className="p-10 bg-blue-100 flex justify-center items-center">
         <div className="results-container">
-          <ul className="font-bold text-xl bg-gray w-screen px-20">{renderResults()}</ul>
+          <ul className="font-bold text-xl bg-gray w-screen px-20 text-center">{renderResults()}</ul>
         </div>
       </div>
     </>
