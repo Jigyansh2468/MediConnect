@@ -9,21 +9,28 @@ const Login = () => {
   const [input, setinput] = useState({
     email: "",
     password: "",
+    user: "",
   });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mode, setmode] = useState("");
+  const [user, setUser] = useState("");
+
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setinput({ ...input, [name]: value });
   };
+
+  const handleUserChange = (e) => {
+    const selectedUser = e.target.value;
+    setinput({ ...input, user: selectedUser });
+  };
+
   const Handlelogin = (e) => {
     if (input.email && input.password) {
       e.preventDefault();
-      console.log(input, mode);
-      const URL = mode === "PATIENT" ? "patient/login" : "doctor/login";
+      console.log(input);
       axios
-        .post(`http://localhost:8080/${URL}`, input, {
+        .post("http://localhost:8080/login", input, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -31,7 +38,7 @@ const Login = () => {
         })
         .then((response) => {
           if (response.data === "login successful") {
-            if (mode == "PATIENT") {
+            if (input.user === "PATIENT") {
               history.replace("/pages/Patient/Hom");
             } else {
               history.replace("/pages/Doctor/Hom");
@@ -87,24 +94,20 @@ const Login = () => {
                 <label>
                   <input
                     type="radio"
-                    name="mode"
+                    name="user"
                     value="PATIENT"
-                    checked={mode === "PATIENT"}
-                    onChange={(e) => {
-                      setmode(e.target.value);
-                    }}
+                    checked={input.user === "PATIENT"}
+                    onChange={handleUserChange}
                   />{" "}
                   Patient
                 </label>
                 <label>
                   <input
                     type="radio"
-                    name="mode"
+                    name="user"
                     value="DOCTOR"
-                    checked={mode === "DOCTOR"}
-                    onChange={(e) => {
-                      setmode(e.target.value);
-                    }}
+                    checked={input.user === "DOCTOR"}
+                    onChange={handleUserChange}
                   />{" "}
                   Doctor
                 </label>

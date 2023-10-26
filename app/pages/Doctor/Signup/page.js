@@ -70,7 +70,7 @@ const SignupD = () => {
       )
       .then((response) => {
         if (response.data === "user already exist") {
-          alert("Doctor with email ${input.email}\n Already exist");
+          alert(`Doctor with email ${input.email}\n Already exist`);
         } else {
           requestotp();
           setCompletedSignup("otp");
@@ -113,7 +113,7 @@ const SignupD = () => {
   };
   useEffect(() => {
     if (completedSignup === "login") {
-      history.replace(/pages/Login);
+      history.replace("/pages/Login");
     }
   }, [completedSignup]);
   const handleSubmit = (e) => {

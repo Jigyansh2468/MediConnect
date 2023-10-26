@@ -79,6 +79,7 @@ const Searchbar = () => {
           <FaSearch id="search-icon" />
           <input
             placeholder="Type to Search..."
+            name="value"
             value={input.value}
             onChange={onInputChange}
           />
