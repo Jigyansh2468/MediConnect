@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
@@ -9,22 +9,22 @@ const Login = () => {
   const [input, setinput] = useState({
     email: "",
     password: "",
-    user: "",
+    user: "PATIENT",
   });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
 
+  // const onInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setinput({ ...input, [name]: value });
+  // };
   const onInputChange = (e) => {
-    const { name, value } = e.target;
-    setinput({ ...input, [name]: value });
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      const newValue = checked ? value : "";
+      setinput({ ...input, [name]: newValue });
+    } else {
+      setinput({ ...input, [name]: value });
+    }
   };
-
-  const handleUserChange = (e) => {
-    const selectedUser = e.target.value;
-    setinput({ ...input, user: selectedUser });
-  };
-
   const Handlelogin = (e) => {
     if (input.email && input.password) {
       e.preventDefault();
@@ -44,13 +44,11 @@ const Login = () => {
               history.replace("/pages/Doctor/Hom");
             }
           } else {
-            if (response.data == "Incorrect password") {
-              alert("password incorrect");
+            if (response.data === "Incorrect password") {
+              alert("Password is incorrect");
             } else {
               alert("User Not Found");
             }
-            setEmail("");
-            setPassword("");
           }
         })
         .catch((error) => {
@@ -60,86 +58,76 @@ const Login = () => {
       alert("Please fill in all the required fields before proceeding.");
     }
   };
+
   return (
-    <>
-      <h1 className="text-center font-bold text-xl py-12">
-        Welcome to Login/SignUP Page
-      </h1>
-      <div>
-        <center>
-          <div className="flex items-center justify-center h-72 w-1/4 border-2 border-black px-20  rounded-xl lg:w-1/4 sm:w-1/4 ">
-            <form className="text-center flex-column items-center gap-10">
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={input.email}
-                onChange={onInputChange}
-                className="my-5 p-2 rounded-md border-2 border-black"
-                required
-              />
-              <br />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={input.password}
-                onChange={onInputChange}
-                className="my-5 p-2 rounded-md border-2 border-black"
-                required
-              />
-              <div className="flex gap-1 font-bold">
-                Login as
-                <br />
-                <label>
-                  <input
-                    type="radio"
-                    name="user"
-                    value="PATIENT"
-                    checked={input.user === "PATIENT"}
-                    onChange={handleUserChange}
-                  />{" "}
-                  Patient
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="user"
-                    value="DOCTOR"
-                    checked={input.user === "DOCTOR"}
-                    onChange={handleUserChange}
-                  />{" "}
-                  Doctor
-                </label>
-              </div>
-              <br />
-              <button
-                className="font-semibold text-lg border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-blue-300 hover:text-white hover:cursor-pointer mb-3"
-                onClick={Handlelogin}
-              >
-                Login
-              </button>
-            </form>
+    <div className="bg-gray-100 h-screen flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
+        <form className="space-y-4">
+          <div>
+            <label htmlFor="email" className="block font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={input.email}
+              onChange={onInputChange}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              required
+            />
           </div>
-          <div className="flex gap-5 items-center justify-center ">
-            <Link
-              href="/pages/Patient/Signup/"
-              className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
-              type="submit"
-            >
-              SignUp as Patient
-            </Link>
-            <Link
-              href="/pages/Doctor/Signup"
-              className="my-10 font-semibold text-xl border-2 border-zinc-300 rounded-lg px-10 p-2 hover:bg-green-300 hover:text-white hover:cursor-pointer"
-              type="submit"
-            >
-              SignUp as Doctor
-            </Link>
+          <div>
+            <label htmlFor="password" className="block font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={input.password}
+              onChange={onInputChange}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              required
+            />
           </div>
-        </center>
+          <div className="flex flex-row gap-10 font-bold">
+            <label className="block font-medium text-gray-700">Are You a Doctor</label>
+            <div className="space-x-2">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="user"
+                  value="DOCTOR"
+                  checked={input.user === "DOCTOR"}
+                  onChange={onInputChange}
+                />
+                If yes Click here
+              </label>
+            </div>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="w-full bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600"
+              onClick={Handlelogin}
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <div className="text-center mt-4">
+          <Link href="/pages/Patient/Signup/">
+            Sign up as Patient
+          </Link>
+          <span className="mx-2 text-gray-500">|</span>
+          <Link href="/pages/Doctor/Signup">
+            Sign up as Doctor
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
