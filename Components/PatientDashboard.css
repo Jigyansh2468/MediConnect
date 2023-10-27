@@ -1,8 +1,8 @@
-.list {
+ul li {
   list-style-type: none;
   padding: 8px;
   margin: 10px;
 }
-.list:hover {
+ul li:hover {
   background-color: #efefef;
 }

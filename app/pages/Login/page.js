@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./login.css"
+
 const Login = () => {
   const history = useRouter();
   const [input, setinput] = useState({
@@ -11,11 +13,6 @@ const Login = () => {
     password: "",
     user: "PATIENT",
   });
-
-  // const onInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setinput({ ...input, [name]: value });
-  // };
   const onInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
@@ -92,9 +89,9 @@ const Login = () => {
               required
             />
           </div>
-          <div className="flex flex-row gap-10 font-bold">
-            <label className="block font-medium text-gray-700">Are You a Doctor</label>
-            <div className="space-x-2">
+          <div className="flex flex-row flex-wrap gap-2 font-bold">
+            <label className="block font-medium text-gray-700">Doctor</label>
+            <div className="space-x-2 flex ">
               <label className="inline-flex items-center">
                 <input
                   type="checkbox"
@@ -102,8 +99,9 @@ const Login = () => {
                   value="DOCTOR"
                   checked={input.user === "DOCTOR"}
                   onChange={onInputChange}
+                  className="hidden"
                 />
-                If yes Click here
+                <span className="slider"></span>
               </label>
             </div>
           </div>

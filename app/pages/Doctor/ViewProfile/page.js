@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import DoctorDashboard from "@/Components/DoctorDashboard";
 import "./doctorprofile.css";
+
 const DoctorProfile = () => {
   const [input, setInput] = useState({
     name: "Doctor_Name",
@@ -43,7 +44,7 @@ const DoctorProfile = () => {
           <div className="flex gap-2 border-b-red-200">
             <div>
               <img
-                // src={input.photo} if photo is there in database
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU"
                 alt="Profile Picture"
                 className="h-80 w-80"
               />

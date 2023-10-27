@@ -1,9 +1,8 @@
-.list {
-    list-style-type: none;
-    padding: 8px;
-    margin: 10px;
-  }
-  .list:hover {
-    background-color: #efefef;
-  }
-  
+ul li {
+  list-style-type: none;
+  padding: 8px;
+  margin: 10px;
+}
+ul li:hover {
+  background-color: #efefef;
+}
