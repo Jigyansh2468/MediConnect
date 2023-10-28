@@ -22,13 +22,13 @@ const PatientDashboard = () => {
       })
       .then((response) => {
         if (response.data === "user logout") {
-          alert("Patient logout");
+          console.log("Patient logout");
         }
       });
     r.replace("/");
   };
   return (
-    <div className="bg-blue-100 text-blue-900 h-auto w-full">
+    <div className="bg-blue-100 text-blue-900 h-auto w-full font-bold">
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">

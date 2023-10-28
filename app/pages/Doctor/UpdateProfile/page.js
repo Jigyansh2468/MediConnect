@@ -4,39 +4,37 @@ import axios from 'axios';
 import DoctorDashboard from '@/Components/DoctorDashboard';
 
 const UpdateProfile = () => {
-    useEffect(() => {
-        axios.get("http://localhost:8080/doctor/view-profile", {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        })
-            .then((response) => setdata(response.data))
-            .catch((error) => console.log(error))
-    }, [])
     const [data, setdata] = useState({
         name: "",
         email: "",
         phoneNo: "",
         address: "",
         city: "",
-        specialization: "",
-        certificateNo: "",
         modeOfConsultation: "",
-        password: "",
     });
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/patient/view-profile", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        })
+            .then((response) => setdata(response.data))
+            .catch((error) => console.log(error));
+    }, []);
+
     const [input, setInput] = useState({
         name: "",
+        email: "",
         phoneNo: "",
         address: "",
         city: "",
-        specialization: "",
-        certificateNo: "",
         modeOfConsultation: "",
     });
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setdata({ ...data, [name]: value });
+        setInput({ ...input, [name]: value });
     };
     const handleModeChange = (e) => {
         const selectedMode = e.target.value;
@@ -52,11 +50,12 @@ const UpdateProfile = () => {
             .then((response) => alert("Your Profile Updated Successfully"))
             .catch(error => console.log(error));
     };
+
     return (
         <div className="bg-gray-100 min-h-screen w-screen">
             <DoctorDashboard />
             <center>
-                <div className="bg-white">
+                <div className="bg-white h-screen">
                     <div className="flex justify-center">
                         <div className="w-full sm:w-4/5 md:w-3/4 lg:w-3/5 xl:w-2/5 mt-10 p-4 md:p-8 flex flex-wrap">
                             <div className="w-full md:w-1/2 p-2">
@@ -68,7 +67,43 @@ const UpdateProfile = () => {
                                             className="h-80 w-80 mx-auto"
                                         />
                                     </div>
-                                    {/* Content for the left column */}
+                                </div>
+                                <div>
+                                    <label htmlFor="modeOfConsultation" className="mt-10 block text-gray-700 text-sm font-bold mb-2">
+                                        Mode of Appointment
+                                    </label>
+                                    <div className="space-x-2">
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="radio"
+                                                name="modeOfConsultation"
+                                                value="ONLINE"
+                                                checked={input.modeOfConsultation === "ONLINE"}
+                                                onChange={handleModeChange}
+                                            />
+                                            Online
+                                        </label>
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="radio"
+                                                name="modeOfConsultation"
+                                                value="OFFLINE"
+                                                checked={input.modeOfConsultation === "OFFLINE"}
+                                                onChange={handleModeChange}
+                                            />
+                                            Offline
+                                        </label>
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="radio"
+                                                name="modeOfConsultation"
+                                                value="BOTH"
+                                                checked={input.modeOfConsultation === "BOTH"}
+                                                onChange={handleModeChange}
+                                            />
+                                            Both
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 p-2">
@@ -80,7 +115,7 @@ const UpdateProfile = () => {
                                         <input
                                             type="text"
                                             name="name"
-                                            // pending
+                                            placeholder={data.name}
                                             value={input.name}
                                             onChange={handleInputChange}
                                             className="w-full max-w-md p-2 border rounded-md mx-auto"
@@ -93,6 +128,7 @@ const UpdateProfile = () => {
                                         <input
                                             type="text"
                                             name="phoneNo"
+                                            placeholder={data.phoneNo}
                                             value={input.phoneNo}
                                             onChange={handleInputChange}
                                             className="w-full max-w-md p-2 border rounded-md mx-auto"
@@ -105,6 +141,7 @@ const UpdateProfile = () => {
                                         <input
                                             type="text"
                                             name="address"
+                                            placeholder={data.address}
                                             value={input.address}
                                             onChange={handleInputChange}
                                             className="w-full max-w-md p-2 border rounded-md mx-auto"
@@ -117,96 +154,13 @@ const UpdateProfile = () => {
                                         <input
                                             type="text"
                                             name="city"
+                                            placeholder={data.city}
                                             value={input.city}
                                             onChange={handleInputChange}
                                             className="w-full max-w-md p-2 border rounded-md mx-auto"
                                         />
                                     </div>
-                                    <div>
-                                        <label htmlFor="specialization" className="block text-gray-700 text-sm font-bold mb-2">
-                                            Specialization
-                                        </label>
-                                        <select
-                                            name="specialization"
-                                            value={input.specialization}
-                                            onChange={handleInputChange}
-                                            className="w-full border border-gray-300 rounded-lg py-2 px-3  block text-gray-700 text-sm font-bold mb-2 xl:w-80 text-center"
-                                            required
-                                        >
-                                            <option value="">Select Specialization</option>
-                                            <option value="Internal medicine">Internal medicine</option>
-                                            <option value="General surgery">General surgery</option>
-                                            <option value="Family medicine">Family medicine</option>
-                                            <option value="Otorhinolaryngology">Otorhinolaryngology</option>
-                                            <option value="Pediatrics">Pediatrics</option>
-                                            <option value="Dermatology">Dermatology</option>
-                                            <option value="Surgeon">Surgeon</option>
-                                            <option value="Emergency medicine">Emergency medicine</option>
-                                            <option value="Ophthalmology">Ophthalmology</option>
-                                            <option value="Radiology">Radiology</option>
-                                            <option value="Psychiatrist">Psychiatrist</option>
-                                            <option value="Neurologist">Neurologist</option>
-                                            <option value="Pediatrician">Pediatrician</option>
-                                            <option value="Geriatrics">Geriatrics</option>
-                                            <option value="Radiologist">Radiologist</option>
-                                            <option value="Dermatologist">Dermatologist</option>
-                                            <option value="Cardiologist">Cardiologist</option>
-                                            <option value="Oncologist">Oncologist</option>
-                                            <option value="Ophthalmologist">Ophthalmologist</option>
-                                            <option value="Gastroenterologist">Gastroenterologist</option>
-                                            <option value="Pulmonologist">Pulmonologist</option>
-                                            <option value="Dentist">Dentist</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label htmlFor="certificateNo" className="block text-gray-700 text-sm font-bold mb-2">
-                                            Certificate Number
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="certificateNo"
-                                            value={input.certificateNo}
-                                            onChange={handleInputChange}
-                                            className="w-full max-w-md p-2 border rounded-md mx-auto"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="modeOfConsultation" className="block text-gray-700 text-sm font-bold mb-2">
-                                            Mode of Appointment
-                                        </label>
-                                        <div className="space-x-2">
-                                            <label className="inline-flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="modeOfConsultation"
-                                                    value="ONLINE"
-                                                    checked={input.modeOfConsultation === "ONLINE"}
-                                                    onChange={handleModeChange}
-                                                />
-                                                Online
-                                            </label>
-                                            <label className="inline-flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="modeOfConsultation"
-                                                    value="OFFLINE"
-                                                    checked={input.modeOfConsultation === "OFFLINE"}
-                                                    onChange={handleModeChange}
-                                                />
-                                                Offline
-                                            </label>
-                                            <label className="inline-flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="modeOfConsultation"
-                                                    value="BOTH"
-                                                    checked={input.modeOfConsultation === "BOTH"}
-                                                    onChange={handleModeChange}
-                                                />
-                                                Both
-                                            </label>
-                                        </div>
-                                    </div>
+
                                     <div className="mt-6 flex justify-center">
                                         <button
                                             type="button"

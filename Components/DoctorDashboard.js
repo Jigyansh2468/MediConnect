@@ -20,14 +20,14 @@ const DoctorDashboard = () => {
       })
       .then((response) => {
         if (response.data === "user logout") {
-          alert("Doctor logout");
+          console.log("Doctor logout");
         }
       });
     r.replace("/");
   };
   return (
     <>
-      <div className="bg-purple-100 text-purple-900 h-auto w-full"> {/* Change background and text colors */}
+      <div className="bg-purple-100 text-purple-900 h-auto w-full font-bold"> {/* Change background and text colors */}
         <div className="container mx-auto py-4">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">
