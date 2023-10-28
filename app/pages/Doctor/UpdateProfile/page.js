@@ -6,13 +6,19 @@ import DoctorDashboard from '@/Components/DoctorDashboard';
 const UpdateProfile = () => {
     const [data, setdata] = useState({
         name: "",
-        email: "",
         phoneNo: "",
         address: "",
         city: "",
         modeOfConsultation: "",
     });
 
+    const [input, setInput] = useState({
+        name: "",
+        phoneNo: "",
+        address: "",
+        city: "",
+        modeOfConsultation: "",
+    });
     useEffect(() => {
         axios.get("http://localhost:8080/patient/view-profile", {
             headers: {
@@ -20,18 +26,19 @@ const UpdateProfile = () => {
             },
             withCredentials: true,
         })
-            .then((response) => setdata(response.data))
+            .then((response) => {
+                setdata(response.data)
+                setInput({
+                    name: response.data.name,
+                    phoneNo: response.data.phoneNo,
+                    address: response.data.address,
+                    city: response.data.city,
+                    modeOfConsultation: response.data.modeOfConsultation,
+                });
+            })
             .catch((error) => console.log(error));
     }, []);
 
-    const [input, setInput] = useState({
-        name: "",
-        email: "",
-        phoneNo: "",
-        address: "",
-        city: "",
-        modeOfConsultation: "",
-    });
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setInput({ ...input, [name]: value });
@@ -69,11 +76,11 @@ const UpdateProfile = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="modeOfConsultation" className="mt-10 block text-gray-700 text-sm font-bold mb-2">
+                                    <p htmlFor="modeOfConsultation" className="mt-10 block text-gray-700 text-sm font-bold mb-2">
                                         Mode of Appointment
-                                    </label>
+                                    </p>
                                     <div className="space-x-2">
-                                        <label className="inline-flex items-center">
+                                        <p className="inline-flex items-center">
                                             <input
                                                 type="radio"
                                                 name="modeOfConsultation"
@@ -82,8 +89,8 @@ const UpdateProfile = () => {
                                                 onChange={handleModeChange}
                                             />
                                             Online
-                                        </label>
-                                        <label className="inline-flex items-center">
+                                        </p>
+                                        <p className="inline-flex items-center">
                                             <input
                                                 type="radio"
                                                 name="modeOfConsultation"
@@ -92,8 +99,8 @@ const UpdateProfile = () => {
                                                 onChange={handleModeChange}
                                             />
                                             Offline
-                                        </label>
-                                        <label className="inline-flex items-center">
+                                        </p>
+                                        <p className="inline-flex items-center">
                                             <input
                                                 type="radio"
                                                 name="modeOfConsultation"
@@ -102,16 +109,16 @@ const UpdateProfile = () => {
                                                 onChange={handleModeChange}
                                             />
                                             Both
-                                        </label>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 p-2">
                                 <div className="flex flex-col gap-4">
                                     <div>
-                                        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                                        <p htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                                             Name
-                                        </label>
+                                        </p>
                                         <input
                                             type="text"
                                             name="name"
@@ -122,9 +129,9 @@ const UpdateProfile = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="phoneNo" className="block text-gray-700 text-sm font-bold mb-2">
+                                        <p htmlFor="phoneNo" className="block text-gray-700 text-sm font-bold mb-2">
                                             Phone Number
-                                        </label>
+                                        </p>
                                         <input
                                             type="text"
                                             name="phoneNo"
@@ -135,9 +142,9 @@ const UpdateProfile = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">
+                                        <p htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">
                                             Address
-                                        </label>
+                                        </p>
                                         <input
                                             type="text"
                                             name="address"
@@ -148,9 +155,9 @@ const UpdateProfile = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">
+                                        <p htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">
                                             City
-                                        </label>
+                                        </p>
                                         <input
                                             type="text"
                                             name="city"

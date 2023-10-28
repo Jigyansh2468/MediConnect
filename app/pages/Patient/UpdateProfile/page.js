@@ -7,9 +7,17 @@ const UpdateProfile = () => {
     const [data, setdata] = useState({
         name: '',
         phoneNo: '',
-        dob: '',
         city: '',
+        dob: '',
     })
+    const [dob,setDob]=useState('');
+   
+    const [input, setInput] = useState({
+        name: data.name,
+        phoneNo: data.phoneNo,
+        dob: data.dob,
+        city: data.city,
+    });
     useEffect(() => {
         axios.get("http://localhost:8080/patient/view-profile", {
             headers: {
@@ -17,16 +25,21 @@ const UpdateProfile = () => {
             },
             withCredentials: true,
         })
-            .then((response) => setdata(response.data))
-            .catch((error) => console.log(error))
+        .then((response) =>{
+            console.log(response);
+            setdata(response.data)
+            const formattedDate = new Date(data.dob).toLocaleDateString();
+            setDob(formattedDate);
+            setInput({
+                name: response.data.name,
+                phoneNo: response.data.phoneNo,
+                dob: formattedDate,
+                city: response.data.city,
+            });
+        })
+        .catch((error) => console.log(error))
         console.log(data);
     }, [])
-    const [input, setInput] = useState({
-        name: '',
-        phoneNo: '',
-        dob: '',
-        city: '',
-    });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -92,7 +105,7 @@ const UpdateProfile = () => {
                                     <input
                                         type="date"
                                         name="dob"
-                                        placeholder={data.dob}
+                                        placeholder={dob}
                                         value={input.dob}
                                         onChange={handleInputChange}
                                         className="w-full max-w-md p-2 border rounded-md mx-auto"

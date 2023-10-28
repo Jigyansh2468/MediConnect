@@ -5,13 +5,16 @@ import PatientDashboard from '@/Components/PatientDashboard'
 const MyAppointment = () => {
     const [list, setlist] = useState([])
     useEffect(() => {
-        axios.get("", input, {
+        axios.get("http://localhost:8080/patient/get appointments", null, {
             headers: {
                 "Content-Type": "application/json",
             },
             withCredentials: true,
         })
-            .then((response) => { setlist(response.data) })
+            .then((response) => {
+                console.log(response);
+                setlist(response.data)
+            })
             .catch((error) => { console.log(error) })
     }, [])
     return (
@@ -30,7 +33,7 @@ const MyAppointment = () => {
                             <div>Patient Name</div>
                             <div>Date</div>
                             <div>Prescrioption</div>
-                            {/*Prescrioption DropDown*/}
+                            {/Prescrioption DropDown/}
                         </div>
                     ))}
                 </div>
