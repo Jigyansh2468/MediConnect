@@ -1,9 +1,30 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DoctorDashboard from '@/Components/DoctorDashboard';
 
 const UpdateProfile = () => {
+    useEffect(() => {
+        axios.get("http://localhost:8080/doctor/view-profile", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        })
+            .then((response) => setdata(response.data))
+            .catch((error) => console.log(error))
+    }, [])
+    const [data, setdata] = useState({
+        name: "",
+        email: "",
+        phoneNo: "",
+        address: "",
+        city: "",
+        specialization: "",
+        certificateNo: "",
+        modeOfConsultation: "",
+        password: "",
+    });
     const [input, setInput] = useState({
         name: "",
         phoneNo: "",
@@ -13,24 +34,24 @@ const UpdateProfile = () => {
         certificateNo: "",
         modeOfConsultation: "",
     });
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
+        setdata({ ...data, [name]: value });
     };
-
     const handleModeChange = (e) => {
         const selectedMode = e.target.value;
         setInput({ ...input, modeOfConsultation: selectedMode });
     };
-
     const handleSubmit = async () => {
-        axios
-            .put("your_api_endpoint", input)
+        axios.put("http://localhost:8080/doctor/update", input, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        })
             .then((response) => alert("Your Profile Updated Successfully"))
-            .catch((error) => console.log(error));
+            .catch(error => console.log(error));
     };
-
     return (
         <div className="bg-gray-100 min-h-screen w-screen">
             <DoctorDashboard />
@@ -59,6 +80,7 @@ const UpdateProfile = () => {
                                         <input
                                             type="text"
                                             name="name"
+                                            // pending
                                             value={input.name}
                                             onChange={handleInputChange}
                                             className="w-full max-w-md p-2 border rounded-md mx-auto"

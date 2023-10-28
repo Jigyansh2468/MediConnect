@@ -21,11 +21,11 @@ const PatientDashboard = () => {
         withCredentials: true,
       })
       .then((response) => {
-        if (response.data === "logout successful") {
+        if (response.data === "user logout") {
           alert("Patient logout");
         }
       });
-    // pending router push
+    r.replace("/");
   };
   return (
     <div className="bg-blue-100 text-blue-900 h-auto w-full">

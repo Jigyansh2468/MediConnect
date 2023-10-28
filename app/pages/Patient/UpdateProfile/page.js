@@ -1,9 +1,26 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PatientDashboard from '@/Components/PatientDashboard';
 
 const UpdateProfile = () => {
+    const [data, setdata] = useState({
+        name: '',
+        phoneNo: '',
+        dob: '',
+        city: '',
+    })
+    useEffect(() => {
+        axios.get("http://localhost:8080/patient/view-profile", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        })
+            .then((response) => setdata(response.data))
+            .catch((error) => console.log(error))
+        console.log(data);
+    }, [])
     const [input, setInput] = useState({
         name: '',
         phoneNo: '',
@@ -17,7 +34,12 @@ const UpdateProfile = () => {
     };
 
     const handleSubmit = async () => {
-        axios.put("your_api_endpoint", input)
+        axios.put("http://localhost:8080/patient/update", input, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        })
             .then((response) => alert("Your Profile Updated Successfully"))
             .catch(error => console.log(error));
     };
@@ -44,6 +66,7 @@ const UpdateProfile = () => {
                                     <input
                                         type="text"
                                         name="name"
+                                        placeholder={data.name}
                                         value={input.name}
                                         onChange={handleInputChange}
                                         className="w-full max-w-md p-2 border rounded-md mx-auto"
@@ -56,6 +79,7 @@ const UpdateProfile = () => {
                                     <input
                                         type="text"
                                         name="phoneNo"
+                                        placeholder={data.phoneNo}
                                         value={input.phoneNo}
                                         onChange={handleInputChange}
                                         className="w-full max-w-md p-2 border rounded-md mx-auto"
@@ -66,8 +90,9 @@ const UpdateProfile = () => {
                                         Date of Birth
                                     </label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         name="dob"
+                                        placeholder={data.dob}
                                         value={input.dob}
                                         onChange={handleInputChange}
                                         className="w-full max-w-md p-2 border rounded-md mx-auto"
@@ -80,6 +105,7 @@ const UpdateProfile = () => {
                                     <input
                                         type="text"
                                         name="city"
+                                        placeholder={data.city}
                                         value={input.city}
                                         onChange={handleInputChange}
                                         className="w-full max-w-md p-2 border rounded-md mx-auto"

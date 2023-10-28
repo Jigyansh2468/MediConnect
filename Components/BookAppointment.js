@@ -62,7 +62,17 @@ const BookAppointment = ({ doctor }) => {
           </div>
           <button
             className='border-2 border-black px-2 py-3 rounded-lg font-bold float-right mt-10 hover:text-white hover:bg-green-300 hover:border-green-300'
-            onClick={() => { axios.get("", { selectedSlot, doctorId: doctor.id }) }}>
+            onClick={() => {
+              axios.put("http://localhost:8080/doctor/bookslot", null, {
+                params: {
+                  doctorId: doctor.id,
+                  slotId: selectedSlot.id
+                },
+                withCredentials: true,
+              }).then((response) => {
+                alert("Slot booked. You will get further details on mail");
+              })
+            }}>
             Confirm Appointment
           </button>
         </div>

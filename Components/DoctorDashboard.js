@@ -1,16 +1,33 @@
-"use client"; import React, { useState } from "react";
+"use client"
+import React, { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import "./DoctorDashboard.css"
 const DoctorDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
+  const r = useRouter();
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
+  const logout = () => {
+    axios
+      .get("http://localhost:8080/doctor/logout", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data === "user logout") {
+          alert("Doctor logout");
+        }
+      });
+    r.replace("/");
+  };
   return (
     <>
-      <div className="bg-pink-100 text-pink-900 h-auto w-full"> {/* Change background and text colors */}
+      <div className="bg-purple-100 text-purple-900 h-auto w-full"> {/* Change background and text colors */}
         <div className="container mx-auto py-4">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">
@@ -33,14 +50,13 @@ const DoctorDashboard = () => {
                       <Link href="/pages/Doctor/UpdateProfile">Update Profile</Link>
                     </li>
                     <li className="list">
-                      <button>Logout</button>
+                      <button onClick={logout}>Logout</button>
                     </li>
                   </ul>
                 </div>
               )}
             </div>
           </div>
-          {/* For mobile view, show navigation links in a responsive menu */}
           <div className="md:hidden mt-4">
             <div className="flex flex-col gap-2">
               <Link href="/pages/FindDoctor">Find Doctor</Link>
