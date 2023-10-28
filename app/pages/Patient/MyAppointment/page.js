@@ -24,8 +24,13 @@ const MyAppointment = () => {
                             key={i}
                             className="bg-white rounded p-4 shadow-md transition transform hover:scale-105"
                         >
-                            <p>{item.title}</p>
-                            <p>{item.description}</p>
+                            <div>Mode</div>
+                            <div>Specialization</div>
+                            <div>Doctor Name</div>
+                            <div>Patient Name</div>
+                            <div>Date</div>
+                            <div>Prescrioption</div>
+                            {/*Prescrioption DropDown*/}
                         </div>
                     ))}
                 </div>
