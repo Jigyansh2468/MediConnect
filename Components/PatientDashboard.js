@@ -11,7 +11,6 @@ const PatientDashboard = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
   const logout = () => {
     axios
       .get("http://localhost:8080/patient/logout", {

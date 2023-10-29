@@ -25,7 +25,6 @@ const Login = () => {
   const Handlelogin = (e) => {
     if (input.email && input.password) {
       e.preventDefault();
-      console.log(input);
       axios
         .post("http://localhost:8080/login", input, {
           headers: {
