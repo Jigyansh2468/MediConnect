@@ -17,10 +17,7 @@ const Page = () => {
         />
       </center>
       <Searchbar />
-      <p className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-        Interactive Elements - Make use of subtle hover effects and animations for buttons and cards. This provides a more engaging user experience.
-      </p>
-      <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-20 mt-20 px-4 sm:px-10 md:px-16 lg:px-20 xl:px-24">
+      <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-20 mt-10 px-4 sm:px-10 md:px-16 lg:px-20 xl:px-24">
         <Link href="/pages/FindDoctor">
           <Card
             title="Find Doctor"
@@ -37,6 +34,12 @@ const Page = () => {
           <Card
             title="Medicines"
             src="https://images.pexels.com/photos/4046945/pexels-photo-4046945.jpeg?auto=compress&cs=tinysrgb&w=600"
+          />
+        </Link>
+        <Link href="/pages/Medicines">
+          <Card
+            title="Book Appointmnet"
+            src="https://images.pexels.com/photos/5417661/pexels-photo-5417661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           />
         </Link>
       </div>

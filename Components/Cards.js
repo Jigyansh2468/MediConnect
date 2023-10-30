@@ -3,12 +3,14 @@ import './Cards.css';
 
 function Card({ title, src }) {
     return (
-        <div className="card">
-            <img src={src} alt={title} />
-            <div className="card-content">
+        <>
+            <div className='flex flex-col justify-center items-center'>
+                <div className="card">
+                    <img src={src} alt={title} />
+                </div>
                 <p className="card-title">{title}</p>
             </div>
-        </div>
+        </>
     );
 }
 
