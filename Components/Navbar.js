@@ -7,6 +7,7 @@ const Navbar = (props) => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
   return (
     <div id="navbar" className="bg-green-100 p-4 h-auto">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
