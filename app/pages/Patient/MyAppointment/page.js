@@ -43,3 +43,5 @@ const MyAppointment = () => {
 }
 
 export default MyAppointment
+
+// img address = https://media.istockphoto.com/id/1065782564/photo/electronic-medical-record-with-patient-data-and-health-care-information-in-tablet-doctor.webp?b=1&s=612x612&w=0&k=20&c=i-roeIZYdPNYKK3Npr2SbF26ARbOPA9CCBMrNJ3flqQ=
