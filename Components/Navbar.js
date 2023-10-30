@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import "./Navbar.css"
-const Navbar = (props) => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
