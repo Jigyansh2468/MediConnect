@@ -9,16 +9,16 @@ const Navbar = (props) => {
   };
 
   return (
-    <div id="navbar" className="bg-green-100 p-4 h-auto">
+    <div id="navbar" className="p-4 h-auto">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <h2 className="text-2xl text-green-700">
+        <h2 className="text-2xl text-black">
           <Link href="/">LOGO</Link>
         </h2>
         <div className="sm:hidden">
           <button className="btn" onClick={toggleMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-green-700"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -34,7 +34,7 @@ const Navbar = (props) => {
           {menuOpen && (
             <div className="mt-2 absolute right-0 bg-white border rounded-md shadow-lg">
               <ul>
-                <li>
+                <li className="">
                   <Link href="/pages/FindDoctor">Find Doctor</Link>
                 </li>
                 <li>
