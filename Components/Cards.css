@@ -4,13 +4,13 @@
   /* padding: 10px; */
   border: 1px solid white;
   border-radius: 20px;
-  box-shadow: 0 8px 15px rgb(44, 39, 39) ;
+  box-shadow: 0 3px 10px rgb(44, 39, 39) ;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px gray;
+  box-shadow: 0 15px 30px rgb(140, 140, 140);
 }
 
 .card img {

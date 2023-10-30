@@ -10,14 +10,8 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      <center>
-        <img
-          src="https://images.pexels.com/photos/7195118/pexels-photo-7195118.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt=""
-        />
-      </center>
       <Searchbar />
-      <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-20 mt-10 px-4 sm:px-10 md:px-16 lg:px-20 xl:px-24">
+      <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-20 mt-10 px-4 sm:px-10 md:px-16 lg:px-20 xl:px-24 justify-around">
         <Link href="/pages/FindDoctor">
           <Card
             title="Find Doctor"
