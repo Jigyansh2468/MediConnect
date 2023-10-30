@@ -1,5 +1,7 @@
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
 import Link from "next/link";
+import gsap from "gsap";
 
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
@@ -7,10 +9,17 @@ import Searchbar from "@/Components/SearchBar";
 import Card from "@/Components/Cards";
 
 const Page = () => {
+
   return (
     <>
       <Navbar />
       <Searchbar />
+      <div>
+        <h1>BOOK</h1>
+        <h1>APPOINTMENT<span>FOR</span>DOCTOR</h1>
+        <h1>NOW</h1>
+        <h5>Scroll Down ⬇</h5>
+      </div>
       <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-20 mt-10 px-4 sm:px-10 md:px-16 lg:px-20 xl:px-24 justify-around">
         <Link href="/pages/FindDoctor">
           <Card

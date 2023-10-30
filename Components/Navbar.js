@@ -1,18 +1,20 @@
 "use client"
+
 import React, { useState } from "react";
 import Link from "next/link";
 import "./Navbar.css"
+
 const Navbar = () => {
+
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
   return (
-    <div id="navbar" className="p-4 h-auto">
-      <div className="container mx-auto flex flex-wrap items-center justify-between">
+    <div id="navbar" className="p-4 h-auto ">
+      <div className="container mx-auto flex flex-wrap items-center justify-between ">
         <h2 className="text-2xl text-black">
-          <Link href="/">LOGO</Link>
+          <Link href="/" >LOGO</Link>
         </h2>
         <div className="sm:hidden">
           <button className="btn" onClick={toggleMenu}>
@@ -32,9 +34,9 @@ const Navbar = () => {
             </svg>
           </button>
           {menuOpen && (
-            <div className="mt-2 absolute right-0 bg-white border rounded-md shadow-lg">
+            <div >
               <ul>
-                <li className="">
+                <li>
                   <Link href="/pages/FindDoctor">Find Doctor</Link>
                 </li>
                 <li>
@@ -44,21 +46,17 @@ const Navbar = () => {
                   <Link href="/pages/Medicines">Medicines</Link>
                 </li>
                 <li>
-                  <button>
-                    <Link href="/pages/Login">Login/Signup</Link>
-                  </button>
+                  <Link href="/pages/Login">Login/Signup</Link>
                 </li>
               </ul>
             </div>
           )}
         </div>
-        <div className="hidden sm:flex gap-4 text-center">
-          <Link href="/pages/FindDoctor">Find Doctor</Link>
-          <Link href="/pages/VideoConsultation">Video Consultation</Link>
-          <Link href="/pages/Medicines">Medicines</Link>
-          <button className="btn">
-            <Link href="/pages/Login">Login/Signup</Link>
-          </button>
+        <div className="hidden sm:flex gap-20 text-center">
+          <Link href="/pages/FindDoctor" className="effect">Find Doctor</Link>
+          <Link href="/pages/VideoConsultation" className="effect">Video Consultation</Link>
+          <Link href="/pages/Medicines" className="effect">Medicines</Link>
+          <Link href="/pages/Login" className="effect">Login/Signup</Link>
         </div>
       </div>
     </div>

@@ -10,3 +10,12 @@ ul li {
   padding: 8px;
   margin: 10px;
 }
+.effect {
+  transition: transform 0.4s, text-decoration 0.2s;
+}
+
+.effect:hover {
+  color: rgb(196, 0, 196);
+  scale: 1;
+  transform: scale(1.2);
+}
