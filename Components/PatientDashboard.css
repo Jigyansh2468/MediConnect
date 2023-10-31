@@ -6,3 +6,12 @@ ul li {
 ul li:hover {
   background-color: #efefef;
 }
+.effect {
+  transition: transform 0.3s, text-decoration 0.2s;
+}
+
+.effect:hover {
+  color: #72348D;
+  scale: 1;
+  transform: scale(1.2);
+}

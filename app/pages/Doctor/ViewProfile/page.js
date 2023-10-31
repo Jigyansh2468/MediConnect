@@ -44,8 +44,7 @@ const DoctorProfile = () => {
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/3 text-center">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU"
-                alt="Profile Picture"
+                src="/Profile.png"
                 className="w-40 h-40 rounded-full mx-auto border-purple-300 border-4"
               />
             </div>

@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 import "./DoctorDashboard.css"
+
 const DoctorDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const r = useRouter();
@@ -27,29 +29,29 @@ const DoctorDashboard = () => {
   };
   return (
     <>
-      <div className="bg-purple-100 text-purple-900 h-auto w-full font-bold"> {/* Change background and text colors */}
+      <div className="h-auto w-full font-bold">
         <div className="container mx-auto py-4">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">
-              <Link href="/">LOGO</Link>
+              <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
             </h2>
-            <div className="hidden md:flex gap-10">
+            <div className="hidden md:flex gap-10 effect">
               <Link href="/pages/VideoConsultation">Video Consultation</Link>
             </div>
             <div className="relative inline-block">
               <button className="rounded-full overflow-hidden" onClick={toggleDropdown}>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU" alt="Doctor_name" height={80} width={80} />
+                <img src="/Profile.png" alt="Doctor_name" height={80} width={80} />
               </button>
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
                   <ul>
-                    <li className="list">
+                    <li className="list effect">
                       <Link href="/pages/Doctor/ViewProfile">View Profile</Link>
                     </li>
-                    <li className="list">
+                    <li className="list effect">
                       <Link href="/pages/Doctor/UpdateProfile">Update Profile</Link>
                     </li>
-                    <li className="list">
+                    <li className="list effect">
                       <button onClick={logout}>Logout</button>
                     </li>
                   </ul>

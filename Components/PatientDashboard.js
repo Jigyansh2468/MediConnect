@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 import "./PatientDashboard.css";
 
 const PatientDashboard = () => {
@@ -27,34 +28,34 @@ const PatientDashboard = () => {
     r.replace("/");
   };
   return (
-    <div className="bg-blue-100 text-blue-900 h-auto w-full font-bold">
+    <div className="h-auto w-full font-bold">
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">
-            <Link href="/pages/Patient/Hom">LOGO</Link>
+            <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
           </h2>
-          <div className="hidden md:flex gap-10">
-            <Link href="/pages/FindDoctor">Find Doctor</Link>
-            <Link href="/pages/VideoConsultation">Video Consultation</Link>
-            <Link href="/pages/Medicines">Medicines</Link>
+          <div className="hidden md:flex gap-10 text-xl">
+            <Link href="/pages/FindDoctor" className="effect">Find Doctor</Link>
+            <Link href="/pages/VideoConsultation" className="effect">Video Consultation</Link>
+            <Link href="/pages/Medicines" className="effect">Medicines</Link>
           </div>
           <div className="relative inline-block">
             <button className="rounded-full overflow-hidden" onClick={toggleDropdown}>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU" alt="Patient" height={80} width={80} />
+              <img src="/Profile.png" alt="Patient" height={80} width={80} />
             </button>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
                 <ul>
                   <li>
-                    <Link href="/pages/Patient/ViewProfile">View Profile</Link>
+                    <Link href="/pages/Patient/ViewProfile" className="effect">View Profile</Link>
                   </li>
                   <li>
-                    <Link href="/pages/Patient/MyAppointment">My Appointment</Link>
+                    <Link href="/pages/Patient/MyAppointment" className="effect">My Appointment</Link>
                   </li>
-                  <li>
+                  <li className="effect">
                     <button>My Cart</button>
                   </li>
-                  <li>
+                  <li className="effect">
                     <button>Order History</button>
                   </li>
                   <li>

@@ -1,43 +1,31 @@
 "use client"
-import React from "react";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import Image from 'next/image'
 
 import Navbar from "@/Components/Navbar";
+import CardDeck from "@/Components/CardDeck";
 import Footer from "@/Components/Footer";
-import Card from "@/Components/Cards";
 
 const Page = () => {
-
+  const [USERMODE, setUSERMODE] = useState("")
+  useEffect(() => { setUSERMODE("DEFAULT") }, [])
   return (
+    // login page se data lekr set usermode
     <>
-      <Navbar />
+      <Navbar USERMODE={USERMODE} />
       <hr />
-      <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-20 mt-10 px-4 sm:px-10 md:px-16 lg:px-20 xl:px-24 justify-around">
-        <Link href="/pages/FindDoctor">
-          <Card
-            title="Find Doctor"
-            src="https://images.pexels.com/photos/8376168/pexels-photo-8376168.jpeg?auto=compress&cs=tinysrgb&w=600"
-          />
-        </Link>
-        <Link href="/pages/VideoConsultation">
-          <Card
-            title="Video Consultation"
-            src="https://images.pexels.com/photos/8376278/pexels-photo-8376278.jpeg?auto=compress&cs=tinysrgb&w=600"
-          />
-        </Link>
-        <Link href="/pages/Medicines">
-          <Card
-            title="Medicines"
-            src="https://images.pexels.com/photos/4046945/pexels-photo-4046945.jpeg?auto=compress&cs=tinysrgb&w=600"
-          />
-        </Link>
-        <Link href="/pages/Medicines">
-          <Card
-            title="Book Appointmnet"
-            src="https://images.pexels.com/photos/5417661/pexels-photo-5417661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          />
-        </Link>
-      </div>
+      <center className="py-10">
+        <Image
+          src="/CARD.jpg"
+          alt="Logo"
+          width={1500}
+          height={300}
+          className="rounded-xl"
+          priority
+        />
+      </center>
+      <CardDeck />
+      slidbar doctor specializarion cards with photos
       <Footer />
     </>
   );

@@ -7,6 +7,9 @@ import { useRouter } from "next/navigation";
 import "./login.css"
 
 const Login = () => {
+
+  const [USERMODE, setUSERMODE] = useState("");
+
   const history = useRouter();
   const [input, setinput] = useState({
     email: "",
@@ -23,6 +26,7 @@ const Login = () => {
     }
   };
   const Handlelogin = (e) => {
+
     if (input.email && input.password) {
       e.preventDefault();
       axios
@@ -33,6 +37,27 @@ const Login = () => {
           withCredentials: true,
         })
         .then((response) => {
+          // cookies
+          const cookies = document.cookie.split('; '); // Split the cookies
+          let USER_MODE = null;
+
+          cookies.forEach((cookie) => {
+            const [name, value] = cookie.split('=');
+            if (name.trim() === 'USER_MODE') {
+              USER_MODE = value.trim();
+            }
+            console.log(cookie);
+          });
+
+          if (USER_MODE !== null) {
+            console.log('USER_MODE:', USER_MODE);
+          } else {
+            console.log('USER_MODE cookie not found');
+          }
+          setUSERMODE(USER_MODE);
+          console.log(USERMODE);
+
+          // handling response
           if (response.data === "login successful") {
             if (input.user === "PATIENT") {
               history.replace("/pages/Patient/Hom");
@@ -70,7 +95,7 @@ const Login = () => {
               name="email"
               value={input.email}
               onChange={onInputChange}
-              className="w-full  border-blue-400 border-2 rounded-md py-2 px-3"
+              className="w-full  border-purle-600 border-2 rounded-md py-2 px-3"
               required
             />
           </div>
@@ -84,7 +109,7 @@ const Login = () => {
               name="password"
               value={input.password}
               onChange={onInputChange}
-              className="w-full border-blue-400 border-2 rounded-md py-2 px-3"
+              className="w-full border-purle-600 border-2 rounded-md py-2 px-3"
               required
             />
           </div>
@@ -107,7 +132,7 @@ const Login = () => {
           <div>
             <button
               type="button"
-              className="w-full bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600"
+              className="w-full bg-purple-400 text-white py-2 px-3 rounded-md hover:bg-purple-600"
               onClick={Handlelogin}
             >
               Login

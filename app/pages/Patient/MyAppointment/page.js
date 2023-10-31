@@ -5,7 +5,7 @@ import PatientDashboard from '@/Components/PatientDashboard'
 const MyAppointment = () => {
     const [list, setlist] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:8080/patient/get appointments", null, {
+        axios.get("http://localhost:8080/patient/getappointments", null, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -13,7 +13,9 @@ const MyAppointment = () => {
         })
             .then((response) => {
                 console.log(response);
-                setlist(response.data)
+                if (Array.isArray(response.data)) {
+                    setlist(response.data);
+                }
             })
             .catch((error) => { console.log(error) })
     }, [])

@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PatientDashboard from "@/Components/PatientDashboard";
-
+import Footer from "@/Components/Footer";
 const PatientProfile = () => {
   const [input, setInput] = useState({
     name: "",
@@ -33,15 +33,14 @@ const PatientProfile = () => {
   }, []);
 
   return (
-    <div className="bg-blue-50 min-h-screen">
+    <div className=" min-h-screen">
       <PatientDashboard />
       <div className="container mx-auto py-8">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/3 text-center">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU"
-                alt="Profile Picture"
+                src="/Profile.png" F
                 className="w-40 h-40 rounded-full mx-auto border-blue-300 border-4"
               />
             </div>
@@ -72,6 +71,7 @@ const PatientProfile = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

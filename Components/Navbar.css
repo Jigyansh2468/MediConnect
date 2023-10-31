@@ -16,7 +16,7 @@ ul li {
 }
 
 .effect:hover {
-  color: rgb(196, 0, 196);
+  color: #72348D;
   scale: 1;
   transform: scale(1.2);
 }

@@ -2,6 +2,8 @@
 import React from 'react'
 import { useEffect } from 'react';
 import gsap from "gsap";
+import Image from "next/image"
+
 const SearchList = ({ results, setdoctor, setbookapt }) => {
     function renderResults() {
         if (results.length === 0) {
@@ -9,9 +11,9 @@ const SearchList = ({ results, setdoctor, setbookapt }) => {
         }
 
         return results.map((result, i) => (
-            <div key={i} className="w-100 bg-white border-2 border-black rounded-lg font-semibold my-10">
+            <div key={i} className=" bg-purple-100 border-2 border-black rounded-lg font-semibold my-10">
                 <div className="flex justify-between  items-center p-5 gap-40">
-                    <img src="" alt="Profile" height={100} width={100} />
+                    <Image src="/Profile.png" alt="Profile" height={100} width={100} className='rounded-full' />
                     <div>
                         <div className="text-2xl">{result.name}</div>
                         <div className="text-xl">{result.city}</div>
@@ -20,7 +22,7 @@ const SearchList = ({ results, setdoctor, setbookapt }) => {
                     <button onClick={() => {
                         setdoctor(result);
                         setbookapt(true);
-                    }} className="border-green-500 border-2 rounded-lg py-2 px-3 hover:bg-green-500 hover:text-white">
+                    }} className="bg-green-200 rounded-lg py-2 px-3 hover:bg-green-500 hover:text-white">
                         Book Appointment
                     </button>
                 </div>
@@ -42,9 +44,9 @@ const SearchList = ({ results, setdoctor, setbookapt }) => {
         tl.play();
     };
     return (
-        <div className="p-10 bg-blue-100 flex justify-center items-center">
+        <div className="p-4 bg-white flex justify-center items-center">
             <div className="results-container">
-                <ul className="font-bold text-xl bg-gray w-screen px-20 text-center">{renderResults()}</ul>
+                <ul className="font-bold text-xl bg-gray w-screen px-10 text-center">{renderResults()}</ul>
             </div>
         </div>
     )
