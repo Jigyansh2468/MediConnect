@@ -2,16 +2,17 @@
   display: flex;
   font-weight: 600;
   font-size: large;
-  padding: 40px;
-  align-items: center;
+  /* padding: 40px; */
 }
 ul li {
+  display: flex;
+  flex-direction: row;
   list-style-type: none;
   padding: 8px;
   margin: 10px;
 }
 .effect {
-  transition: transform 0.4s, text-decoration 0.2s;
+  transition: transform 0.3s, text-decoration 0.2s;
 }
 
 .effect:hover {

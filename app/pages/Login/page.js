@@ -56,35 +56,35 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex items-center justify-center">
+    <div className="bg-gray-100 h-screen flex items-center justify-center ">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
         <form className="space-y-4">
           <div>
-            <label htmlFor="email" className="block font-medium text-gray-700">
+            <p htmlFor="email" className="block font-medium text-gray-700">
               Email
-            </label>
+            </p>
             <input
               type="email"
               id="email"
               name="email"
               value={input.email}
               onChange={onInputChange}
-              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              className="w-full  border-blue-400 border-2 rounded-md py-2 px-3"
               required
             />
           </div>
           <div>
-            <label htmlFor="password" className="block font-medium text-gray-700">
+            <p htmlFor="password" className="block font-medium text-gray-700">
               Password
-            </label>
+            </p>
             <input
               type="password"
               id="password"
               name="password"
               value={input.password}
               onChange={onInputChange}
-              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              className="w-full border-blue-400 border-2 rounded-md py-2 px-3"
               required
             />
           </div>
