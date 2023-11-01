@@ -146,9 +146,9 @@ const SignupD = () => {
           {completedSignup === "signup" && (
             <>
               <div>
-                <label htmlFor="name" className="block font-medium text-gray-700">
+                <p htmlFor="name" className="block font-medium text-gray-700">
                   Full Name
-                </label>
+                </p>
                 <input
                   type="text"
                   id="name"
@@ -160,9 +160,9 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block font-medium text-gray-700">
+                <p htmlFor="email" className="block font-medium text-gray-700">
                   Email
-                </label>
+                </p>
                 <input
                   type="email"
                   id="email"
@@ -174,9 +174,9 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700">
+                <p className="block font-medium text-gray-700">
                   Phone Number
-                </label>
+                </p>
                 <input
                   type="text"
                   name="phoneNo"
@@ -187,9 +187,9 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label htmlFor="address" className="block font-medium text-gray-700">
+                <p htmlFor="address" className="block font-medium text-gray-700">
                   Address
-                </label>
+                </p>
                 <input
                   type="text"
                   id="address"
@@ -201,7 +201,7 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700">City</label>
+                <p className="block font-medium text-gray-700">City</p>
                 <input
                   type="text"
                   name="city"
@@ -212,9 +212,9 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700">
+                <p className="block font-medium text-gray-700">
                   Specialization
-                </label>
+                </p>
                 <select
                   name="specialization"
                   value={input.specialization}
@@ -248,9 +248,9 @@ const SignupD = () => {
                 </select>
               </div>
               <div>
-                <label className="block font-medium text-gray-700">
+                <p className="block font-medium text-gray-700">
                   Certificate Number
-                </label>
+                </p>
                 <input
                   type="text"
                   name="certificateNo"
@@ -261,11 +261,11 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label className="block font-medium text-gray-700">
+                <p className="block font-medium text-gray-700">
                   Mode of Appointment
-                </label>
+                </p>
                 <div className="space-x-2">
-                  <label className="inline-flex items-center">
+                  <p className="inline-flex items-center">
                     <input
                       type="radio"
                       name="modeOfConsultation"
@@ -274,8 +274,8 @@ const SignupD = () => {
                       onChange={handleModeChange}
                     />
                     Online
-                  </label>
-                  <label className="inline-flex items-center">
+                  </p>
+                  <p className="inline-flex items-center">
                     <input
                       type="radio"
                       name="modeOfConsultation"
@@ -284,8 +284,8 @@ const SignupD = () => {
                       onChange={handleModeChange}
                     />
                     Offline
-                  </label>
-                  <label className="inline-flex items-center">
+                  </p>
+                  <p className="inline-flex items-center">
                     <input
                       type="radio"
                       name="modeOfConsultation"
@@ -294,13 +294,13 @@ const SignupD = () => {
                       onChange={handleModeChange}
                     />
                     Both
-                  </label>
+                  </p>
                 </div>
               </div>
               <div>
-                <label htmlFor="password" className="block font-medium text-gray-700">
+                <p htmlFor="password" className="block font-medium text-gray-700">
                   Password
-                </label>
+                </p>
                 <input
                   type="password"
                   id="password"
@@ -312,9 +312,9 @@ const SignupD = () => {
                 />
               </div>
               <div>
-                <label htmlFor="cnfrmpass" className="block font-medium text-gray-700">
+                <p htmlFor="cnfrmpass" className="block font-medium text-gray-700">
                   Confirm Password
-                </label>
+                </p>
                 <input
                   type="password"
                   id="cnfrmpass"
