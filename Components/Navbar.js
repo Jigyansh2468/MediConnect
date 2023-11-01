@@ -6,19 +6,19 @@ import "./Navbar.css";
 import DoctorDashboard from "./DoctorDashboard";
 import PatientDashboard from "./PatientDashboard";
 
-const Navbar = ({ USERMODE }) => {
+const Navbar = ({ UserMode }) => {
   return (
     <>
-      {USERMODE === "DOCTOR" ? (
+      {UserMode === "DOCTOR" ? (
         <DoctorDashboard />
-      ) : USERMODE === "PATIENT" ? (
+      ) : UserMode === "PATIENT" ? (
         <PatientDashboard />
       ) : (
         <div id="navbar" className="p-4 h-auto border-b-2 border-purple-200">
           <div className="container mx-auto flex flex-wrap items-center justify-between">
-            <h2 className="text-2xl text-black">
+            <Link href="/" className="text-2xl text-black">
               <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
-            </h2>
+            </Link>
             <div className="flex flex-row gap-10">
               <Link href="/pages/FindDoctor" className="effect">
                 Find Doctor

@@ -8,9 +8,7 @@ import "./login.css"
 
 const Login = () => {
 
-  const [USERMODE, setUSERMODE] = useState("");
-
-  const history = useRouter();
+  const r = useRouter();
   const [input, setinput] = useState({
     email: "",
     password: "",
@@ -54,15 +52,14 @@ const Login = () => {
           } else {
             console.log('USER_MODE cookie not found');
           }
-          setUSERMODE(USER_MODE);
-          console.log(USERMODE);
+          console.log(USER_MODE);
 
           // handling response
           if (response.data === "login successful") {
             if (input.user === "PATIENT") {
-              history.replace("/pages/Patient/Hom");
+              r.replace("/pages/Patient/Hom");
             } else {
-              history.replace("/pages/Doctor/Hom");
+              r.replace("/pages/Doctor/Hom");
             }
           } else {
             if (response.data === "Incorrect password") {
@@ -95,7 +92,7 @@ const Login = () => {
               name="email"
               value={input.email}
               onChange={onInputChange}
-              className="w-full  border-purle-600 border-2 rounded-md py-2 px-3"
+              className="w-full border-2 border-purle-600 rounded-md py-2 px-3"
               required
             />
           </div>

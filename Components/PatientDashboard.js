@@ -31,9 +31,9 @@ const PatientDashboard = () => {
     <div className="h-auto w-full font-bold">
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">
+          <Link href="/" className="text-2xl font-bold">
             <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
-          </h2>
+          </Link>
           <div className="hidden md:flex gap-10 text-xl">
             <Link href="/pages/FindDoctor" className="effect">Find Doctor</Link>
             <Link href="/pages/VideoConsultation" className="effect">Video Consultation</Link>
@@ -44,13 +44,13 @@ const PatientDashboard = () => {
               <img src="/Profile.png" alt="Patient" height={80} width={80} />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
+              <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg">
                 <ul>
-                  <li>
-                    <Link href="/pages/Patient/ViewProfile" className="effect">View Profile</Link>
+                  <li className="effect">
+                    <Link href="/pages/Patient/ViewProfile">View Profile</Link>
                   </li>
-                  <li>
-                    <Link href="/pages/Patient/MyAppointment" className="effect">My Appointment</Link>
+                  <li className="effect">
+                    <Link href="/pages/Patient/MyAppointment" >My Appointment</Link>
                   </li>
                   <li className="effect">
                     <button>My Cart</button>
@@ -58,10 +58,10 @@ const PatientDashboard = () => {
                   <li className="effect">
                     <button>Order History</button>
                   </li>
-                  <li>
+                  <li className="effect">
                     <Link href="/pages/Patient/UpdateProfile">Update Profile</Link>
                   </li>
-                  <li>
+                  <li className="effect">
                     <button onClick={logout}>Logout</button>
                   </li>
                 </ul>

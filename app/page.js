@@ -7,12 +7,12 @@ import CardDeck from "@/Components/CardDeck";
 import Footer from "@/Components/Footer";
 
 const Page = () => {
-  const [USERMODE, setUSERMODE] = useState("")
-  useEffect(() => { setUSERMODE("DEFAULT") }, [])
+  const [UserMode, setUserMode] = useState("")
+  useEffect(() => { setUserMode("DEFAULT") }, [])
   return (
     // login page se data lekr set usermode
     <>
-      <Navbar USERMODE={USERMODE} />
+      <Navbar UserMode={UserMode} />
       <hr />
       <center className="py-10">
         <Image

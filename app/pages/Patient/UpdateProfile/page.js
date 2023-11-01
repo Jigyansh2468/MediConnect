@@ -63,19 +63,19 @@ const UpdateProfile = () => {
             <center>
                 <div className="bg-white">
                     <div className="flex justify-center">
-                        <div className="w-full sm:w-4/5 md:w-3/4 lg:w-3/5 xl:w-2/5 mt-10 p-4 md:p-8">
+                        <div className="w-full sm:w-4/5 md:w-3/4 lg:w-3/5 xl:w-2/5 p-4 md:p-8">
                             <div className="flex flex-col gap-4">
                                 <div>
                                     <img
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU"
+                                        src="/Profile.png"
                                         alt="Profile Picture"
-                                        className="h-80 w-80 mx-auto"
+                                        className="h-80 w-80 mx-auto rounded-full"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <p htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                                         Name
-                                    </label>
+                                    </p>
                                     <input
                                         type="text"
                                         name="name"
@@ -86,9 +86,9 @@ const UpdateProfile = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="phoneNo" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <p htmlFor="phoneNo" className="block text-gray-700 text-sm font-bold mb-2">
                                         Phone Number
-                                    </label>
+                                    </p>
                                     <input
                                         type="text"
                                         name="phoneNo"
@@ -99,9 +99,9 @@ const UpdateProfile = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="dob" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <p htmlFor="dob" className="block text-gray-700 text-sm font-bold mb-2">
                                         Date of Birth
-                                    </label>
+                                    </p>
                                     <input
                                         type="date"
                                         name="dob"
@@ -112,9 +112,9 @@ const UpdateProfile = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <p htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">
                                         City
-                                    </label>
+                                    </p>
                                     <input
                                         type="text"
                                         name="city"

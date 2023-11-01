@@ -69,9 +69,8 @@ const UpdateProfile = () => {
                                 <div className="flex flex-col gap-4">
                                     <div>
                                         <img
-                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQabPnL65PJtnyc3OgCKevPT-1eIOWDjC_f86xZ2x9qB81e9NKK25pkKjg_IKJWeEKt__g&usqp=CAU"
-                                            alt="Profile Picture"
-                                            className="h-80 w-80 mx-auto"
+                                            src="/Profile.png"
+                                            className="h-80 w-80 mx-auto rounded-full"
                                         />
                                     </div>
                                 </div>

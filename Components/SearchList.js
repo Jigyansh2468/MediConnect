@@ -11,7 +11,7 @@ const SearchList = ({ results, setdoctor, setbookapt }) => {
         }
 
         return results.map((result, i) => (
-            <div key={i} className=" bg-purple-100 border-2 border-black rounded-lg font-semibold my-10">
+            <div key={i} className=" bg-purple-100 rounded-lg font-semibold my-4">
                 <div className="flex justify-between  items-center p-5 gap-40">
                     <Image src="/Profile.png" alt="Profile" height={100} width={100} className='rounded-full' />
                     <div>

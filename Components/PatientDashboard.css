@@ -8,10 +8,11 @@ ul li:hover {
 }
 .effect {
   transition: transform 0.3s, text-decoration 0.2s;
+  border-radius: 8px;
 }
 
 .effect:hover {
-  color: #72348D;
+  color: #72348d;
   scale: 1;
   transform: scale(1.2);
 }
