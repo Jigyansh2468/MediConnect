@@ -8,7 +8,7 @@ import "./login.css"
 
 const Login = () => {
 
-  const r = useRouter();
+  const route = useRouter();
   const [input, setinput] = useState({
     email: "",
     password: "",
@@ -57,9 +57,9 @@ const Login = () => {
           // handling response
           if (response.data === "login successful") {
             if (input.user === "PATIENT") {
-              r.replace("/Patient/Hom");
+              route.replace("/Patient/Hom");
             } else {
-              r.replace("/Doctor/Hom");
+              route.replace("/Doctor/Hom");
             }
           } else {
             if (response.data === "Incorrect password") {

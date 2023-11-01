@@ -22,16 +22,16 @@ const Navbar = ({ UserMode }) => {
               <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
             </Link>
             <div className="flex flex-row gap-10">
-              <Link href="/FindDoctor" className="effect" style={{ color: p === '/blog' ? 'red' : 'blue' }}>
+              <Link href="/FindDoctor" className={`nav-link ${p === '/FindDoctor' ? 'active' : ''}`}>
                 Find Doctor
               </Link>
-              <Link href="/VideoConsultation" className="effect">
+              <Link href="/VideoConsultation" className={`nav-link ${p === '/VideoConsultation' ? 'active' : ''}`}>
                 Video Consultation
               </Link>
-              <Link href="/Medicines" className="effect">
+              <Link href="/Medicines" className={`nav-link ${p === '/Medicines' ? 'active' : ''}`}>
                 Medicines
               </Link>
-              <Link href="/Login" className="effect border-1 border-gray">
+              <Link href="/Login" className="nav-link border-1 border-gray">
                 Login/Signup
               </Link>
             </div>

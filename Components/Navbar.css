@@ -11,12 +11,32 @@ ul li {
   padding: 8px;
   margin: 10px;
 }
-.effect {
-  transition: transform 0.3s, text-decoration 0.2s;
-}
 
-.effect:hover {
-  color: #72348D;
+
+/* .nav-link {
+  transition: transform 0.3s, text-decoration 0.2s;
+  color: #72348d;
+}
+.nav-link:hover {
+  color: #72348d;
   scale: 1;
   transform: scale(1.2);
+} */
+
+
+.nav-link {
+  transform: scale(1) rotate(0);
+  transition: transform 0.5s;
+}
+.nav-link:hover {
+  transform: scale(1.1) rotate(-10deg);
+}
+
+.active {
+  color: red;
+  /* color: #72348d; */
+  scale: 1;
+  transform: scale(1.2);
+  /* transform: scale(1) rotate(0); */
+  transform: scale(1.1) rotate(-5deg);
 }

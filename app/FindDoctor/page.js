@@ -14,16 +14,6 @@ const FindDoctor = () => {
     setResults([]);
     setbookapt(false);
   };
-  // const myStyle = {
-  //   backgroundImage:
-  //     "url('/BlurBG.png')",
-  //   height: '50vh',
-  //   marginTop: '-70px',
-  //   backgroundSize: 'cover',
-  //   backgroundRepeat: 'no-repeat',
-  //   margin: "20px",
-  //   filter: "blur(1.5rem)"
-  // };
   return (
     <>
       <div>
