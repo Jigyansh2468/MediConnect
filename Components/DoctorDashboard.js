@@ -36,7 +36,7 @@ const DoctorDashboard = () => {
               <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
             </Link>
             <div className="hidden md:flex gap-10 effect">
-              <Link href="/pages/VideoConsultation">Video Consultation</Link>
+              <Link href="/VideoConsultation">Video Consultation</Link>
             </div>
             <div className="relative inline-block">
               <button className="rounded-full overflow-hidden" onClick={toggleDropdown}>
@@ -46,10 +46,10 @@ const DoctorDashboard = () => {
                 <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg">
                   <ul>
                     <li className="list effect">
-                      <Link href="/pages/Doctor/ViewProfile">View Profile</Link>
+                      <Link href="/Doctor/ViewProfile">View Profile</Link>
                     </li>
                     <li className="list effect">
-                      <Link href="/pages/Doctor/UpdateProfile">Update Profile</Link>
+                      <Link href="/Doctor/UpdateProfile">Update Profile</Link>
                     </li>
                     <li className="list effect">
                       <button onClick={logout}>Logout</button>
@@ -61,9 +61,9 @@ const DoctorDashboard = () => {
           </div>
           <div className="md:hidden mt-4">
             <div className="flex flex-col gap-2">
-              <Link href="/pages/FindDoctor">Find Doctor</Link>
-              <Link href="/pages/VideoConsultation">Video Consultation</Link>
-              <Link href="/pages/Medicines">Medicines</Link>
+              <Link href="/FindDoctor">Find Doctor</Link>
+              <Link href="/VideoConsultation">Video Consultation</Link>
+              <Link href="/Medicines">Medicines</Link>
             </div>
           </div>
         </div>

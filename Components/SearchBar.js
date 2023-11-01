@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Searchbar.css";
 import { FaSearch } from "react-icons/fa";
+
 const Searchbar = ({ setResults, clearResults }) => {
   const [input, setInput] = useState({
     searchBy: "",

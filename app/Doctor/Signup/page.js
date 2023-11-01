@@ -110,7 +110,7 @@ const SignupD = () => {
 
   useEffect(() => {
     if (completedSignup === "login") {
-      router.replace("/pages/Login");
+      router.replace("/Login");
     }
   }, [completedSignup]);
 

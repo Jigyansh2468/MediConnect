@@ -126,9 +126,9 @@ const SignupP = () => {
           {completedSignup === "signup" && (
             <>
               <div>
-                <label htmlFor="name" className="block font-medium text-gray-700">
+                <p htmlFor="name" className="block font-medium text-gray-700">
                   Full Name
-                </label>
+                </p>
                 <input
                   type="text"
                   id="name"
@@ -140,9 +140,9 @@ const SignupP = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block font-medium text-gray-700">
+                <p htmlFor="email" className="block font-medium text-gray-700">
                   Email
-                </label>
+                </p>
                 <input
                   type="email"
                   id="email"
@@ -154,9 +154,9 @@ const SignupP = () => {
                 />
               </div>
               <div>
-                <label htmlFor="phoneNo" className="block font-medium text-gray-700">
+                <p htmlFor="phoneNo" className="block font-medium text-gray-700">
                   Phone Number
-                </label>
+                </p>
                 <input
                   type="number"
                   id="phoneNo"
@@ -168,9 +168,9 @@ const SignupP = () => {
                 />
               </div>
               <div>
-                <label htmlFor="dob" className="block font-medium text-gray-700">
+                <p htmlFor="dob" className="block font-medium text-gray-700">
                   Date of Birth
-                </label>
+                </p>
                 <input
                   type="date"
                   id="dob"
@@ -182,9 +182,9 @@ const SignupP = () => {
                 />
               </div>
               <div>
-                <label htmlFor="city" className="block font-medium text-gray-700">
+                <p htmlFor="city" className="block font-medium text-gray-700">
                   City
-                </label>
+                </p>
                 <input
                   type="text"
                   id="city"
@@ -196,9 +196,9 @@ const SignupP = () => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block font-medium text-gray-700">
+                <p htmlFor="password" className="block font-medium text-gray-700">
                   Password
-                </label>
+                </p>
                 <input
                   type="password"
                   id="password"
@@ -210,9 +210,9 @@ const SignupP = () => {
                 />
               </div>
               <div>
-                <label htmlFor="cnfrmpass" className="block font-medium text-gray-700">
+                <p htmlFor="cnfrmpass" className="block font-medium text-gray-700">
                   Confirm Password
-                </label>
+                </p>
                 <input
                   type="password"
                   id="cnfrmpass"
@@ -267,7 +267,7 @@ const SignupP = () => {
           </div>
         )}
         <div className="text-center mt-4">
-          <Link href="/pages/Login">Login</Link>
+          <Link href="/Login">Login</Link>
         </div>
       </div>
     </div>

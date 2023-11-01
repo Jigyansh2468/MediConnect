@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PatientDashboard from "@/Components/PatientDashboard";
 import Footer from "@/Components/Footer";
+
 const PatientProfile = () => {
   const [input, setInput] = useState({
     name: "",

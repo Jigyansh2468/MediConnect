@@ -57,9 +57,9 @@ const Login = () => {
           // handling response
           if (response.data === "login successful") {
             if (input.user === "PATIENT") {
-              r.replace("/pages/Patient/Hom");
+              r.replace("/Patient/Hom");
             } else {
-              r.replace("/pages/Doctor/Hom");
+              r.replace("/Doctor/Hom");
             }
           } else {
             if (response.data === "Incorrect password") {
@@ -137,11 +137,11 @@ const Login = () => {
           </div>
         </form>
         <div className="text-center mt-4">
-          <Link href="/pages/Patient/Signup/">
+          <Link href="/Patient/Signup/">
             Sign up as Patient
           </Link>
           <span className="mx-2 text-gray-500">|</span>
-          <Link href="/pages/Doctor/Signup">
+          <Link href="/Doctor/Signup">
             Sign up as Doctor
           </Link>
         </div>

@@ -35,9 +35,9 @@ const PatientDashboard = () => {
             <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
           </Link>
           <div className="hidden md:flex gap-10 text-xl">
-            <Link href="/pages/FindDoctor" className="effect">Find Doctor</Link>
-            <Link href="/pages/VideoConsultation" className="effect">Video Consultation</Link>
-            <Link href="/pages/Medicines" className="effect">Medicines</Link>
+            <Link href="/FindDoctor" className="effect">Find Doctor</Link>
+            <Link href="/VideoConsultation" className="effect">Video Consultation</Link>
+            <Link href="/Medicines" className="effect">Medicines</Link>
           </div>
           <div className="relative inline-block">
             <button className="rounded-full overflow-hidden" onClick={toggleDropdown}>
@@ -47,10 +47,10 @@ const PatientDashboard = () => {
               <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg">
                 <ul>
                   <li className="effect">
-                    <Link href="/pages/Patient/ViewProfile">View Profile</Link>
+                    <Link href="/Patient/ViewProfile">View Profile</Link>
                   </li>
                   <li className="effect">
-                    <Link href="/pages/Patient/MyAppointment" >My Appointment</Link>
+                    <Link href="/Patient/MyAppointment" >My Appointment</Link>
                   </li>
                   <li className="effect">
                     <button>My Cart</button>
@@ -59,7 +59,7 @@ const PatientDashboard = () => {
                     <button>Order History</button>
                   </li>
                   <li className="effect">
-                    <Link href="/pages/Patient/UpdateProfile">Update Profile</Link>
+                    <Link href="/Patient/UpdateProfile">Update Profile</Link>
                   </li>
                   <li className="effect">
                     <button onClick={logout}>Logout</button>
@@ -72,9 +72,9 @@ const PatientDashboard = () => {
         {/* For mobile view, show navigation links in a responsive menu */}
         <div className="md:hidden mt-4">
           <div className="flex flex-col gap-2">
-            <Link href="/pages/FindDoctor">Find Doctor</Link>
-            <Link href="/pages/VideoConsultation">Video Consultation</Link>
-            <Link href="/pages/Medicines">Medicines</Link>
+            <Link href="/FindDoctor">Find Doctor</Link>
+            <Link href="/VideoConsultation">Video Consultation</Link>
+            <Link href="/Medicines">Medicines</Link>
           </div>
         </div>
       </div>
