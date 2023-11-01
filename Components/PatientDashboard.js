@@ -31,7 +31,7 @@ const PatientDashboard = () => {
     <div className="h-auto w-full font-bold">
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/Patient/Hom" className="text-2xl font-bold">
             <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
           </Link>
           <div className="hidden md:flex gap-10 text-xl">
@@ -44,7 +44,7 @@ const PatientDashboard = () => {
               <img src="/Profile.png" alt="Patient" height={80} width={80} />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg">
+              <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg">
                 <ul>
                   <li className="effect">
                     <Link href="/Patient/ViewProfile">View Profile</Link>
