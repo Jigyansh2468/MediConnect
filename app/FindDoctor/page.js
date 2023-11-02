@@ -17,7 +17,6 @@ const FindDoctor = () => {
     <>
       <div>
         <Navbar UserMode={authState.USER_MODE} />
-
         {bookapt === true ? (
           <BookAppointment doctor={doctor} />
         ) : (<Searchbar setdoctor={setdoctor} setbookapt={setbookapt} />)
