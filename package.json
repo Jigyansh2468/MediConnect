@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coreui/coreui": "^5.0.0-beta.1",
+    "@coreui/react": "^5.0.0-beta.0",
     "axios": "^1.6.0",
     "gsap": "^3.12.2",
     "next": "^14.0.1",
@@ -19,7 +21,9 @@
     "react-icon": "^1.0.0",
     "react-icons": "^4.11.0",
     "react-router": "^6.17.0",
-    "react-router-dom": "^6.17.0"
+    "react-router-dom": "^6.17.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "autoprefixer": "^10",

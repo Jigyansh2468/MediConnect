@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Image from "next/image"
+import './BookAppointment.css'
 
 const BookAppointment = ({ doctor }) => {
   const [slotlist, setslotlist] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState({});
+
   useEffect(() => {
     axios.get("http://localhost:8080/doctor/getavailableslots",
       {
@@ -40,6 +42,7 @@ const BookAppointment = ({ doctor }) => {
   }
   return (
     <>
+      {/* conditainla render the dialog box */}
       <div className=" h-screen w-screen flex">
         <div className="ml-16 mr-16 mt-10 flex">
           <div className="flex gap-2 border-b-red-200 flex-col ">

@@ -9,25 +9,25 @@ function CardDeck() {
                 <Link href="/FindDoctor">
                     <Card
                         title="Find Doctor"
-                        SRC="/FindDoctor.png"
+                        SRC="/FindDoctor.jpg"
                     />
                 </Link>
                 <Link href="/VideoConsultation">
                     <Card
                         title="Video Consultation"
-                        SRC="/VideoConsultation.png"
+                        SRC="/VideoConsultation.jpg"
                     />
                 </Link>
                 <Link href="/Medicines">
                     <Card
                         title="Medicines"
-                        SRC="/Medicines.png"
+                        SRC="/Medicines.jpg"
                     />
                 </Link>
                 <Link href="/Medicines">
                     <Card
                         title="Book Appointmnet"
-                        SRC="/BookAppointment.png"
+                        SRC="/BookAppointment.jpg"
                     />
                 </Link>
             </div>

@@ -9,22 +9,25 @@ import CardDeck from '@/Components/CardDeck';
 const PatientProfile = () => {
   return (
     <>
-      <PatientDashboard />
-      <hr />
-      <center className="py-10">
-        <Image
-          src="/CARD.jpg"
-          alt="Logo"
-          width={1500}
-          height={300}
-          className="rounded-xl"
-          priority
-        />
-      </center>
-      <hr />
-      <CardDeck />
-      slidbar doctor specializarion cards with photos
-      <Footer />
+
+      <div>
+        <PatientDashboard />
+        <hr />
+        <center className="py-10">
+          <Image
+            src="/CARD.jpg"
+            alt="Logo"
+            width={1500}
+            height={300}
+            className="rounded-xl"
+            priority
+          />
+        </center>
+        <hr />
+        <CardDeck />
+        slidbar doctor specializarion cards with photos
+        <Footer />
+      </div>
     </>
   );
 };

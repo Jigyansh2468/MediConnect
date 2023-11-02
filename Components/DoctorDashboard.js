@@ -33,7 +33,7 @@ const DoctorDashboard = () => {
         <div className="container mx-auto py-4">
           <div className="flex items-center justify-between">
             <Link href="/Doctor/Hom" className="text-2xl font-bold">
-              <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
+              <Image src="/LOGO.png" alt="LOGO"  width={250} height={200} className="rounded-full" />
             </Link>
             <div className="hidden md:flex gap-10 effect">
               <Link href="/VideoConsultation">Video Consultation</Link>

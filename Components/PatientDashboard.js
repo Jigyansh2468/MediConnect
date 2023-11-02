@@ -1,12 +1,14 @@
 "use client"
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import "./PatientDashboard.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
-import "./PatientDashboard.css";
+import { SessionContext } from "./SessionContextProvider";
 
 const PatientDashboard = () => {
+  const { setAuthState } = useContext(SessionContext)
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const r = useRouter();
   const toggleDropdown = () => {
@@ -24,6 +26,7 @@ const PatientDashboard = () => {
         if (response.data === "user logout") {
           console.log("Patient logout");
         }
+        setAuthState({ LOGGED_IN: false, USER_MODE: "" })
       });
     r.replace("/");
   };
@@ -31,8 +34,8 @@ const PatientDashboard = () => {
     <div className="h-auto w-full font-bold">
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
-          <Link href="/Patient/Hom" className="text-2xl font-bold">
-            <Image src="/LOGO.jpg" alt="LOGO" width={80} height={80} className="rounded-full" />
+          <Link href="/" className="text-2xl font-bold">
+            <Image src="/LOGO.png" alt="LOGO" width={250} height={200} className="rounded-full" />
           </Link>
           <div className="hidden md:flex gap-10 text-xl">
             <Link href="/FindDoctor" className="effect">Find Doctor</Link>
@@ -44,7 +47,7 @@ const PatientDashboard = () => {
               <img src="/Profile.png" alt="Patient" height={80} width={80} />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg">
+              <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-10">
                 <ul>
                   <li className="effect">
                     <Link href="/Patient/ViewProfile">View Profile</Link>

@@ -1,9 +1,10 @@
 "use client"
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Searchbar from "@/Components/SearchBar";
 import Navbar from "@/Components/Navbar";
 import BookAppointment from "@/Components/BookAppointment";
 import SearchList from "@/Components/SearchList";
+import { SessionContext } from "@/Components/SessionContextProvider";
 
 
 const FindDoctor = () => {
@@ -14,10 +15,13 @@ const FindDoctor = () => {
     setResults([]);
     setbookapt(false);
   };
+
+  const { authState } = useContext(SessionContext);
+
   return (
     <>
       <div>
-        <Navbar />
+        <Navbar UserMode={authState.USER_MODE} />
         <Searchbar setResults={setResults} clearResults={clearResults} />
         {bookapt === true ? (
           <BookAppointment doctor={doctor} />
