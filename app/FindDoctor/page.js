@@ -21,6 +21,8 @@ const FindDoctor = () => {
   return (
     <>
       <div>
+      </div>
+      <div>
         <Navbar UserMode={authState.USER_MODE} />
         <Searchbar setResults={setResults} clearResults={clearResults} />
         {bookapt === true ? (
@@ -29,8 +31,6 @@ const FindDoctor = () => {
           <SearchList results={results} setdoctor={setdoctor} setbookapt={setbookapt} />
         )}
       </div>
-      {/* <div style={myStyle}>
-      </div> */}
     </>
   );
 };

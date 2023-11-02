@@ -1,8 +1,9 @@
 "use client"
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import PatientDashboard from "@/Components/PatientDashboard";
+import React, { useContext, useEffect, useState } from "react";
+import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import { SessionContext } from "@/Components/SessionContextProvider";
 
 const PatientProfile = () => {
   const [input, setInput] = useState({
@@ -32,10 +33,10 @@ const PatientProfile = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
+  const { authState } = useContext(SessionContext)
   return (
     <div className=" min-h-screen">
-      <PatientDashboard />
+      <Navbar UserMode={authState.USER_MODE} />
       <div className="container mx-auto py-8">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="flex flex-col md:flex-row items-center">

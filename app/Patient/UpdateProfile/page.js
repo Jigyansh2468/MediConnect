@@ -1,7 +1,8 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import PatientDashboard from '@/Components/PatientDashboard';
+import Navbar from '@/Components/Navbar';
+import { SessionContext } from '@/Components/SessionContextProvider';
 
 const UpdateProfile = () => {
     const [data, setdata] = useState({
@@ -10,8 +11,8 @@ const UpdateProfile = () => {
         city: '',
         dob: '',
     })
-    const [dob,setDob]=useState('');
-   
+    const [dob, setDob] = useState('');
+
     const [input, setInput] = useState({
         name: data.name,
         phoneNo: data.phoneNo,
@@ -25,19 +26,19 @@ const UpdateProfile = () => {
             },
             withCredentials: true,
         })
-        .then((response) =>{
-            console.log(response);
-            setdata(response.data)
-            const formattedDate = new Date(data.dob).toLocaleDateString();
-            setDob(formattedDate);
-            setInput({
-                name: response.data.name,
-                phoneNo: response.data.phoneNo,
-                dob: formattedDate,
-                city: response.data.city,
-            });
-        })
-        .catch((error) => console.log(error))
+            .then((response) => {
+                console.log(response);
+                setdata(response.data)
+                const formattedDate = new Date(data.dob).toLocaleDateString();
+                setDob(formattedDate);
+                setInput({
+                    name: response.data.name,
+                    phoneNo: response.data.phoneNo,
+                    dob: formattedDate,
+                    city: response.data.city,
+                });
+            })
+            .catch((error) => console.log(error))
         console.log(data);
     }, [])
 
@@ -56,10 +57,10 @@ const UpdateProfile = () => {
             .then((response) => alert("Your Profile Updated Successfully"))
             .catch(error => console.log(error));
     };
-
+    const { authState } = useContext(SessionContext)
     return (
         <div className="bg-gray-100 min-h-screen w-screen">
-            <PatientDashboard />
+            <Navbar UserMode={authState.USER_MODE} />
             <center>
                 <div className="bg-white">
                     <div className="flex justify-center">

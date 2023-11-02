@@ -1,8 +1,8 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import PatientDashboard from '@/Components/PatientDashboard'
-
+import Navbar from '@/Components/Navbar'
+import { SessionContext } from '@/Components/SessionContextProvider'
 const MyAppointment = () => {
     const [list, setlist] = useState([])
 
@@ -21,16 +21,16 @@ const MyAppointment = () => {
             })
             .catch((error) => { console.log(error) })
     }, [])
-
+    const { authState } = useContext(SessionContext)
     return (
         <>
-            <PatientDashboard />
+            <Navbar UserMode={authState.USER_MODE} />
             <div className=" p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {list.map((item, i) => (
                         <div
                             key={i}
-                            className="bg-gray-100 rounded p-4 shadow-md transition transform hover:scale-105"
+                            className="bg-gray-100 rounded p-2 shadow-md transition transform hover:scale-105"
                         >
                             <div>Mode: {item.mode}</div>
                             <div>Date: {item.date}</div>

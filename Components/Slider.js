@@ -18,7 +18,7 @@ function Slidbar() {
 
   return (
     <div className="slider-container">
-      <Slider {...settings}>
+      <Slider {...settings} className='mb-10'>
         <div>
           <img src="/Specialization/Psychiatrist.jpg" alt="Card 1" />
           <p className='font-bold text-center'>Psychiatrist</p>
@@ -28,7 +28,7 @@ function Slidbar() {
           <p className='font-bold text-center'>Neurologist</p>
         </div>
         <div>
-          <img src="https://wallpaper.dog/large/5515198.jpg" alt="Card 2" />
+          <img src="/Specialization/Cardiologist.jpg" alt="Card 2" className='max-w-full max-h-full' />
           <p className='font-bold text-center'>Cardiologist</p>
         </div>
         <div>

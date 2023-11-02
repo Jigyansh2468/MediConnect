@@ -9,7 +9,6 @@ const SearchList = ({ results, setdoctor, setbookapt }) => {
         if (results.length === 0) {
             return <div>No Doctors Found</div>;
         }
-
         return results.map((result, i) => (
             <div key={i} className=" bg-purple-100 rounded-lg font-semibold my-4">
                 <div className="flex justify-between  items-center p-5 gap-40">

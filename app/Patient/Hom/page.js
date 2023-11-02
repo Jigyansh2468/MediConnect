@@ -1,17 +1,17 @@
 "use client";
-import React from 'react'
-import PatientDashboard from "@/Components/PatientDashboard";
+import React, { useContext } from 'react'
 import Footer from '@/Components/Footer';
 import Image from 'next/image';
 import CardDeck from '@/Components/CardDeck';
+import { SessionContext } from '@/Components/SessionContextProvider';
 
 
 const PatientProfile = () => {
+  const { authState } = useContext(SessionContext)
   return (
     <>
-
       <div>
-        <PatientDashboard />
+        <Navbar UserMode={authState.USER_MODE} />
         <hr />
         <center className="py-10">
           <Image

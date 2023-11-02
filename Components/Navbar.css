@@ -34,7 +34,7 @@ ul li:hover {
 }
 
 .active {
-  text-decoration: 2px red underline;
+  text-decoration: 3px red underline;
   text-underline-offset: 10px;
   transform: scale(1);
   transition: text-decoration 0.5s;
