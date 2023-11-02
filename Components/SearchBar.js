@@ -16,6 +16,7 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
     setResults([]);
     setbookapt(false);
   };
+  const [nodoc, setnodoc] = useState(false);
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -34,6 +35,9 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
         .then((response) => {
           setResults(response.data);
           console.log(Results);
+          if (Results.length === 0) {
+            setnodoc(true);
+          }
         })
         .catch((error) => console.log(error));
     }
@@ -86,33 +90,34 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
             <div className="results-container">
               <ul className="font-bold text-xl bg-gray w-screen px-10 text-center">
                 {
-                  Results.length === 0 ? (
-                    <div>No Doctor Found</div>
-                  ) : (
-                    Results.map((result, i) => (
-                      <div key={i} className=" bg-purple-100 rounded-lg font-semibold my-4">
-                        <div className="flex justify-between  items-center p-5 gap-40">
-                          <Image src="/Profile.png" alt="Profile" height={100} width={100} className='rounded-full' />
-                          <div>
-                            <div className="text-2xl">{result.name}</div>
-                            <div className="text-xl">{result.city}</div>
-                          </div>
-                          <div className="text-2xl">{result.specialization}</div>
-                          <button onClick={() => {
-                            setdoctor(result);
-                            setbookapt(true);
-                          }} className="bg-green-200 rounded-lg py-2 px-3 hover:bg-green-500 hover:text-white">
-                            Book Appointment
-                          </button>
+                  Results.map((result, i) => (
+                    <div key={i} className="bg-purple-100 rounded-lg font-semibold my-4">
+                      <div className="flex justify-between items-center p-5 gap-40">
+                        <Image src="/Profile.png" alt="Profile" height={100} width={100} className='rounded-full' />
+                        <div>
+                          <div className="text-2xl">{result.name}</div>
+                          <div className="text-xl">{result.city}</div>
                         </div>
-                      </div >
-                    ))
+                        <div className="text-2xl">{result.specialization}</div>
+                        <button onClick={() => {
+                          setdoctor(result);
+                          setbookapt(true);
+                        }} className="bg-green-200 rounded-lg py-2 px-3 hover-bg-green-500 hover-text-white">
+                          Book Appointment
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }{
+                  Results.length === 0 && nodoc === true && (
+                    <div>No Doctor Found</div>
                   )
-                }</ul>
+                }
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 };

@@ -17,13 +17,11 @@ const FindDoctor = () => {
     <>
       <div>
         <Navbar UserMode={authState.USER_MODE} />
-        <Searchbar setdoctor={setdoctor} setbookapt={setbookapt} />
-        {/* <BookAppointment doctor={doctor} /> */}
-        {/* {bookapt === true ? (
+
+        {bookapt === true ? (
           <BookAppointment doctor={doctor} />
-        ) : (
-          {< SearchList Results={Results} setdoctor={setdoctor} setbookapt={setbookapt} />  }
-        )} */}
+        ) : (<Searchbar setdoctor={setdoctor} setbookapt={setbookapt} />)
+        }
       </div>
     </>
   );
