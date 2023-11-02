@@ -34,6 +34,8 @@ const Page = () => {
       <hr />
       <Slider />
       <hr />
+      <DummyArticle />
+      <hr />
       <Footer />
     </>
   );
