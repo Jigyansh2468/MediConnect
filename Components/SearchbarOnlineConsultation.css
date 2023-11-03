@@ -1,0 +1,30 @@
+.searchbox {
+  background-color: white;
+  width: 30%;
+  border-radius: 30px;
+  border: 2px solid blueviolet;
+  height: 3.5rem;
+  padding: 0 15px;
+  box-shadow: 0px 0px 0px #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  font-size: 1.25rem;
+  width: 100%;
+  margin-left: 5px;
+}
+input:focus {
+  outline: none;
+}
+#search-icon {
+  color: royalblue;
+  font-size: large;
+}

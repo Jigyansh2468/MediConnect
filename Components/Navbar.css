@@ -1,7 +1,7 @@
 #navbar {
   display: flex;
   font-weight: 600;
-  font-size: large;
+  font-size: x-large;
 }
 ul li {
   list-style-type: none;
@@ -20,7 +20,6 @@ ul li:hover {
 .effect:hover {
   color: #72348d;
   scale: 1;
-  transform: scale(1.2);
 }
 .nav-link {
   transition: transform 0.3s, text-decoration 0.2s;
@@ -29,11 +28,11 @@ ul li:hover {
 }
 
 .nav-link:hover {
-  color: #72348d;
-  transform: scale(1.2);
+  color: red;
 }
 
 .active {
+  color: red;
   text-decoration: 3px red underline;
   text-underline-offset: 10px;
   transform: scale(1);

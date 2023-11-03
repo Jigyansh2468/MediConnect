@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-200 py-4">
+        <footer className="bg-gray-200 py-4 w-full">
             <div className="container mx-auto">
                 <div className="flex flex-wrap justify-center"> {/* Center the content on smaller screens */}
                     <div className="w-full md:w-1/2 lg:w-1/5 mb-4 md:">

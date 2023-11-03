@@ -17,24 +17,24 @@ const Page = () => {
   return (
     <>
       <Navbar UserMode={authState.USER_MODE} />
-      <hr />
       <center className="py-10">
-        <Link href="/Login">
+        <Link href="/Patient/Signup">
           <Image
             src="/CARD.jpg"
             alt="Logo"
             width={1500}
             height={300}
-            className="rounded-xl"
+            className="rounded-xl mt-28"
             priority
           />
         </Link>
       </center>
       <CardDeck />
       <hr />
+      {/* fix width of slider div it is making page unresponsive */}
       <Slider />
       <hr />
-      <DummyArticle />
+      {/* <DummyArticle /> */}
       <hr />
       <Footer />
     </>

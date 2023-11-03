@@ -34,7 +34,6 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
         })
         .then((response) => {
           setResults(response.data);
-          console.log(Results);
           if (Results.length === 0) {
             setnodoc(true);
           }
@@ -60,12 +59,14 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
   return (
     <>
       <div>
+        <div className="h-60 w-full bg-transparent text-3xl font-bold text-center"></div>
+        <div className="text-center text-4xl font-bold mb-16 text-white font-sans">Find and Book Doctor Now</div>
         <div className="flex justify-center items-center gap-5">
           <select
             name="searchBy"
             value={input.searchBy}
             onChange={onInputChange}
-            className="my-5 p-2 rounded-md border-x-4 border-y-2  font-semibold border-purple-400 "
+            className="my-5 p-4 rounded-full font-semibold border-white text-xl bg-purple-700 text-white"
             required
           >
             <option value="">Search By</option>
@@ -81,18 +82,17 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
               value={input.value}
               onChange={onInputChange}
             />
-            <button onClick={search} className="font-semibold">Search</button>
           </div>
+          <button onClick={search} className="font-semibold bg-whiten border-2 border-purple-600 bg-white rounded-full py-2 px-3 hover:py-4 hover:px-6">Search</button>
         </div>
-        <hr />
         <div>
-          <div className="p-4 bg-white flex justify-center items-center">
+          <div className="p-4  flex justify-center items-center">
             <div className="results-container">
               <ul className="font-bold text-xl bg-gray w-screen px-10 text-center">
                 {
                   Results.map((result, i) => (
-                    <div key={i} className="bg-purple-100 rounded-lg font-semibold my-4">
-                      <div className="flex justify-between items-center p-5 gap-40">
+                    <div key={i} className="bg-purple-200 rounded-lg font-semibold my-4">
+                      <div className="flex justify-evenly items-center p-5 gap-40">
                         <Image src="/Profile.png" alt="Profile" height={100} width={100} className='rounded-full' />
                         <div>
                           <div className="text-2xl">{result.name}</div>
@@ -102,7 +102,7 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
                         <button onClick={() => {
                           setdoctor(result);
                           setbookapt(true);
-                        }} className="bg-green-200 rounded-lg py-2 px-3 hover-bg-green-500 hover-text-white">
+                        }} className="bg-green-200 rounded-lg py-2 px-3 hover:bg-green-500 hover:text-white">
                           Book Appointment
                         </button>
                       </div>

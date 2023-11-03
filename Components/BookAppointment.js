@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Image from "next/image"
 import './BookAppointment.css'
+import { useRouter } from 'next/navigation';
 
-const BookAppointment = ({ doctor }) => {
+const BookAppointment = ({ doctor, UserMode }) => {
   const [slotlist, setslotlist] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState({});
-
+  const Route = useRouter();
+  const [btn, setbtn] = useState(1);
   useEffect(() => {
     axios.get("http://localhost:8080/doctor/getavailableslots",
       {
@@ -26,6 +28,33 @@ const BookAppointment = ({ doctor }) => {
   function handleSlotClick(slotId) {
     setSelectedSlot(slotId);
   }
+  const confirmapt = () => {
+    setTimeout(() => {
+      setbtn(2);
+    }, 10);
+    if (UserMode === "") {
+      alert('Login First')
+      Route.push("/Login");
+    }
+    if (selectedSlot.id === null) {
+      alert('Select a SLot First');
+    }
+    axios.put("http://localhost:8080/doctor/bookslot", null, {
+      params: {
+        doctorId: doctor.id,
+        slotId: selectedSlot.id
+      },
+      withCredentials: true,
+    })
+      .then((response) => {
+        setTimeout(() => {
+          setbtn(3);
+        }, 3000);
+        alert("Slot booked. You will get further details on mail");
+      })
+      .catch(error => console.log(error))
+
+  }
   function showslot() {
     if (slotlist.length === 0) {
       return (<div>No slot Available for Today</div>)
@@ -42,8 +71,7 @@ const BookAppointment = ({ doctor }) => {
   }
   return (
     <>
-      {/* conditainla render the dialog box */}
-      <div className=" h-screen w-screen flex">
+      <div className=" h-screen w-screen flex ">
         <div className="ml-16 mr-16 mt-10 flex">
           <div className="flex gap-2 border-b-red-200 flex-col ">
             <div>
@@ -56,34 +84,38 @@ const BookAppointment = ({ doctor }) => {
             </center>
           </div>
         </div >
+
         <div className="ml-16 mr-16 mt-10 flex-1">
-          <div className="bg-white p-10">
-            <h2 className="text-xl font-bold mb-4 text-center ">Available Time Slots</h2>
+          <div className="bg-transparent p-10  ">
+            <h2 className="text-xl font-bold mb-4 text-center underline
+            ">Available Time Slots</h2>
             <div className='flex flex-wrap flex-row'>
               {showslot()}
             </div>
-          </div>
-          <div className='flex items-center justify-center'>
-            <button
-              className='bg-green-300 text-xl px-4 py-6 rounded-lg font-bold float-right mt-10 hover:bg-green-500'
-              onClick={() => {
-                axios.put("http://localhost:8080/doctor/bookslot", null, {
-                  params: {
-                    doctorId: doctor.id,
-                    slotId: selectedSlot.id
-                  },
-                  withCredentials: true,
-                }).then((response) => {
-                  alert("Slot booked. You will get further details on mail");
-                })
-              }}>
-              Confirm Appointment
-            </button>
+            <div className='flex items-center justify-center'>
+              {
+                btn === 1 ? (
+                  <button
+                    className='bg-green-300 text-xl px-4 py-6 rounded-lg font-bold float-right mt-10 hover:bg-green-500'
+                    onClick={confirmapt} >
+                    Confirm Appointment
+                  </button>
+                ) : btn === 2 ? (
+                  <button className='bg-green-300 text-xl w-32  flex items-center justify-center px-4 py-6 rounded-lg font-bold float-right mt-10 relative'>
+                    <div className='dot-flashing absolute '></div>
+                  </button>
+                ) : btn === 3 ? (
+                  <button
+                    className='bg-green-300 text-xl px-4 py-6 rounded-lg font-bold float-right mt-10 hover:bg-green-500' onClick={Route.push('/')}>
+                    Appointment Confirmed
+                  </button>
+                ) : null
+              }
+            </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   )
 }
-
 export default BookAppointment

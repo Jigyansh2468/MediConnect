@@ -1,4 +1,4 @@
-  import SessionContextProvider from "@/Components/SessionContextProvider";
+import SessionContextProvider from "@/Components/SessionContextProvider";
 import "./globals.css";
 import { Inter } from "next/font/google";
 

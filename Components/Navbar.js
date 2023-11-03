@@ -53,7 +53,7 @@ const Navbar = ({ UserMode }) => {
   };
 
   return (
-    <nav id="navbar" className="p-4 h-26 border-b-2 border-purple-200 ">
+    <nav id="navbar" className="bg-white p-4 h-26 border-b-2 border-purple-200  z-10  w-full ">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link href="/" className="text-2xl text-black flex items-center">
           <Image src="/LOGO.png" alt="LOGO" width={250} height={200} className="rounded-full" />
@@ -62,15 +62,15 @@ const Navbar = ({ UserMode }) => {
           <Link href="/FindDoctor" className={`nav-link ${p === "/FindDoctor" ? "active" : ""}`}>
             Find Doctor
           </Link>
-          <Link
-            href="/VideoConsultation"
-            className={`nav-link ${p === "/VideoConsultation" ? "active" : ""}`}
-          >
-            Video Consultation
-          </Link>
-          <Link href="/Medicines" className={`nav-link ${p === "/Medicines" ? "active" : ""}`}>
-            Medicines
-          </Link>
+          {UserMode === "DOCTOR" ? (
+            <Link href="/RoomPage" className="nav-link">
+              Join Room
+            </Link>
+          ) : (
+            <Link href="/VideoConsultation" className={`nav-link ${p === "/VideoConsultation" ? "active" : ""}`}>
+              Video Consultation
+            </Link>
+          )}
           {UserMode === "DOCTOR" || UserMode === "PATIENT" ? (
             <div className="relative inline-block">
               <button
@@ -85,7 +85,7 @@ const Navbar = ({ UserMode }) => {
                 />
               </button>
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-lg">
+                <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg z-100">
                   <ul>
                     {UserMode === "DOCTOR" && (
                       <>
@@ -104,12 +104,6 @@ const Navbar = ({ UserMode }) => {
                         </li>
                         <li className="effect">
                           <Link href="/Patient/MyAppointment">My Appointment</Link>
-                        </li>
-                        <li className="effect">
-                          <button>My Cart</button>
-                        </li>
-                        <li className="effect">
-                          <button>Order History</button>
                         </li>
                         <li className="effect">
                           <Link href="/Patient/UpdateProfile">Update Profile</Link>
