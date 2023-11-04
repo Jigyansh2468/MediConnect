@@ -18,7 +18,7 @@ function CardDeck() {
                         SRC="/VideoConsultation.jpg"
                     />
                 </Link>
-                <Link href="/Medicines">
+                <Link href="/FindDoctor">
                     <Card
                         title="Book Appointmnet"
                         SRC="/BookAppointment.jpg"

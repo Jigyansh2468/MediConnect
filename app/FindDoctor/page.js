@@ -26,7 +26,7 @@ const FindDoctor = () => {
               <source src='/findDoctor.mp4' type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div className="absolute w-full h-full z-10">
+            <div className="absolute w-full h-full">
               <Navbar UserMode={authState.USER_MODE} />
               <Searchbar setdoctor={setdoctor} setbookapt={setbookapt} />
             </div>

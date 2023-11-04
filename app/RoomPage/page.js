@@ -21,6 +21,7 @@ function Page() {
           mode: ZegoUIKitPrebuilt.OneONoneCall
         },
         showScreenSharingButton: false,
+        turnOnCameraWhenJoining: true,
       });
     };
 
