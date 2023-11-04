@@ -20,12 +20,6 @@ function CardDeck() {
                 </Link>
                 <Link href="/Medicines">
                     <Card
-                        title="Medicines"
-                        SRC="/Medicines.jpg"
-                    />
-                </Link>
-                <Link href="/Medicines">
-                    <Card
                         title="Book Appointmnet"
                         SRC="/BookAppointment.jpg"
                     />

@@ -9,9 +9,9 @@ const Footer = () => {
                     <div className="w-full md:w-1/2 lg:w-1/5 mb-4 md:">
                         <div className="text-center">
                             <h3 className="text-xl font-bold mb-2 text-purple-700">Contact Us</h3>
-                            <p className="text-gray-700 font-semibold py-1">Phone:</p>
-                            <p className="text-gray-700 font-semibold py-1">Email:</p>
-                            <p className="text-gray-700 font-semibold py-1">Address</p>
+                            <p className="text-gray-700 font-semibold py-1">Email : telemed24@gmail.com</p>
+                            <p className="text-gray-700 font-semibold py-1">Instagram : telemed_24</p>
+                            <p className="text-gray-700 font-semibold py-1">Twitter : telemed_24</p>
                         </div>
                     </div>
                     <hr />
