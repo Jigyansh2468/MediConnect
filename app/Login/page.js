@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import "./login.css";
 import { SessionContext } from "@/Components/SessionContextProvider";
 
 const Login = () => {
+  useEffect(() => { console.log("hello") }, []);
   const route = useRouter();
 
   const [input, setInput] = useState({
@@ -114,7 +115,7 @@ const Login = () => {
                   name="email"
                   value={input.email}
                   onChange={onInputChange}
-                  className="w-full border-2 border-purple-600 rounded-md py-2 px-3"
+                  className="w-full border-2 border-blue-600 rounded-md py-2 px-3"
                   required
                 />
               </div>
@@ -128,12 +129,12 @@ const Login = () => {
                   name="password"
                   value={input.password}
                   onChange={onInputChange}
-                  className="w-full border-purple-600 border-2 rounded-md py-2 px-3"
+                  className="w-full border-blue-600 border-2 rounded-md py-2 px-3"
                   required
                 />
               </div>
               <div className="flex flex-row flex-wrap gap-2 font-bold">
-                <label className="block font-medium text-gray-700">Doctor</label>
+                <label className="block font-medium text-gray-700 ">Doctor</label>
                 <div className="space-x-2 flex">
                   <label className="inline-flex items-center">
                     <input
@@ -151,7 +152,7 @@ const Login = () => {
               <div>
                 <button
                   type="button"
-                  className="w-full bg-purple-400 text-white py-2 px-3 rounded-md hover:bg-purple-600"
+                  className="w-full bg-blue-400 text-white py-2 px-3 rounded-md hover:bg-blue-600"
                   onClick={Handlelogin}
                 >
                   Login

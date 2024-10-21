@@ -22,6 +22,7 @@ const SignupP = () => {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [verificationAttempts, setVerificationAttempts] = useState(0);
+  
   const router = useRouter();
 
   const onInputChange = (e) => {

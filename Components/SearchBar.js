@@ -83,10 +83,10 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
               onChange={onInputChange}
             />
           </div>
-          <button onClick={search} className="font-semibold bg-whiten border-2 border-purple-600 bg-white rounded-full py-2 px-3 hover:py-4 hover:px-6">Search</button>
+          <button onClick={search} className="font-semibold bg-whiten border-2 border-purple-600 bg-white rounded-full py-1 px-2 hover:py-2 hover:px-3">Search</button>
         </div>
         <div>
-          <div className="p-4  flex justify-center items-center">
+          <div className="p-4  flex justify-center items-center mb-10">
             <div className="results-container">
               <ul className="font-bold text-xl bg-gray w-screen px-10 text-center">
                 {
@@ -102,7 +102,7 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
                         <button onClick={() => {
                           setdoctor(result);
                           setbookapt(true);
-                        }} className="bg-green-200 rounded-lg py-2 px-3 hover:bg-green-500 hover:text-white">
+                        }} className="bg-green-200 rounded-lg py-2 px-3 hover:bg-green-300 hover:text-white">
                           Book Appointment
                         </button>
                       </div>

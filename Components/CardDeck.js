@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link';
 import Card from './Cards';
+import BookAppointment from './BookAppointment';
+import Image from 'next/image'
 
 function CardDeck() {
     return (
@@ -18,11 +20,16 @@ function CardDeck() {
                         SRC="/VideoConsultation.jpg"
                     />
                 </Link>
-                <Link href="/FindDoctor">
-                    <Card
-                        title="Book Appointmnet"
-                        SRC="/BookAppointment.jpg"
-                    />
+                <Link href={{
+                    pathname: '/FindDoctor',
+                    query: { data: 'fromhome' },
+                }}>
+                    <div className='flex flex-col justify-center items-center py-10'>
+                        <div className="card">
+                            <Image src='/BookAppointment.jpg' alt="LOGO" width={800} height={700} />
+                        </div>
+                        <p className="card-title">BookAppointment</p>
+                    </div>
                 </Link>
             </div>
         </>

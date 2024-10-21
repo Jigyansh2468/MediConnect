@@ -76,7 +76,7 @@ const Searchbar = () => {
                             name="specialization"
                             value={input.specialization}
                             onChange={onInputChange}
-                            className="my-5 p-4 rounded-full font-semibold border-white text-xl bg-purple-500 text-white"
+                            className="my-5 p-4 rounded-full font-semibold border-white text-xl bg-blue-500 text-white"
                             required
                         >
                             <option value="">Select specialization</option>

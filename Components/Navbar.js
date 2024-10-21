@@ -53,10 +53,10 @@ const Navbar = ({ UserMode }) => {
   };
 
   return (
-    <nav id="navbar" className="bg-white p-4 h-26 border-b-2 border-purple-200  z-10  w-full ">
+    <nav id="navbar" className="bg-white p-4 h-28 border-b-2 border-blue-200  z-10  w-full ">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <Link href="/" className="text-2xl text-black flex items-center">
-          <Image src="/LOGO.png" alt="LOGO" width={250} height={200} className="rounded-full" />
+          <Image src="/LOGO.png" alt="LOGO" width={70} height={70} className="rounded-full" />
         </Link>
         <div className="flex flex-row gap-10 items-center">
           <Link href="/FindDoctor" className={`nav-link ${p === "/FindDoctor" ? "active" : ""}`}>
@@ -122,7 +122,7 @@ const Navbar = ({ UserMode }) => {
           ) : (
             <Link
               href="/Login"
-              className="effect border-2 border-purple-600 py-1 px-2 border-gray bg-purple-200"
+              className="effect border-2 border-blue-400 py-1 px-2 border-gray bg-blue-200"
             >
               Login/Signup
             </Link>
