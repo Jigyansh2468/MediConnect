@@ -16,8 +16,8 @@ const Page = () => {
   const { authState } = useContext(SessionContext)
   useEffect(() => { setUserMode("DEFAULT") }, [])
   return (
-    <div>
-      <div className="w-full h-full">
+    <div lassName="w-full h-full">
+      <div>
         <Navbar UserMode={authState.USER_MODE} />
         <HeroSection />
         <center>
@@ -25,9 +25,9 @@ const Page = () => {
             <Image
               src="/CARD.jpg"
               alt="Logo"
-              width={500}
+              width={1000}
               height={300}
-              className="rounded-xl mt-28"
+              className="rounded-xl mt-20"
               priority
             />
           </Link>
@@ -36,8 +36,6 @@ const Page = () => {
         <hr />
         {/* fix width of slider div it is making page unresponsive */}
         <Slider />
-        <hr />
-        {/* <DummyArticle /> */}
         <hr />
         <Footer />
       </div>

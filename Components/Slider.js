@@ -16,7 +16,7 @@ function Slidbar() {
   };
 
   return (
-    <div className="slider-container w-auto">
+    <div className="slider-container w-full">
       <Slider {...settings} className='mb-10'>
         <div className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10">
           <img src="/Specialization/Psychiatrist.jpg" alt="Card 1" className="w-100" />
