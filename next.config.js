@@ -3,7 +3,7 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     // Handle media files
     config.module.rules.push({
-      test: /\.(mp4|webm)$/,
+      test: /\.(mpwebm)$/,
       use: {
         loader: 'file-loader',
         options: {
@@ -16,32 +16,30 @@ const nextConfig = {
 
     // Handle punycode deprecation
     if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        punycode: 'punycode-lite',
-      };
       config.resolve.fallback = {
         ...config.resolve.fallback,
-        punycode: false,
+        punycode: false
       };
     }
 
     return config;
   },
   images: {
-    domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  // Disable source maps in production to reduce bundle size
   productionBrowserSourceMaps: false,
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    // This helps prevent hydration mismatches
-    optimizeFonts: true,
     optimizeCss: true,
-  },
-}
+  }
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
