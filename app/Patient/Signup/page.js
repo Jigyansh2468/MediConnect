@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FaUser, FaEnvelope, FaPhone, FaCalendar, FaCity, FaLock } from 'react-icons/fa';
 
 const SignupP = () => {
 
@@ -114,169 +115,187 @@ const SignupP = () => {
     }
   };
   return (
-    <div className="relative h-screen">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute object-cover w-full h-full filter blur-md"
+        className="fixed object-cover object-center w-full h-full z-0 filter blur-sm"
       >
         <source src="/LoginBlur.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
-      <div className="absolute inset-0 "></div>
+      <div className="absolute w-full h-full z-10">
+        <div className="flex items-center justify-center h-full">
+          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h1>
+              <p className="text-gray-600">Join as a Patient</p>
+            </div>
 
-      <div className="flex items-center justify-center h-full relative z-10">
-        <div className="bg-white p-6 rounded-lg shadow-md w-full md:max-w-md lg:max-w-lg">
-          <h1 className="text-center text-2xl font-bold mb-4">Signup</h1>
-          <form className="space-y-4">
             {completedSignup === "signup" && (
-              <>
-                <div>
-                  <p htmlFor="name" className="block font-medium text-gray-700">
-                    Full Name
-                  </p>
+              <form className="space-y-4">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaUser className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
                     type="text"
-                    id="name"
                     name="name"
                     value={input.name}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    placeholder="Full Name"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <p htmlFor="email" className="block font-medium text-gray-700">
-                    Email
-                  </p>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaEnvelope className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
                     type="email"
-                    id="email"
                     name="email"
                     value={input.email}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    placeholder="Email Address"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <p htmlFor="phoneNo" className="block font-medium text-gray-700">
-                    Phone Number
-                  </p>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaPhone className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
-                    type="number"
-                    id="phoneNo"
+                    type="tel"
                     name="phoneNo"
                     value={input.phoneNo}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    placeholder="Phone Number"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <p htmlFor="dob" className="block font-medium text-gray-700">
-                    Date of Birth
-                  </p>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaCalendar className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
                     type="date"
-                    id="dob"
                     name="dob"
                     value={input.dob}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <p htmlFor="city" className="block font-medium text-gray-700">
-                    City
-                  </p>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaCity className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
                     type="text"
-                    id="city"
                     name="city"
                     value={input.city}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    placeholder="City"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <p htmlFor="password" className="block font-medium text-gray-700">
-                    Password
-                  </p>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaLock className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
                     type="password"
-                    id="password"
                     name="password"
                     value={input.password}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    placeholder="Password"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
-                <div>
-                  <p htmlFor="cnfrmpass" className="block font-medium text-gray-700">
-                    Confirm Password
-                  </p>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaLock className="h-5 w-5 text-gray-400" />
+                  </div>
                   <input
                     type="password"
-                    id="cnfrmpass"
                     name="cnfrmpass"
                     value={input.cnfrmpass}
-                    onBlur={checkPasswordMatch}
                     onChange={onInputChange}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    onBlur={checkPasswordMatch}
+                    placeholder="Confirm Password"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                     required
                   />
                 </div>
+
                 {passwordMatchError && (
-                  <div className="text-red-500">{passwordMatchError}</div>
+                  <div className="text-red-500 text-sm">{passwordMatchError}</div>
                 )}
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600"
-                    onClick={handleSubmit}
-                  >
-                    Sign Up
-                  </button>
-                </div>
-              </>
+
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-md"
+                >
+                  Create Account
+                </button>
+              </form>
             )}
-          </form>
-          {completedSignup === "otp" && (
-            <div className="text-center">
-              <h2 className="text-lg font-semibold mt-4">Enter OTP</h2>
-              <input
-                type="tel"
-                placeholder="Enter OTP"
-                name="otp"
-                value={otp}
-                onChange={handleOTPChange}
-                className="my-5 py-3 px-5 rounded-md border border-black"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600"
-                onClick={verifyOTP}
+
+            {completedSignup === "otp" && (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <h2 className="text-xl font-semibold mb-2">Verify Your Email</h2>
+                  <p className="text-gray-600">We've sent a code to your email</p>
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Enter 4-digit OTP"
+                  value={otp}
+                  onChange={handleOTPChange}
+                  className="w-full text-center text-2xl tracking-widest py-4 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                  maxLength={4}
+                />
+
+                <button
+                  onClick={verifyOTP}
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all"
+                >
+                  Verify OTP
+                </button>
+
+                {verificationError && (
+                  <div className="text-red-500 text-center">{verificationError}</div>
+                )}
+                {verificationStatus && (
+                  <div className="text-green-500 text-center">OTP verified successfully!</div>
+                )}
+              </div>
+            )}
+
+            <div className="mt-8 text-center">
+              <p className="text-gray-600">Already have an account?</p>
+              <Link 
+                href="/Login"
+                className="text-blue-600 hover:text-blue-700 font-medium"
               >
-                Verify OTP
-              </button>
-              {verificationError && (
-                <div className="text-red-500 mt-2">{verificationError}</div>
-              )}
-              {verificationStatus && (
-                <div className="text-green-500 mt-2">OTP verified. You can proceed.</div>
-              )}
+                Sign in
+              </Link>
             </div>
-          )}
-          <div className="text-center mt-4">
-            <Link href="/Login">Login</Link>
           </div>
         </div>
       </div>

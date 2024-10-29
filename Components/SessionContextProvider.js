@@ -1,43 +1,20 @@
 "use client"
-// const { createContext, useState, useEffect } = require("react");
-
-// export const SessionContext = createContext();
-
-// const SessionContextProvider = ({ children }) => {
-
-//     const authStateString = localStorage.getItem("authState");
-//     const authStateJSON = (authStateString == null) ? {
-//         USER_MODE: "",
-//     } : JSON.parse(authStateString);
-//     const [authState, setAuthState] = useState(
-//         authStateJSON
-//     );
-
-//     useEffect(() => {
-//         localStorage.setItem("authState", JSON.stringify(authState))
-//     }, [authState])
-
-//     return <SessionContext.Provider value={{ authState, setAuthState }}>
-//         {children}
-//     </SessionContext.Provider>
-// }
-
-// export default SessionContextProvider;
-
-
-import { createContext, useState, useEffect } from 'react';
-// import { useClient } from 'next/app'; // Import useClient for Next.js
+import React, { createContext, useState, useEffect } from 'react';
 
 export const SessionContext = createContext();
 
-const SessionContextProvider = ({ children }) => {
-//   useClient(); // Enable client-side functionality in Next.js
-
-  const authStateString = localStorage.getItem('authState');
-  const authStateJSON = authStateString ? JSON.parse(authStateString) : { USER_MODE: '' };
-  const [authState, setAuthState] = useState(authStateJSON);
+export const SessionContextProvider = ({ children }) => {
+  const [authState, setAuthState] = useState({ USER_MODE: '' });
 
   useEffect(() => {
+    // Access localStorage only on the client side
+    const authStateString = localStorage.getItem('authState');
+    const authStateJSON = authStateString ? JSON.parse(authStateString) : { USER_MODE: '' };
+    setAuthState(authStateJSON);
+  }, []);
+
+  useEffect(() => {
+    // Update localStorage when authState changes
     localStorage.setItem('authState', JSON.stringify(authState));
   }, [authState]);
 
@@ -47,5 +24,3 @@ const SessionContextProvider = ({ children }) => {
     </SessionContext.Provider>
   );
 };
-
-export default SessionContextProvider;

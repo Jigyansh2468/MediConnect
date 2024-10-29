@@ -16,7 +16,7 @@ const Page = () => {
   const { authState } = useContext(SessionContext)
   useEffect(() => { setUserMode("DEFAULT") }, [])
   return (
-    <div lassName="w-full h-full">
+    <div className="w-full h-full">
       <div>
         <Navbar UserMode={authState.USER_MODE} />
         <HeroSection />
@@ -27,7 +27,7 @@ const Page = () => {
               alt="Logo"
               width={1000}
               height={300}
-              className="rounded-xl mt-20"
+              className="rounded-xl mt-20 w-auto h-auto"
               priority
             />
           </Link>

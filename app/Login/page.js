@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "./login.css";
 import { SessionContext } from "@/Components/SessionContextProvider";
+import VideoBackground from '@/Components/VideoBackground';
+import { FaUserMd, FaEnvelope, FaLock } from 'react-icons/fa';
 
 const Login = () => {
   useEffect(() => { console.log("hello") }, []);
@@ -89,80 +91,95 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <video
-        autoPlay
-        muted
-        loop
-        className="fixed object-cover object-center w-full h-full z-0 filter blur-md"
-      >
-        <source src='/LoginBlur.mp4' type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+      <VideoBackground 
+        src="/LoginBlur.mp4"
+        className="fixed object-cover object-center w-full h-full z-0 filter blur-sm"
+      />
 
       <div className="absolute w-full h-full z-10">
         <div className="flex items-center justify-center h-full">
-          <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-            <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="email" className="block font-medium text-gray-700">
-                  Email
-                </label>
+          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
+              <p className="text-gray-600">Please sign in to continue</p>
+            </div>
+
+            <form className="space-y-6">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaEnvelope className="h-5 w-5 text-gray-400" />
+                </div>
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   value={input.email}
                   onChange={onInputChange}
-                  className="w-full border-2 border-blue-600 rounded-md py-2 px-3"
+                  placeholder="Email address"
+                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                   required
                 />
               </div>
-              <div>
-                <label htmlFor="password" className="block font-medium text-gray-700">
-                  Password
-                </label>
+
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaLock className="h-5 w-5 text-gray-400" />
+                </div>
                 <input
                   type="password"
-                  id="password"
                   name="password"
                   value={input.password}
                   onChange={onInputChange}
-                  className="w-full border-blue-600 border-2 rounded-md py-2 px-3"
+                  placeholder="Password"
+                  className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                   required
                 />
               </div>
-              <div className="flex flex-row flex-wrap gap-2 font-bold">
-                <label className="block font-medium text-gray-700 ">Doctor</label>
-                <div className="space-x-2 flex">
-                  <label className="inline-flex items-center">
-                    <input
-                      type="checkbox"
-                      name="user"
-                      value="DOCTOR"
-                      checked={input.user === "DOCTOR"}
-                      onChange={onInputChange}
-                      className="hidden"
-                    />
-                    <span className="slider"></span>
-                  </label>
+
+              <div className="flex items-center space-x-3 py-2">
+                <div className="flex items-center space-x-2">
+                  <FaUserMd className="text-gray-600" />
+                  <span className="text-gray-700">Doctor Mode</span>
                 </div>
+                <label className="switch-wrapper">
+                  <input
+                    type="checkbox"
+                    name="user"
+                    value="DOCTOR"
+                    checked={input.user === "DOCTOR"}
+                    onChange={onInputChange}
+                    className="hidden"
+                  />
+                  <span className="slider"></span>
+                </label>
               </div>
-              <div>
-                <button
-                  type="button"
-                  className="w-full bg-blue-400 text-white py-2 px-3 rounded-md hover:bg-blue-600"
-                  onClick={Handlelogin}
-                >
-                  Login
-                </button>
-              </div>
+
+              <button
+                type="button"
+                onClick={Handlelogin}
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-md"
+              >
+                Sign In
+              </button>
             </form>
-            <div className="text-center mt-4">
-              <Link href="/Patient/Signup">Sign up as Patient</Link>
-              <span className="mx-2 text-gray-500">|</span>
-              <Link href="/Doctor/Signup">Sign up as Doctor</Link>
+
+            <div className="mt-8 text-center">
+              <p className="text-gray-600 mb-4">Don't have an account?</p>
+              <div className="space-x-4">
+                <Link 
+                  href="/Patient/Signup" 
+                  className="text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  Sign up as Patient
+                </Link>
+                <span className="text-gray-400">|</span>
+                <Link 
+                  href="/Doctor/Signup" 
+                  className="text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  Sign up as Doctor
+                </Link>
+              </div>
             </div>
           </div>
         </div>

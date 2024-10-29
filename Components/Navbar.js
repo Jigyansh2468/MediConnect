@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,16 @@ const Navbar = ({ UserMode }) => {
   const p = usePathname();
   const { setAuthState } = useContext(SessionContext);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const r = useRouter();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -53,80 +62,95 @@ const Navbar = ({ UserMode }) => {
   };
 
   return (
-    <nav id="navbar" className="bg-white p-4 h-28 border-b-2 border-blue-200  z-10  w-full ">
-      <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <Link href="/" className="text-2xl text-black flex items-center">
-          <Image src="/LOGO.png" alt="LOGO" width={70} height={70} className="rounded-full" />
-        </Link>
-        <div className="flex flex-row gap-10 items-center">
-          <Link href="/FindDoctor" className={`nav-link ${p === "/FindDoctor" ? "active" : ""}`}>
-            Find Doctor
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-white'
+    }`}>
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center space-x-3">
+            <Image 
+              src="/LOGO.png" 
+              alt="LOGO" 
+              width={50} 
+              height={50} 
+              className="rounded-full transition-transform hover:scale-105"
+            />
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+              MediConnect
+            </span>
           </Link>
-          {UserMode === "DOCTOR" ? (
-            <Link href="/RoomPage" className="nav-link">
-              Join Room
+
+          <div className="flex items-center space-x-8">
+            <Link 
+              href="/FindDoctor" 
+              className={`nav-link relative ${p === "/FindDoctor" ? "active" : ""}`}
+            >
+              Find Doctor
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
             </Link>
-          ) : (
-            <Link href="/VideoConsultation" className={`nav-link ${p === "/VideoConsultation" ? "active" : ""}`}>
-              Video Consultation
-            </Link>
-          )}
-          {UserMode === "DOCTOR" || UserMode === "PATIENT" ? (
-            <div className="relative inline-block">
-              <button
-                className="rounded-full overflow-hidden"
-                onClick={toggleDropdown}
+
+            {UserMode === "DOCTOR" ? (
+              <Link href="/RoomPage" className="nav-link">
+                Join Room
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
+              </Link>
+            ) : (
+              <Link 
+                href="/VideoConsultation" 
+                className={`nav-link ${p === "/VideoConsultation" ? "active" : ""}`}
               >
-                <Image
-                  src="/Profile.png"
-                  alt={UserMode === "DOCTOR" ? "Doctor_name" : "Patient"}
-                  width={80}
-                  height={80}
-                />
-              </button>
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg z-100">
-                  <ul>
-                    {UserMode === "DOCTOR" && (
-                      <>
-                        <li className="effect">
+                Video Consultation
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
+              </Link>
+            )}
+
+            {UserMode === "DOCTOR" || UserMode === "PATIENT" ? (
+              <div className="relative">
+                <button
+                  className="rounded-full overflow-hidden transform transition-transform hover:scale-110 focus:outline-none ring-2 ring-blue-400 hover:ring-blue-500"
+                  onClick={toggleDropdown}
+                >
+                  <Image
+                    src="/Profile.png"
+                    alt={UserMode === "DOCTOR" ? "Doctor_name" : "Patient"}
+                    width={45}
+                    height={45}
+                    className="object-cover"
+                  />
+                </button>
+                
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-lg border border-gray-100 transform transition-all">
+                    <div className="p-2">
+                      {UserMode === "DOCTOR" && (
+                        <>
                           <Link href="/Doctor/ViewProfile">View Profile</Link>
-                        </li>
-                        <li className="effect">
                           <Link href="/Doctor/UpdateProfile">Update Profile</Link>
-                        </li>
-                      </>
-                    )}
-                    {UserMode === "PATIENT" && (
-                      <>
-                        <li className="effect">
+                        </>
+                      )}
+                      {UserMode === "PATIENT" && (
+                        <>
                           <Link href="/Patient/ViewProfile">View Profile</Link>
-                        </li>
-                        <li className="effect">
                           <Link href="/Patient/MyAppointment">My Appointment</Link>
-                        </li>
-                        <li className="effect">
                           <Link href="/Patient/UpdateProfile">Update Profile</Link>
-                        </li>
-                      </>
-                    )}
-                    <li className="list effect">
+                        </>
+                      )}
                       <button onClick={UserMode === "DOCTOR" ? logoutD : logoutP}>
                         Logout
                       </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          ) : (
-            <Link
-              href="/Login"
-              className="effect border-2 border-blue-400 py-1 px-2 border-gray bg-blue-200"
-            >
-              Login/Signup
-            </Link>
-          )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/Login"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:shadow-lg"
+              >
+                Login/Signup
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>

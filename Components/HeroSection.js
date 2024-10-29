@@ -1,18 +1,37 @@
-// import video1 from "../assets/video1.mp4";
-// import video2 from "../assets/video2.mp4";
-
-// import video1 from "../public/video1.mp4";
-// import video2 from "../public/video2.mp4";
+'use client'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import VideoBackground from './VideoBackground';
 
 const HeroSection = () => {
+  const [isClient, setIsClient] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleVideoLoad = () => {
+    setIsVideoLoaded(true);
+  };
+
+  if (!isClient) {
+    // Return a placeholder or loading state
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[600px]">
+        <div className="animate-pulse bg-gray-200 h-8 w-3/4 mb-4"></div>
+        <div className="animate-pulse bg-gray-200 h-8 w-1/2"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-center ">
-      <div className="flex flex-col items-center mt-6 lg:mt-20">
+    <div className="flex flex-col items-center relative">
+      <div className="flex flex-col items-center mt-6 lg:mt-20 z-10">
         <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
           MediConnect is Here
           <br />
           <span className="bg-gradient-to-r from-green-500 to-blue-800 text-transparent bg-clip-text">
-            {" "}
             for seamless healthcare
           </span>
         </h1>
@@ -23,40 +42,32 @@ const HeroSection = () => {
           healthcare like never before!
         </p>
         <div className="flex justify-center my-10">
-          <a
-            href="/"
-            className="bg-gradient-to-r from-green-400 to-green-600 py-3 px-4 mx-3 rounded-md text-white"
+          <Link
+            href="/FindDoctor"
+            className="bg-gradient-to-r from-green-400 to-green-600 py-3 px-4 mx-3 rounded-md text-white hover:opacity-90 transition-opacity"
           >
             Start a Consultation
-          </a>
-          <a
-            href="/"
-            className="bg-gradient-to-r from-blue-400 to-blue-600 py-3 px-4 mx-3 rounded-md text-white"
+          </Link>
+          <Link
+            href="/about"
+            className="bg-gradient-to-r from-blue-400 to-blue-600 py-3 px-4 mx-3 rounded-md text-white hover:opacity-90 transition-opacity"
           >
             About Us
-          </a>
+          </Link>
         </div>
       </div>
-      <div className="flex mt-10 justify-center">
-        <video
-          autoPlay
-          loop
-          muted
-          className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400  px-2 py-2 my-4"
-        >
-          <source src='/video1.mp4' type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <video
-          autoPlay
-          loop
-          muted
-          className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 px-2 py-2 my-4 mx-2"
-        >
-          <source src='/video2.mp4' type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+      {isClient && (
+        <div className="flex mt-10 justify-center w-full">
+          <VideoBackground
+            src="/video1.mp4"
+            className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 px-2 py-2 my-4"
+          />
+          <VideoBackground
+            src="/video2.mp4"
+            className="rounded-lg w-1/2 border border-orange-700 shadow-sm shadow-orange-400 px-2 py-2 my-4 mx-2"
+          />
+        </div>
+      )}
     </div>
   );
 };
