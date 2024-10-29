@@ -5,7 +5,6 @@ import Navbar from "@/Components/Navbar";
 import BookAppointment from "@/Components/BookAppointment";
 import { SessionContext } from "@/Components/SessionContextProvider";
 import { useSearchParams } from "next/navigation";
-import ListofDoctor from "@/Components/ListOfDoctors";
 import VideoBackground from '@/Components/VideoBackground';
 
 const FindDoctor = () => {
@@ -36,11 +35,7 @@ const FindDoctor = () => {
               </p>
 
               <div className="max-w-4xl mx-auto backdrop-blur-md bg-white/30 rounded-2xl shadow-xl p-8">
-                {loadcomp === 'fromhome' ? (
-                  <ListofDoctor setdoctor={setdoctor} setbookapt={setbookapt} />
-                ) : (
-                  <Searchbar setdoctor={setdoctor} setbookapt={setbookapt} />
-                )}
+                <Searchbar setdoctor={setdoctor} setbookapt={setbookapt} />
               </div>
             </div>
           </div>

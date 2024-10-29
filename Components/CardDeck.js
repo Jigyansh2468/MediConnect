@@ -20,10 +20,7 @@ function CardDeck() {
                         SRC="/VideoConsultation.jpg"
                     />
                 </Link>
-                <Link href={{
-                    pathname: '/FindDoctor',
-                    query: { data: 'fromhome' },
-                }}>
+                <Link href="/FindDoctor">
                     <div className='flex flex-col justify-center items-center py-10'>
                         <div className="card">
                             <Image src='/BookAppointment.jpg' alt="LOGO" width={800} height={700} />
