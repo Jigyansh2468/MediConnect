@@ -196,22 +196,38 @@ const Navbar = ({ UserMode }) => {
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
             </Link>
 
-            {UserMode === "DOCTOR" ? (
-              <Link href="/RoomPage" className="nav-link">
-                Join Room
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
-              </Link>
-            ) : (
-              <Link 
-                href="/VideoConsultation" 
-                className={`nav-link ${p === "/VideoConsultation" ? "active" : ""}`}
-              >
-                Video Consultation
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
-              </Link>
-            )}
+            <Link 
+              href="/VideoConsultation" 
+              className={`nav-link relative ${p === "/VideoConsultation" ? "active" : ""}`}
+            >
+              Video Consultation
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform origin-left hover:scale-x-100"/>
+            </Link>
 
-            {UserMode === "PATIENT" && (
+            {!UserMode || UserMode === "DEFAULT" ? (
+              <div className="flex items-center space-x-4">
+                <Link 
+                  href="/Login"
+                  className="px-6 py-2 rounded-full text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300"
+                >
+                  Login
+                </Link>
+                <div className="flex space-x-2">
+                  <Link 
+                    href="/Patient/Signup"
+                    className="px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
+                  >
+                    Patient Signup
+                  </Link>
+                  <Link 
+                    href="/Doctor/Signup"
+                    className="px-6 py-2 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300"
+                  >
+                    Doctor Signup
+                  </Link>
+                </div>
+              </div>
+            ) : (
               <div className="relative dropdown-container">
                 <button
                   className="rounded-full overflow-hidden transform transition-transform hover:scale-110 focus:outline-none ring-2 ring-blue-400 hover:ring-blue-500"
