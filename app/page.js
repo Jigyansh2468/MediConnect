@@ -16,7 +16,7 @@ const Page = () => {
   const { authState } = useContext(SessionContext)
   useEffect(() => { setUserMode("DEFAULT") }, [])
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full overflow-x-hidden">
       <div>
         <Navbar UserMode={authState.USER_MODE} />
         <HeroSection />
