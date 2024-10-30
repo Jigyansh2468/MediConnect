@@ -51,13 +51,13 @@ const DoctorDashboard = () => {
         </Link>
 
         {/* Update Slots Card */}
-        <Link href="/Doctor/Update Slot" className="transform hover:scale-105 transition-all">
+        <Link href="/Doctor/UpdateSlot" className="transform hover:scale-105 transition-all">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-purple-100 rounded-full">
                 <Image 
                   src="/Profile.png" 
-                  alt="Update Slots" 
+                  alt="UpdateSlot" 
                   width={40} 
                   height={40}
                 />
