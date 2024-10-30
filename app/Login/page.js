@@ -32,7 +32,6 @@ const Login = () => {
   };
 
   const Handlelogin = (e) => {
-
     if (input.email && input.password) {
       e.preventDefault();
       axios
@@ -44,7 +43,7 @@ const Login = () => {
         })
         .then((response) => {
           // cookies
-          const cookies = document.cookie.split('; '); // Split the cookies
+          const cookies = document.cookie.split('; ');
           let USER_MODE = null;
 
           cookies.forEach((cookie) => {
@@ -52,38 +51,28 @@ const Login = () => {
             if (name.trim() === 'USER_MODE') {
               USER_MODE = value.trim();
             }
-            console.log(cookie);
           });
 
           if (USER_MODE !== null) {
-            console.log('USER_MODE:', USER_MODE);
-          } else {
-            console.log('USER_MODE cookie not found');
-          }
-          setAuthState((prev) => {
-            return {
+            // Store in localStorage
+            localStorage.setItem('userMode', USER_MODE);
+            
+            setAuthState((prev) => ({
               USER_MODE: USER_MODE,
-            }
-          })
-          console.log(USER_MODE);
+            }));
 
-          // handling response
-          if (response.data === "login successful") {
-            if (input.user === "PATIENT") {
-              route.replace("/");
-            } else {
-              route.replace("/");
-            }
-          } else {
-            if (response.data === "Incorrect password") {
-              alert("Password is incorrect");
-            } else {
-              alert("User Not Found");
+            if (response.data === "login successful") {
+              if (input.user === "PATIENT") {
+                route.replace("/");
+              } else {
+                route.replace("/");
+              }
             }
           }
         })
         .catch((error) => {
           console.log(error);
+          alert("Login failed. Please check your credentials.");
         });
     } else {
       alert("Please fill in all the required fields before proceeding.");

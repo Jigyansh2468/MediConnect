@@ -7,15 +7,31 @@ export const SessionContextProvider = ({ children }) => {
   const [authState, setAuthState] = useState({ USER_MODE: '' });
 
   useEffect(() => {
-    // Access localStorage only on the client side
-    const authStateString = localStorage.getItem('authState');
-    const authStateJSON = authStateString ? JSON.parse(authStateString) : { USER_MODE: '' };
-    setAuthState(authStateJSON);
+    // Check localStorage and cookies on mount
+    const storedUserMode = localStorage.getItem('userMode');
+    const cookies = document.cookie.split('; ');
+    let cookieUserMode = null;
+
+    cookies.forEach((cookie) => {
+      const [name, value] = cookie.split('=');
+      if (name.trim() === 'USER_MODE') {
+        cookieUserMode = value.trim();
+      }
+    });
+
+    // Use cookie value if available, otherwise use localStorage
+    const userMode = cookieUserMode || storedUserMode || '';
+    
+    setAuthState({ USER_MODE: userMode });
   }, []);
 
+  // Update localStorage when authState changes
   useEffect(() => {
-    // Update localStorage when authState changes
-    localStorage.setItem('authState', JSON.stringify(authState));
+    if (authState.USER_MODE) {
+      localStorage.setItem('userMode', authState.USER_MODE);
+    } else {
+      localStorage.removeItem('userMode');
+    }
   }, [authState]);
 
   return (

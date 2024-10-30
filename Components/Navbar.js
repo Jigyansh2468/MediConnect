@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { SessionContext } from "./SessionContextProvider";
+import { FaUser, FaEdit, FaClock, FaSignOutAlt } from "react-icons/fa";
 
 import "./Navbar.css";
 
@@ -37,11 +38,11 @@ const Navbar = ({ UserMode }) => {
       })
       .then((response) => {
         if (response.data === "user logout") {
-          console.log("Patient logout");
+          localStorage.removeItem('userMode');
+          setAuthState({ USER_MODE: "" });
+          r.replace("/");
         }
-        setAuthState({ USER_MODE: "" });
       });
-    r.replace("/");
   };
 
   const logoutD = () => {
@@ -54,11 +55,11 @@ const Navbar = ({ UserMode }) => {
       })
       .then((response) => {
         if (response.data === "user logout") {
-          console.log("Doctor logout");
+          localStorage.removeItem('userMode');
+          setAuthState({ USER_MODE: "" });
+          r.replace("/");
         }
       });
-    setAuthState({ USER_MODE: "" });
-    r.replace("/");
   };
 
   return (
@@ -120,25 +121,41 @@ const Navbar = ({ UserMode }) => {
                 </button>
                 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-lg border border-gray-100 transform transition-all">
-                    <div className="p-2">
+                  <div className="absolute right-0 mt-3 w-64 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100 transform transition-all duration-300 origin-top scale-y-100 opacity-100">
+                    <div className="p-3 space-y-1">
                       {UserMode === "DOCTOR" && (
                         <>
-                          <Link href="/Doctor/ViewProfile">View Profile</Link>
-                          <Link href="/Doctor/UpdateProfile">Update Profile</Link>
-                          <Link href="/Doctor/Update Slot">Update Slots</Link>
+                          <Link 
+                            href="/Doctor/ViewProfile"
+                            className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
+                          >
+                            <FaUser className="text-blue-600" />
+                            <span className="text-gray-700 font-medium">View Profile</span>
+                          </Link>
+                          <Link 
+                            href="/Doctor/UpdateProfile"
+                            className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
+                          >
+                            <FaEdit className="text-blue-600" />
+                            <span className="text-gray-700 font-medium">Update Profile</span>
+                          </Link>
+                          <Link 
+                            href="/Doctor/Update Slot"
+                            className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
+                          >
+                            <FaClock className="text-blue-600" />
+                            <span className="text-gray-700 font-medium">Update Slots</span>
+                          </Link>
+                          <hr className="my-2 border-gray-200" />
+                          <button 
+                            onClick={logoutD}
+                            className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors duration-200 w-full text-left"
+                          >
+                            <FaSignOutAlt className="text-red-600" />
+                            <span className="text-red-600 font-medium">Logout</span>
+                          </button>
                         </>
                       )}
-                      {UserMode === "PATIENT" && (
-                        <>
-                          <Link href="/Patient/ViewProfile">View Profile</Link>
-                          <Link href="/Patient/MyAppointment">My Appointment</Link>
-                          <Link href="/Patient/UpdateProfile">Update Profile</Link>
-                        </>
-                      )}
-                      <button onClick={UserMode === "DOCTOR" ? logoutD : logoutP}>
-                        Logout
-                      </button>
                     </div>
                   </div>
                 )}
