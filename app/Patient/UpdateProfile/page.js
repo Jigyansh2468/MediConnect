@@ -3,144 +3,163 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '@/Components/Navbar';
 import { SessionContext } from '@/Components/SessionContextProvider';
+import { FaUser, FaEnvelope, FaPhone, FaCalendar, FaCity } from 'react-icons/fa';
 
 const UpdateProfile = () => {
-    const [data, setdata] = useState({
-        name: '',
-        phoneNo: '',
-        city: '',
-        dob: '',
+  const { authState } = useContext(SessionContext);
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    phoneNo: "",
+    dob: "",
+    city: "",
+  });
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/patient/view-profile", {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
     })
-    const [dob, setDob] = useState('');
+    .then((response) => {
+      setInput({
+        name: response.data.name,
+        email: response.data.email,
+        phoneNo: response.data.phoneNo,
+        dob: response.data.dob,
+        city: response.data.city,
+      });
+    })
+    .catch((error) => console.log(error));
+  }, []);
 
-    const [input, setInput] = useState({
-        name: data.name,
-        phoneNo: data.phoneNo,
-        dob: data.dob,
-        city: data.city,
-    });
-    useEffect(() => {
-        axios.get("http://localhost:8080/patient/view-profile", {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        })
-            .then((response) => {
-                console.log(response);
-                setdata(response.data)
-                const formattedDate = new Date(data.dob).toLocaleDateString();
-                setDob(formattedDate);
-                setInput({
-                    name: response.data.name,
-                    phoneNo: response.data.phoneNo,
-                    dob: formattedDate,
-                    city: response.data.city,
-                });
-            })
-            .catch((error) => console.log(error))
-        console.log(data);
-    }, [])
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.put("http://localhost:8080/patient/update-profile", input, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    })
+    .then((response) => {
+      if (response.data === "Profile Updated") {
+        alert("Profile Updated Successfully!");
+      }
+    })
+    .catch((error) => console.log(error));
+  };
 
-    const handleSubmit = async () => {
-        axios.put("http://localhost:8080/patient/update", input, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        })
-            .then((response) => alert("Your Profile Updated Successfully"))
-            .catch(error => console.log(error));
-    };
-    const { authState } = useContext(SessionContext)
-    return (
-        <div className="bg-gray-100 min-h-screen w-screen">
-            <Navbar UserMode={authState.USER_MODE} />
-            <center>
-                <div className="bg-white">
-                    <div className="flex justify-center">
-                        <div className="w-full sm:w-4/5 md:w-3/4 lg:w-3/5 xl:w-2/5 p-4 md:p-8">
-                            <div className="flex flex-col gap-4">
-                                <div>
-                                    <img
-                                        src="/Profile.png"
-                                        alt="Profile Picture"
-                                        className="h-80 w-80 mx-auto rounded-full"
-                                    />
-                                </div>
-                                <div>
-                                    <p htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-                                        Name
-                                    </p>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder={data.name}
-                                        value={input.name}
-                                        onChange={handleInputChange}
-                                        className="w-full max-w-md p-2 border rounded-md mx-auto"
-                                    />
-                                </div>
-                                <div>
-                                    <p htmlFor="phoneNo" className="block text-gray-700 text-sm font-bold mb-2">
-                                        Phone Number
-                                    </p>
-                                    <input
-                                        type="text"
-                                        name="phoneNo"
-                                        placeholder={data.phoneNo}
-                                        value={input.phoneNo}
-                                        onChange={handleInputChange}
-                                        className="w-full max-w-md p-2 border rounded-md mx-auto"
-                                    />
-                                </div>
-                                <div>
-                                    <p htmlFor="dob" className="block text-gray-700 text-sm font-bold mb-2">
-                                        Date of Birth
-                                    </p>
-                                    <input
-                                        type="date"
-                                        name="dob"
-                                        placeholder={dob}
-                                        value={input.dob}
-                                        onChange={handleInputChange}
-                                        className="w-full max-w-md p-2 border rounded-md mx-auto"
-                                    />
-                                </div>
-                                <div>
-                                    <p htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">
-                                        City
-                                    </p>
-                                    <input
-                                        type="text"
-                                        name="city"
-                                        placeholder={data.city}
-                                        value={input.city}
-                                        onChange={handleInputChange}
-                                        className="w-full max-w-md p-2 border rounded-md mx-auto"
-                                    />
-                                </div>
-                                <div className="mt-6 flex justify-center">
-                                    <button
-                                        type="button"
-                                        onClick={handleSubmit}
-                                        className="bg-blue-500 text-white p-2 rounded-md w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 hover:bg-blue-600"
-                                    >
-                                        Update
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <Navbar UserMode={authState.USER_MODE} />
+      <div className="pt-20">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="p-8">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-800">Update Profile</h2>
+                <p className="text-gray-600">Modify your personal information</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Name Field */}
+                  <div className="relative">
+                    <label className="text-gray-700 font-semibold mb-2 block">Full Name</label>
+                    <div className="flex items-center">
+                      <FaUser className="text-blue-500 absolute left-3" />
+                      <input
+                        type="text"
+                        name="name"
+                        value={input.name}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        placeholder="Enter your full name"
+                      />
                     </div>
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="relative">
+                    <label className="text-gray-700 font-semibold mb-2 block">Email Address</label>
+                    <div className="flex items-center">
+                      <FaEnvelope className="text-blue-500 absolute left-3" />
+                      <input
+                        type="email"
+                        name="email"
+                        value={input.email}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        placeholder="Enter your email"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone Number Field */}
+                  <div className="relative">
+                    <label className="text-gray-700 font-semibold mb-2 block">Phone Number</label>
+                    <div className="flex items-center">
+                      <FaPhone className="text-blue-500 absolute left-3" />
+                      <input
+                        type="tel"
+                        name="phoneNo"
+                        value={input.phoneNo}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        placeholder="Enter your phone number"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Date of Birth Field */}
+                  <div className="relative">
+                    <label className="text-gray-700 font-semibold mb-2 block">Date of Birth</label>
+                    <div className="flex items-center">
+                      <FaCalendar className="text-blue-500 absolute left-3" />
+                      <input
+                        type="date"
+                        name="dob"
+                        value={input.dob}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  {/* City Field */}
+                  <div className="relative">
+                    <label className="text-gray-700 font-semibold mb-2 block">City</label>
+                    <div className="flex items-center">
+                      <FaCity className="text-blue-500 absolute left-3" />
+                      <input
+                        type="text"
+                        name="city"
+                        value={input.city}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        placeholder="Enter your city"
+                      />
+                    </div>
+                  </div>
                 </div>
-            </center>
+
+                <div className="flex justify-center mt-8">
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-md"
+                  >
+                    Update Profile
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default UpdateProfile;

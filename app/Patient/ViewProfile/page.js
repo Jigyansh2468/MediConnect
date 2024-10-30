@@ -35,7 +35,7 @@ const PatientProfile = () => {
   }, []);
   const { authState } = useContext(SessionContext)
   return (
-    <div className=" min-h-screen">
+    <div className="min-h-screen pt-20">
       <Navbar UserMode={authState.USER_MODE} />
       <div className="container mx-auto py-8">
         <div className="bg-white rounded-lg shadow-lg p-8">

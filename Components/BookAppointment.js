@@ -4,12 +4,14 @@ import axios from 'axios';
 import Image from "next/image"
 import './BookAppointment.css'
 import { useRouter } from 'next/navigation';
+import { FaCalendarAlt, FaClock, FaUserMd, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 
 const BookAppointment = ({ doctor, UserMode }) => {
   const [slotlist, setslotlist] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState({});
   const Route = useRouter();
   const [btn, setbtn] = useState(1);
+
   useEffect(() => {
     axios.get("http://localhost:8080/doctor/getavailableslots",
       {
@@ -21,13 +23,14 @@ const BookAppointment = ({ doctor, UserMode }) => {
       })
       .then((response) => {
         setslotlist(response.data);
-        console.log(response.data);
       })
       .catch(error => console.log(error))
   }, [])
+
   function handleSlotClick(slotId) {
     setSelectedSlot(slotId);
   }
+
   const confirmapt = () => {
     setTimeout(() => {
       setbtn(2);
@@ -37,7 +40,7 @@ const BookAppointment = ({ doctor, UserMode }) => {
       Route.push("/Login");
     }
     if (selectedSlot.id === null) {
-      alert('Select a SLot First');
+      alert('Select a Slot First');
     }
     axios.put("http://localhost:8080/doctor/bookslot", null, {
       params: {
@@ -53,69 +56,110 @@ const BookAppointment = ({ doctor, UserMode }) => {
         alert("Slot booked. You will get further details on mail");
       })
       .catch(error => console.log(error))
-
   }
+
   function showslot() {
     if (slotlist.length === 0) {
-      return (<div>No slot Available for Today</div>)
+      return (
+        <div className="text-lg text-gray-600 text-center p-8 bg-gray-50 rounded-lg">
+          No slots available for today
+        </div>
+      )
     }
-    return slotlist.map((slot, i) =>
-      <div
-        key={i}
-        onClick={() => handleSlotClick(slot)}
-        className={` w-40 py-3 px-4 text-center rounded-lg bg-purple-200 hover:text-white hover:bg-purple-600 font-bold hover:cursor-pointer m-5 ${selectedSlot === slot ? 'bg-purple-900 text-white cursor-pointer' : ''
-          }`}>
-        {slot.startTime}-{slot.endTime}
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {slotlist.map((slot, i) => (
+          <div
+            key={i}
+            onClick={() => handleSlotClick(slot)}
+            className={`flex items-center justify-center p-4 rounded-lg transition-all duration-300 cursor-pointer
+              ${selectedSlot === slot 
+                ? 'bg-blue-600 text-white shadow-lg transform scale-105' 
+                : 'bg-blue-50 text-blue-900 hover:bg-blue-100'}`}
+          >
+            <FaClock className="mr-2" />
+            <span className="font-semibold">{slot.startTime}-{slot.endTime}</span>
+          </div>
+        ))}
       </div>
     )
   }
-  return (
-    <>
-      <div className=" h-screen w-screen flex ">
-        <div className="ml-16 mr-16 mt-10 flex">
-          <div className="flex gap-2 border-b-red-200 flex-col ">
-            <div>
-              <Image src="/Profile.png" alt="Profile Picture" width={300} height={30} className='rounded-full border-4 border-black' />
-            </div>
-            <center>
-              <div className="mx-20 font-bold text-2xl">{doctor.name}</div>
-              <div className="mx-20 font-bold text-xl">{doctor.specialization}</div>
-              <div className="mx-20 font-semibold text-xl">Rating</div>
-            </center>
-          </div>
-        </div >
 
-        <div className="ml-16 mr-16 mt-10 flex-1">
-          <div className="bg-transparent p-10  ">
-            <h2 className="text-xl font-bold mb-4 text-center underline
-            ">Available Time Slots</h2>
-            <div className='flex flex-wrap flex-row'>
-              {showslot()}
+  return (
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="md:flex">
+            {/* Doctor Info Section */}
+            <div className="md:w-1/3 bg-gradient-to-b from-blue-50 to-white p-8">
+              <div className="text-center">
+                <Image 
+                  src="/Profile.png" 
+                  alt="Profile Picture" 
+                  width={200} 
+                  height={200} 
+                  className="rounded-full border-4 border-white shadow-lg mx-auto"
+                />
+                <h2 className="mt-4 text-2xl font-bold text-gray-900">{doctor.name}</h2>
+                <div className="mt-2 flex items-center justify-center text-blue-600">
+                  <FaUserMd className="mr-2" />
+                  <span className="font-semibold">{doctor.specialization}</span>
+                </div>
+                <div className="mt-2 flex items-center justify-center text-gray-600">
+                  <FaMapMarkerAlt className="mr-2" />
+                  <span>{doctor.city}</span>
+                </div>
+                <div className="mt-4 flex items-center justify-center text-yellow-500">
+                  <FaStar className="mr-1" />
+                  <FaStar className="mr-1" />
+                  <FaStar className="mr-1" />
+                  <FaStar className="mr-1" />
+                  <FaStar className="opacity-50" />
+                </div>
+              </div>
             </div>
-            <div className='flex items-center justify-center'>
-              {
-                btn === 1 ? (
+
+            {/* Booking Section */}
+            <div className="md:w-2/3 p-8">
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-gray-900 flex items-center">
+                  <FaCalendarAlt className="mr-2 text-blue-600" />
+                  Available Time Slots
+                </h3>
+                <p className="mt-2 text-gray-600">Select your preferred appointment time</p>
+              </div>
+
+              <div className="mb-8">
+                {showslot()}
+              </div>
+
+              <div className="flex justify-center">
+                {btn === 1 ? (
                   <button
-                    className='bg-green-300 text-xl px-4 py-6 rounded-lg font-bold float-right mt-10 hover:bg-green-500'
-                    onClick={confirmapt} >
+                    onClick={confirmapt}
+                    className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
+                  >
                     Confirm Appointment
                   </button>
                 ) : btn === 2 ? (
-                  <button className='bg-green-300 text-xl w-32  flex items-center justify-center px-4 py-6 rounded-lg font-bold float-right mt-10 relative'>
-                    <div className='dot-flashing absolute '></div>
+                  <button className="bg-blue-100 px-8 py-3 rounded-lg font-semibold relative min-w-[200px] flex items-center justify-center">
+                    <div className="dot-flashing" />
                   </button>
-                ) : btn === 3 ? (
+                ) : (
                   <button
-                    className='bg-green-300 text-xl px-4 py-6 rounded-lg font-bold float-right mt-10 hover:bg-green-500' onClick={Route.push('/')}>
-                    Appointment Confirmed
+                    onClick={() => Route.push('/')}
+                    className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all"
+                  >
+                    Appointment Confirmed ✓
                   </button>
-                ) : null
-              }
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div >
-    </>
+      </div>
+    </div>
   )
 }
+
 export default BookAppointment
