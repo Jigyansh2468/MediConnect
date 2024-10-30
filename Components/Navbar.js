@@ -126,6 +126,7 @@ const Navbar = ({ UserMode }) => {
                         <>
                           <Link href="/Doctor/ViewProfile">View Profile</Link>
                           <Link href="/Doctor/UpdateProfile">Update Profile</Link>
+                          <Link href="/Doctor/Update Slot">Update Slots</Link>
                         </>
                       )}
                       {UserMode === "PATIENT" && (
