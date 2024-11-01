@@ -49,7 +49,7 @@ const HeroSection = () => {
             Start a Consultation
           </Link>
           <Link
-            href="/about"
+            href="/"
             className="bg-gradient-to-r from-blue-400 to-blue-600 py-3 px-4 mx-3 rounded-md text-white hover:opacity-90 transition-opacity"
           >
             About Us
