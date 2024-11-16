@@ -33,6 +33,7 @@ const Searchbar = ({ setdoctor, setbookapt }) => {
           withCredentials: true,
         })
         .then((response) => {
+          console.log(response.data.name);
           setResults(response.data);
           if (Results.length === 0) {
             setnodoc(true);

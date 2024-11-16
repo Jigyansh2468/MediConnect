@@ -45,7 +45,9 @@ const Login = () => {
           // cookies
           const cookies = document.cookie.split('; ');
           let USER_MODE = null;
-
+          if(response.data==="User Not Found") {
+            alert("User with email does not exist");
+          }
           cookies.forEach((cookie) => {
             const [name, value] = cookie.split('=');
             if (name.trim() === 'USER_MODE') {
@@ -67,6 +69,9 @@ const Login = () => {
               } else {
                 route.replace("/");
               }
+            }
+            if(response.data==="User Not Found") {
+                alert("User with email does not exist");
             }
           }
         })
